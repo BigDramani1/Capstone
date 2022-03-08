@@ -1163,8 +1163,8 @@
       $( "#slider-range" ).slider({
         range: true,
         min: 0,
-        max: 10000,
-        values: [ 600, 7000 ],
+        max: 50000,
+        values: [ 600, 50000 ],
         slide: function( event, ui ) {
           $( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
         }
@@ -1176,13 +1176,13 @@
       $( "#slider-range2" ).slider({
         range: true,
         min: 0,
-        max: 500000,
-        values: [ 12000, 100000 ],
+        max: 1000000,
+        values: [ 120000, 700000 ],
         slide: function( event, ui ) {
-          $( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
+          $( "#amounts" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
         }
       });
-      $( "#amount" ).val( "$" + $( "#slider-range2" ).slider( "values", 0 ) + " - $" + $( "#slider-range2" ).slider( "values", 1 ) );
+      $( "#amounts" ).val( "$" + $( "#slider-range2" ).slider( "values", 0 ) + " - $" + $( "#slider-range2" ).slider( "values", 1 ) );
     });
     var sync1 = $("#sync1");
     var sync2 = $("#sync2");
