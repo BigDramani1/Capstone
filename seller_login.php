@@ -1,3 +1,98 @@
+<?php
+// Initializing the session
+session_start();
+ 
+// Check if the user is already logged in, if yes then redirect the person  to home page
+if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
+    header("location:seller_page.php");
+    exit;
+}
+ 
+// Including a config file to it
+require_once "connection.php";
+ 
+// Stating the variables and initialize it with empty values
+$username = $password = "";
+$username_err = $password_err = "";
+ 
+// Processing form data when form is submitted
+if($_SERVER["REQUEST_METHOD"] == "POST"){
+ 
+    // Cross checking to see if username is empty
+    if(empty(trim($_POST["username"]))){
+        $username_err = "Please enter username.";
+    } else{
+        $username = trim($_POST["username"]);
+    }
+    
+    // Cross checking to see if password is empty
+    if(empty(trim($_POST["password"]))){
+        $password_err = "Please enter your password.";
+    } else{
+        $password = trim($_POST["password"]);
+    }
+    
+    // Validating the  credentials
+    if(empty($username_err) && empty($password_err)){
+        // Prepare a select statement
+        $sql = "SELECT seller_id, username, password FROM sign_up_seller WHERE username = ?";
+        
+        if($stmt = $mysqli->prepare($sql)){
+            // Binding variables to parameters
+            $stmt->bind_param("s", $param_username);
+            
+            // Setting parameters
+            $param_username = $username;
+            
+            // Attempting to execute the prepared statement
+            if($stmt->execute()){
+                // Store result
+                $stmt->store_result();
+                
+                // Check if username exists, if yes then verify password
+                if($stmt->num_rows == 1){                    
+                    // Bind result variables
+                    $stmt->bind_result($id, $username, $hashed_password);
+                    if($stmt->fetch()){
+                        if(password_verify($password, $hashed_password)){
+                            // Password is correct, so start a new session
+                            
+                            // Store data in session variables
+                            $_SESSION["loggedin"] = true;
+                            $_SESSION["id"] = $id;
+                            $_SESSION["username"] = $username;  
+                            $_SESSION["firstname"]=$firstname;
+                            $_SESSION["phone"]=$phone;
+                            $_SESSION["email"]=$email;
+                            $_SESSION["lastname"]=$lastname;
+                         // Setting parameters                          
+                            
+                            // Redirect user to Home page
+                           
+                            header("location:seller_page.php?login=success");
+                        } else{
+                            // Display an error message if password is not valid
+                            $password_err = "The password is not valid.";
+                            
+                        }
+                    }
+                } else{
+                    // Display an error message if username doesn't exist
+                    $username_err = "Sorry, such username doesn't exist.";
+                }
+            } else{
+                echo "Oops! Something went wrong. Please try again later.";
+            }
+
+            // Close statement
+            $stmt->close();
+        }
+    }
+    
+    // Closing the connection
+    $mysqli->close();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,8 +110,8 @@
     <link rel="stylesheet" href="assets/css/magnific-popup.css">
     <link rel="stylesheet" href="assets/css/flaticon.css">
     <link rel="stylesheet" href="assets/css/jquery-ui.min.css">
-    <link rel="stylesheet" href="assets/css/seller_login.css">
-
+    <link rel="stylesheet" href="assets/css/seller.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
     <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon">
 </head>
 
@@ -57,25 +152,25 @@
             <div class="container">
                 <div class="header-wrapper">
                     <div class="logo">
-                        <a href="home.php">
+                        <a href="index.php">
                             <img src="assets/images/logo/logo.png" alt="logo">
                         </a>
                     </div>
                     <ul class="menu ml-auto">
                         <li>
-                            <a href="home.php">Home</a>
+                            <a href="index.php" style='text-decoration: none'>Home</a>
                         </li>
                         <li>
-                            <a href="my_favorites.php">My Favorites</a>
+                            <a href="sign_in.php" style='text-decoration: none'>My Favorites</a>
                         </li>
                         
                         <li>
-                            <a href="contact.php">Contact</a>
+                            <a href="contact.php"style='text-decoration: none'>Contact</a>
                         </li>
                     </ul>
                     <form class="search-form">
                         <input type="text" placeholder="Search for brand, model....">
-                        <button type="submit">T</button>
+                        <button type="submit"><i class="fas fa-search"></i></button>
                     </form>
                     <div class="search-bar d-md-none">
                         <a href="#0"><i class="fas fa-search"></i></a>
@@ -95,7 +190,6 @@
 
     <!--============= Hero Section Starts Here =============-->
     <div class="hero-section">
-        <div class="container">
             <ul class="breadcrumb">
                 <li>
                     <a href="home.php">Home</a>
@@ -111,7 +205,7 @@
         <div class="bg_img hero-bg bottom_center" data-background="assets/images/banner/hero-bg.png"></div>
     </div>
     <!--============= Hero Section Ends Here =============-->
-   
+
 
     <!--============= Account Section Starts Here =============-->
     <section class="account-section padding-bottom">
@@ -122,35 +216,36 @@
                         <h2 class="title">HI, THERE</h2>
                         <p>This is the Seller's Login.</p>
                     </div>
-                   
-                    <form class="login-form">
-                        <div class="form-group mb-30">
-                            <label for="login-email"><i class="far fa-envelope"></i></label>
-                            <input type="text" id="login-email" placeholder="Email Address">
-                        </div>
-                        <div class="form-group">
-                            <label for="login-pass"><i class="fas fa-lock"></i></label>
-                            <input type="password" id="login-pass" placeholder="Password">
-                            <span class="pass-type"><i class="fas fa-eye"></i></span>
-                        </div>
-                        <div class="form-group">
-                            <a href="#0">Forgot Password?</a>
-                        </div>
+                <form class="form-group" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+                    <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
+                    <label>Username</label>
+                     <input type="text" name="username" class="form-control" value="<?php echo $username; ?>">
+                     <span class="help-block"><?php echo $username_err; ?></span>
+                    </div>    
+                    <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
+                        <label>Password</label>
+                        <input type="password" name="password" class="form-control">
+                        <span class="help-block"><?php echo $password_err; ?></span>
+                    </div>
+                        
                         <div class="form-group mb-0">
                             <button type="submit" class="custom-button">LOG IN</button>
                         </div>
                     </form>
+                    <div class="work">
+                            <a href="#0" style='text-decoration: none'>Forgot Password?</a>
+                        </div>
                 </div>
                 <div class="right-side cl-white">
                     <div class="section-header mb-0">
-                        <h3 class="title mt-0">NEW HERE?</h3>
+                        <h3 class="title mt-0">NEW SELLER?</h3>
                         <p>Sign up and create your Account</p>
-                        <a href="seller_sign.php" class="custom-button transparent">Sign Up</a>
+                        <a href="seller_sign.php" class="custom-button transparent"style='text-decoration: none'>Sign Up</a>
                     </div>
                     <div class="section-header mb-0">
                         <h3 class="title mt-0">BUYER'S LOGIN?</h3>
                         <P>Log in and go to your Dashboard.</P>
-                        <a href="sign_in.php" class="custom-button transparent">LOGIN </a>
+                        <a href="sign_in.php" class="custom-button transparent"style='text-decoration: none'>LOGIN </a>
                     </div>
                 </div>
             </div>

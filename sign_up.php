@@ -1,11 +1,13 @@
 
 <?php
+session_start();
 // Including a config file to it
 require_once "connection.php";
  
 // Variable are initialize with empty values
-$username = $firstname = $lastname = $phone = $email = $password = $confirm_password = "";
-$username_err = $firstname_err = $lastname_err = $phone_err = $email_err= $password_err = $confirm_password_err = "";
+$username = $firstname = $lastname = $phone = $city = $email = $password = $confirm_password = "";
+$username_err = $firstname_err = $lastname_err = $phone_err = $city_err=  $email_err= $password_err = $confirm_password_err = "";
+
 
 
  
@@ -62,6 +64,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         if(empty($password_err) && ($password != $confirm_password)){
             $confirm_password_err = "Password did not match.";
         }
+    }
+
+    //Validating the city
+    if(empty(trim($_POST["city"]))){
+        $city_err = "Please enter your city.";
+    }else{
+        $city = trim($_POST["city"]);
     }
      
     //validating the first name
@@ -125,23 +134,32 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     
 
     //Checking the input errors before updating into the database
-    if(empty($username_err) && empty($firstname_err) && empty($lastname_err) && empty($phone_err) && empty($email_eer) && empty($password_err) && empty($confirm_password_err)){
+    if(empty($username_err) && empty($firstname_err) && empty($lastname_err) && empty($phone_err) && empty($city_err) && empty($email_eer) && empty($password_err) && empty($confirm_password_err)){
         
         // Preparing an insert statement
-        $sql = "INSERT INTO sign_up_buyer (username, fname, lname, phone, email, password) VALUES (?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO sign_up_buyer (username, fname, lname, phone, city, email, password) VALUES (?, ?, ?, ?, ?, ?, ?)";
          
-        if($stmt = $mysqli->prepare($sql)){
-             // Setting parameters
+        if($stmt = $mysqli->prepare($sql)){  
+            ///Storing the session information
+            $_SESSION["username"] = $username;     
+            $_SESSION["firstname"] =  $firstname;
+            $_SESSION["lastname"] = $lastname;     
+            $_SESSION["email"] = $email; 
+            $_SESSION["phone"] = $phone; 
+            $_SESSION["city"] = $city;     
+                ///// Storing Data session variables
              $param_lastname = $lastname;
              $param_firstname = $firstname;
              $param_phone = $phone;
              $param_username = $username;
              $param_email= $email;
+             $param_city= $city;
              $param_password = password_hash($password, PASSWORD_DEFAULT); // Creates a password hash
+
             // Binding variables to parameters
-            $stmt->bind_param("ssssss", $param_username, $param_firstname, $param_lastname, $param_phone, $param_email, $param_password);
-            
-            
+            $stmt->bind_param("sssssss", $param_username, $param_firstname, $param_lastname, $param_phone, $param_city, $param_email, $param_password);
+
+
             // Attempting to execute the prepared statement
             if($stmt->execute()){
                 // Redirect to login page
@@ -219,20 +237,20 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             <div class="container">
                 <div class="header-wrapper">
                     <div class="logo">
-                        <a href="home.php">
+                        <a href="index.php">
                             <img src="assets/images/logo/logo.png" alt="logo">
                         </a>
                     </div>
                     <ul class="menu ml-auto">
                         <li>
-                            <a href="home.php">Home</a>
+                            <a href="index.php" style='text-decoration: none'>Home</a>
                         </li>
                         <li>
-                            <a href="my_favorites.php">My Favorites</a>
+                            <a href="my_favorites.php" style='text-decoration: none'>My Favorites</a>
                         </li>
                         
                         <li>
-                            <a href="contact.php">Contact</a>
+                            <a href="contact.php" style='text-decoration: none'>Contact</a>
                         </li>
                     </ul>
                     <form class="search-form">
@@ -258,7 +276,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         <div class="luck">
             <ul class="breadcrumb">
                 <li>
-                    <a href="home.php">Home</a>
+                    <a href="index.php">Home</a>
                 </li>
                 <li>
                     <a href="#0">Account</a>
@@ -300,8 +318,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             </div>
             <div class="form-group <?php echo (!empty($phone_err)) ? 'has-error' : ''; ?>">
                 <label>Phone</label>
-                <input type="tel" name="phone" class="form-control" value="<?php echo $phone; ?>">
+                <input type="tel" name="phone" class="form-control" placeholder="+233 548342152" value="<?php echo $phone; ?>">
                 <span class="help-block"><?php echo $phone_err; ?></span>   
+            </div>
+            <div class="form-group <?php echo (!empty($city_err)) ? 'has-error' : ''; ?>">
+                <label>City</label>
+                <input type="text" name="city" class="form-control" value="<?php echo $city; ?>">
+                <span class="help-block"><?php echo $city_err; ?></span>   
             </div>
             <div class="form-group <?php echo (!empty($email_err)) ? 'has-error' : ''; ?>">
                 <label>Email</label>
@@ -318,8 +341,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 <input type="password" name="confirm_password" class="form-control" value="<?php echo $confirm_password; ?>">
                 <span class="help-block"><?php echo $confirm_password_err; ?></span>
             </div>
-                        <div class="form-group mb-0">
+                        <div class="form-group">
                             <button type="submit" class="custom-button">LOG IN</button>
+                             By clicking this button you are agreeing to the <a href="terms.php">terms and conditions</a>
                         </div>
                     </form>
                 </div>
@@ -327,12 +351,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     <div class="section-header mb-0">
                         <h3 class="title mt-0">WANT TO SIGN UP AS SELLER?</h3>
                         <P>Sign up and start selling</P>
-                        <a href="seller_sign.php" class="custom-button transparent">Sign Up</a>
+                        <a href="seller_sign.php" class="custom-button transparent" style='text-decoration: none'>Sign Up</a>
                     </div>
                     <div class="section-header mb-0">
                         <h3 class="title mt-0">ALREADY HAVE AN ACCOUNT?</h3>
                         <p>Log in and go to your Dashboard.</p>
-                        <a href="sign_in.php" class="custom-button transparent">Login</a>
+                        <a href="sign_in.php" class="custom-button transparent"style='text-decoration: none'>Login</a>
                     </div>
                 </div>
             </div>
@@ -476,7 +500,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 <div class="copyright-area">
                     <div class="footer-bottom-wrapper">
                         <div class="logo">
-                            <a href="home.php"><img src="assets/images/logo/footer-logo.png" alt="logo"></a>
+                            <a href="index.php"><img src="assets/images/logo/footer-logo.png" alt="logo"></a>
                         </div>
                         <div class="copyright"><p>&copy; Copyright 2021 | <a> Divanta is created by Dramani Alhassan </a></p></div>
                     </div>

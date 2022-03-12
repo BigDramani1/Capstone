@@ -57,13 +57,13 @@
             <div class="container">
                 <div class="header-wrapper">
                     <div class="logo">
-                        <a href="home.php">
+                        <a href="index.php">
                             <img src="assets/images/logo/logo.png" alt="logo">
                         </a>
                     </div>
                     <ul class="menu ml-auto">
                         <li>
-                            <a href="home.php">Home</a>
+                            <a href="index.php">Home</a>
                         </li>
                         <li>
                             <a href="my_favorites.php">My Favorites</a>
@@ -96,7 +96,7 @@
         <div class="container">
             <ul class="breadcrumb">
                 <li>
-                    <a href="home.php">Home</a>
+                    <a href="index.php">Home</a>
                 </li>
                 <li>
                     <span>Sports</span>
@@ -825,7 +825,7 @@
                 <div class="copyright-area">
                     <div class="footer-bottom-wrapper">
                         <div class="logo">
-                            <a href="home.php"><img src="assets/images/logo/footer-logo.png" alt="logo"></a>
+                            <a href="index.php"><img src="assets/images/logo/footer-logo.png" alt="logo"></a>
                         </div>
                         <div class="copyright"><p>&copy; Copyright 2021 | <a> Divanta is created by Dramani Alhassan </a></p></div>
                     </div>

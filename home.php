@@ -1,3 +1,5 @@
+<?php session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -42,13 +44,8 @@
                             <a href="dashboard.php" class="mr-3"><i class="fa fa-bars"></i><span class="ml-2 d-none d-sm-inline-block">Dashboard</span></a>
                         </li>
                     </ul>
-                    <ul class="cart-button-area">
-                        <li>
-                            <a href="seller_sign.php" class="user-button"><i class="fa fa-search-dollar"></i></a><p style="color:white";>Sell</p>
-                        </li>                        
-                        <li>
-                            <a href="sign_in.php" class="user-button"><i class="flaticon-user"></i></a><p style="color:white";>Account</p>
-                        </li>                        
+                    <ul class="cart-button-area">                       
+                        <li><a href="log_out.php" class="user-button"><i class='fa fa-sign-out-alt' style='color: red'></i></a><p style="color:black";><strong>Log Out</strong></p><li>
                     </ul>
                 </div>
             </div>
@@ -66,11 +63,11 @@
                             <a href="home.php">Home</a>
                         </li>
                         <li>
-                            <a href="my-favorites.php">My Favorites</a>
+                            <a href="my_favorites.php">My Favorites</a>
                         </li>
                         
                         <li>
-                            <a href="contact.php">Contact</a>
+                            <a href="user_contact.php">Contact</a>
                         </li>
                     </ul>
                     <form class="search-form">
@@ -98,11 +95,10 @@
             <div class="row align-items-center justify-content-between">
                 <div class="col-lg-6 col-xl-6">
                     <div class="banner-content cl-white">
-                        <h5 class="cate">Next Generation Auction</h5>
-                        <h1 class="title"><span class="d-xl-block">Find Your</span> Next Deal!</h1>
-                        <p>
-                            Online Auction is where everyone goes to shop, sell,and give, while discovering variety and affordability.
-                        </p>
+                        <h1 class="title"> Welcome!🎉</h1>
+                        <h2 style="color:tomato">
+                            <?php echo $_SESSION["firstname"]; echo " "; echo $_SESSION["lastname"];?> 
+                        </h2>
                     </div>
                 </div>
                 <div class="d-none d-lg-block col-lg-6">
@@ -1186,10 +1182,10 @@
                             <h5 class="title">We're Here to Help</h5>
                             <ul class="links-list">
                                 <li>
-                                    <a href="contact.php">Contact Us</a>
+                                    <a href="user_contact.php">Contact Us</a>
                                 </li>
                                 <li>
-                                    <a href="faqs.php">Help & FAQ</a>
+                                    <a href="user_faqs.php">Help & FAQ</a>
                                 </li>
                             </ul>
                         </div>

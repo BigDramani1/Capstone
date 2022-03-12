@@ -1,3 +1,5 @@
+<?php session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -40,13 +42,8 @@
                             <a href="seller_dashboard.php" class="mr-3"><i class="fa fa-bars"></i><span class="ml-2 d-none d-sm-inline-block">Dashboard</span></a>
                         </li>
                     </ul>
-                    <ul class="cart-button-area">
-                        <li>
-                            <a href="seller_sign.php" class="user-button"><i class="fa fa-search-dollar"></i></a><p style="color:white";>Sell</p>
-                        </li>                        
-                        <li>
-                            <a href="sign_in.php" class="user-button"><i class="flaticon-user"></i></a><p style="color:white";>Account</p>
-                        </li>                        
+                    <ul class="cart-button-area">                       
+                        <li><a href="log_out.php" class="user-button"><i class='fa fa-sign-out-alt' style='color: red'></i></a><p style="color:black";><strong>Log Out</strong></p><li>
                     </ul>
                 </div>
             </div>
@@ -71,21 +68,9 @@
                         </li>
                         
                         <li>
-                            <a href="contact.php">Contact</a>
+                            <a href="seller_contact.php">Contact</a>
                         </li>
                     </ul>
-                    <form class="search-form">
-                        <input type="text" placeholder="Search for brand, model....">
-                        <button type="submit"><i class="fas fa-search"></i></button>
-                    </form>
-                    <div class="search-bar d-md-none">
-                        <a href="#0"><i class="fas fa-search"></i></a>
-                    </div>
-                    <div class="header-bar d-lg-none">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </div>
                 </div>
             </div>
         </div>
@@ -99,7 +84,9 @@
             <div class="row align-items-center justify-content-between">
                 <div class="col-lg-6 col-xl-6">
                     <div class="banner-content cl-white">
-                        <h5 class="cate">Next Generation Auction</h5>
+                    <h2 style="color:tomato">
+                            <?php echo $_SESSION["firstname"]; echo " "; echo $_SESSION["lastname"];?> 
+                        </h2>
                         <h1 class="title"><span class="d-xl-block">Start Making</span> Money!</h1>
                     </div>
                 </div>
@@ -243,13 +230,13 @@
                 </div>
                 <div class="column">
                     <label for="subject"></label>
-                    <input type="text" id="num" placeholder="Enter your min bid amount" pattern="[0-9]{1,}">
+                    <input type="number" id="num" placeholder="Enter your min bid amount in GH₵">
                 </div>
                 </div>
                 <div class="rows">
                 <div class="column">
                     <label for="subject"></label>
-                    <input type="text" id="num" placeholder="Enter your buy price" pattern="[0-9]{1,}">
+                    <input type="number" id="num" placeholder="Enter your buy price in GH₵">
                 </div>
                 <div class="column">
                   <input type="file" id="file" name="pictures" multiple>
@@ -419,7 +406,7 @@
                             <h5 class="title">We're Here to Help</h5>
                             <ul class="links-list">
                                 <li>
-                                    <a href="contact.php">Contact Us</a>
+                                    <a href="seller_contact.php">Contact Us</a>
                                 </li>
                                 <li>
                                     <a href="faqs.php">Help & FAQ</a>

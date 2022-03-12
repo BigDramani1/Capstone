@@ -1,3 +1,6 @@
+<?php 
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -42,13 +45,8 @@
                             <a href="dashboard.php" class="mr-3"><i class="fa fa-bars"></i><span class="ml-2 d-none d-sm-inline-block">Dashboard</span></a>
                         </li>
                     </ul>
-                    <ul class="cart-button-area">
-                        <li>
-                            <a href="seller_sign.php" class="user-button"><i class="fa fa-search-dollar"></i></a><p style="color:white";>Sell</p>
-                        </li>                       
-                        <li>
-                            <a href="sign_in.php" class="user-button"><i class="flaticon-user"></i></a><p style="color:white";>Account</p>
-                        </li>                        
+                    <ul class="cart-button-area">                       
+                        <li><a href="log_out.php" class="user-button"><i class='fa fa-sign-out-alt' style='color: red'></i></a><p style="color:black";><strong>Log Out</strong></p><li>
                     </ul>
                 </div>
             </div>
@@ -70,7 +68,7 @@
                         </li>
                         
                         <li>
-                            <a href="contact.php">Contact</a>
+                            <a href="user_contact.php">Contact</a>
                         </li>
                     </ul>
                     <form class="search-form">
@@ -97,7 +95,7 @@
         <div class="container">
             <ul class="breadcrumb">
                 <li>
-                    <a href="home.php">Home</a>
+                    <a href="index.php">Home</a>
                 </li>
                 <li>
                     <a href="#0">My Account</a>
@@ -121,14 +119,14 @@
                         <div class="user">
                             <div class="thumb-area">
                                 <div class="thumb">
-                                    <img src="assets/images/dashboard/user.png" alt="user">
+                                    <img src="assets/images/profile.png" alt="user">
                                 </div>
                                 <label for="profile-pic" class="profile-pic-edit"><i class="flaticon-pencil"></i></label>
                                 <input type="file" id="profile-pic" class="d-none">
                             </div>
                             <div class="content">
-                                <h5 class="title">Percy Reed</a></h5>
-                                <span class="username">percyreed69@gmail.com</span>
+                                <h5 class="title"><?php echo $_SESSION["firstname"]; echo " "; echo $_SESSION["lastname"];?></h5>
+                                <span class="username"><?php echo $_SESSION["email"];?></span>
                             </div>
                         </div>
                         <ul class="dashboard-menu">
@@ -137,9 +135,6 @@
                             </li>
                             <li>
                                 <a href="profile.php"><i class="flaticon-settings"></i>Personal Profile </a>
-                            </li>
-                            <li>
-                                <a href="my_bid.php"><i class="flaticon-auction"></i>My Bids</a>
                             </li>
                             <li>
                                 <a href="my_favorites.php"><i class="flaticon-star"></i>My Favorites</a>
@@ -159,7 +154,7 @@
                                         <img src="assets/images/dashboard/01.png" alt="dashboard">
                                     </div>
                                     <div class="content">
-                                        <h2 class="title"><span class="counter">15</span></h2>
+                                        <h2 class="title"><span class="counter">4</span></h2>
                                         <h6 class="info">Active Bids</h6>
                                     </div>
                                 </div>
@@ -170,7 +165,7 @@
                                         <img src="assets/images/dashboard/02.png" alt="dashboard">
                                     </div>
                                     <div class="content">
-                                        <h2 class="title"><span class="counter">4</span></h2>
+                                        <h2 class="title"><span class="counter">0</span></h2>
                                         <h6 class="info">Items Won</h6>
                                     </div>
                                 </div>
@@ -181,7 +176,7 @@
                                         <img src="assets/images/dashboard/03.png" alt="dashboard">
                                     </div>
                                     <div class="content">
-                                        <h2 class="title"><span class="counter">4</span></h2>
+                                        <h2 class="title"><span class="counter">2</span></h2>
                                         <h6 class="info">Favorites</h6>
                                     </div>
                                 </div>
@@ -189,7 +184,7 @@
                         </div>
                     </div>
                     <div class="dashboard-widget">
-                        <h5 class="title mb-10">Purchasing</h5>
+                        <h5 class="title mb-10">My Bids</h5>
                         <div class="dashboard-purchasing-tabs">
                             <ul class="nav-tabs nav">
                                 <li>
@@ -204,73 +199,15 @@
                                     <table class="purchasing-table">
                                         <thead>
                                             <th>Item</th>
-                                            <th>Bid Price</th>
+                                            <th>Price Bidded</th>
                                             <th>Buy Price</th>
-                                            <th>Lowest Bid Price</th>
                                             <th>Expires</th>
                                         </thead>
                                         <tbody>
                                             <tr>
                                                 <td data-purchase="item">2018 Hyundai Sonata</td>
-                                                <td data-purchase="bid price">₵1,775.00</td>
+                                                <td data-purchase="Price Bidded">₵1,775.00</td>
                                                 <td data-purchase="Buy Price">₵1,775.00</td>
-                                                <td data-purchase="Lowest Bid Price">₵1,400.00</td>
-                                                <td data-purchase="expires">7/2/2021</td>
-                                            </tr>
-                                            <tr>
-                                                <td data-purchase="item">2018 Hyundai Sonata</td>
-                                                <td data-purchase="Bid Price">₵1,775.00</td>
-                                                <td data-purchase="Buy Price">₵1,775.00</td>
-                                                <td data-purchase="Lowest Bid Price">₵1,400.00</td>
-                                                <td data-purchase="expires">7/2/2021</td>
-                                            </tr>
-                                            <tr>
-                                                <td data-purchase="item">2018 Hyundai Sonata</td>
-                                                <td data-purchase="Bid Price">₵1,775.00</td>
-                                                <td data-purchase="Buy Price">₵1,775.00</td>
-                                                <td data-purchase="Lowest Bid Price">₵1,400.00</td>
-                                                <td data-purchase="expires">7/2/2021</td>
-                                            </tr>
-                                            <tr>
-                                                <td data-purchase="item">2018 Hyundai Sonata</td>
-                                                <td data-purchase="Bid Price">₵1,775.00</td>
-                                                <td data-purchase="Buy Price">₵1,775.00</td>
-                                                <td data-purchase="Lowest Bid Price">₵1,400.00</td>
-                                                <td data-purchase="expires">7/2/2021</td>
-                                            </tr>
-                                            <tr>
-                                                <td data-purchase="item">2018 Hyundai Sonata</td>
-                                                <td data-purchase="Bid Price">₵1,775.00</td>
-                                                <td data-purchase="Buy Price">₵1,775.00</td>
-                                                <td data-purchase="Lowest Bid Price">₵1,400.00</td>
-                                                <td data-purchase="expires">7/2/2021</td>
-                                            </tr>
-                                            <tr>
-                                                <td data-purchase="item">2018 Hyundai Sonata</td>
-                                                <td data-purchase="Bid Price">₵1,775.00</td>
-                                                <td data-purchase="Buy Price">₵1,775.00</td>
-                                                <td data-purchase="Lowest Bid Price">₵1,400.00</td>
-                                                <td data-purchase="expires">7/2/2021</td>
-                                            </tr>
-                                            <tr>
-                                                <td data-purchase="item">2018 Hyundai Sonata</td>
-                                                <td data-purchase="Bid Price">₵1,775.00</td>
-                                                <td data-purchase="Buy Price">₵1,775.00</td>
-                                                <td data-purchase="Lowest Bid Price">₵1,400.00</td>
-                                                <td data-purchase="expires">7/2/2021</td>
-                                            </tr>
-                                            <tr>
-                                                <td data-purchase="item">2018 Hyundai Sonata</td>
-                                                <td data-purchase="Bid Price">₵1,775.00</td>
-                                                <td data-purchase="Buy Price">₵1,775.00</td>
-                                                <td data-purchase="Lowest Bid Price">₵1,400.00</td>
-                                                <td data-purchase="expires">7/2/2021</td>
-                                            </tr>
-                                            <tr>
-                                                <td data-purchase="item">2018 Hyundai Sonata</td>
-                                                <td data-purchase="Bid Price">₵1,775.00</td>
-                                                <td data-purchase="Buy Price">₵1,775.00</td>
-                                                <td data-purchase="Lowest Bid Price">₵1,400.00</td>
                                                 <td data-purchase="expires">7/2/2021</td>
                                             </tr>
                                         </tbody>
@@ -280,59 +217,15 @@
                                     <table class="purchasing-table">
                                         <thead>
                                             <th>Item</th>
-                                            <th>Bid Price</th>
+                                            <th>Price Bidded</th>
                                             <th>Buy Price</th>
-                                            <th>Lowest Bid Price</th>
                                             <th>Expires</th>
                                         </thead>
                                         <tbody>
                                             <tr>
                                                 <td data-purchase="item">2018 Hyundai Sonata</td>
-                                                <td data-purchase="Bid Price">₵1,775.00</td>
+                                                <td data-purchase="Price Bidded">₵1,775.00</td>
                                                 <td data-purchase="Buy Price">₵1,775.00</td>
-                                                <td data-purchase="Lowest Bid Price">₵1,400.00</td>
-                                                <td data-purchase="expires">7/2/2021</td>
-                                            </tr>
-                                            <tr>
-                                                <td data-purchase="item">2018 Hyundai Sonata</td>
-                                                <td data-purchase="Bid Price">₵1,775.00</td>
-                                                <td data-purchase="Buy Price">₵1,775.00</td>
-                                                <td data-purchase="Lowest Bid Price">₵1,400.00</td>
-                                                <td data-purchase="expires">7/2/2021</td>
-                                            </tr>
-                                            <tr>
-                                                <td data-purchase="item">2018 Hyundai Sonata</td>
-                                                <td data-purchase="Bid Price">₵1,775.00</td>
-                                                <td data-purchase="Buy Price">₵1,775.00</td>
-                                                <td data-purchase="Lowest Bid Price">₵1,400.00</td>
-                                                <td data-purchase="expires">7/2/2021</td>
-                                            </tr>
-                                            <tr>
-                                                <td data-purchase="item">2018 Hyundai Sonata</td>
-                                                <td data-purchase="Bid Price">₵1,775.00</td>
-                                                <td data-purchase="Buy Price">₵1,775.00</td>
-                                                <td data-purchase="Lowest Bid Price">₵1,400.00</td>
-                                                <td data-purchase="expires">7/2/2021</td>
-                                            </tr>
-                                            <tr>
-                                                <td data-purchase="item">2018 Hyundai Sonata</td>
-                                                <td data-purchase="Bid Price">₵1,775.00</td>
-                                                <td data-purchase="Buy Price">₵1,775.00</td>
-                                                <td data-purchase="Lowest Bid Price">₵1,400.00</td>
-                                                <td data-purchase="expires">7/2/2021</td>
-                                            </tr>
-                                            <tr>
-                                                <td data-purchase="item">2018 Hyundai Sonata</td>
-                                                <td data-purchase="Bid Price">₵1,775.00</td>
-                                                <td data-purchase="Buy Price">₵1,775.00</td>
-                                                <td data-purchase="Lowest Bid Price">₵1,400.00</td>
-                                                <td data-purchase="expires">7/2/2021</td>
-                                            </tr>
-                                            <tr>
-                                                <td data-purchase="item">2018 Hyundai Sonata</td>
-                                                <td data-purchase="Bid Price">₵1,775.00</td>
-                                                <td data-purchase="Buy Price">₵1,775.00</td>
-                                                <td data-purchase="Lowest Bid Price">₵1,400.00</td>
                                                 <td data-purchase="expires">7/2/2021</td>
                                             </tr>
                                         </tbody>
@@ -437,7 +330,7 @@
                             <h5 class="title">We're Here to Help</h5>
                             <ul class="links-list">
                                 <li>
-                                    <a href="contact.php">Contact Us</a>
+                                    <a href="user_contact.php">Contact Us</a>
                                 </li>
                                 <li>
                                     <a href="faqs.php">Help & FAQ</a>

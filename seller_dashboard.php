@@ -39,16 +39,11 @@
                 <div class="header-top-wrapper">
                     <ul class="customer-support">
                         <li>
-                            <a href="dashboard.php" class="mr-3"><i class="fa fa-bars"></i><span class="ml-2 d-none d-sm-inline-block">Dashboard</span></a>
+                            <a href="seller_dashboard.php" class="mr-3"><i class="fa fa-bars"></i><span class="ml-2 d-none d-sm-inline-block">Dashboard</span></a>
                         </li>
                     </ul>
-                    <ul class="cart-button-area">
-                        <li>
-                            <a href="seller_sign.php" class="user-button"><i class="fa fa-search-dollar"></i></a><p style="color:white";>Sell</p>
-                        </li>                       
-                        <li>
-                            <a href="sign_in.php" class="user-button"><i class="flaticon-user"></i></a><p style="color:white";>Account</p>
-                        </li>                        
+                    <ul class="cart-button-area">                       
+                        <li><a href="log_out.php" class="user-button"><i class='fa fa-sign-out-alt' style='color: red'></i></a><p style="color:black";><strong>Log Out</strong></p><li>
                     </ul>
                 </div>
             </div>
@@ -57,7 +52,7 @@
             <div class="container">
                 <div class="header-wrapper">
                     <div class="logo">
-                        <a href="home.php">
+                        <a href="seller_page.php">
                             <img src="assets/images/logo/logo.png" alt="logo">
                         </a>
                     </div>
@@ -73,7 +68,7 @@
                         </li>
                         
                         <li>
-                            <a href="contact.php">Contact</a>
+                            <a href="seller_contact.php">Contact</a>
                         </li>
                     </ul>
                     <form class="search-form">
@@ -100,7 +95,7 @@
         <div class="container">
             <ul class="breadcrumb">
                 <li>
-                    <a href="home.php">Home</a>
+                    <a href="seller_page.php">Home</a>
                 </li>
                 <li>
                     <a href="#0">My Account</a>
@@ -123,15 +118,15 @@
                     <div class="dashboard-widget mb-30 mb-lg-0">
                         <div class="user">
                             <div class="thumb-area">
-                                <div class="thumb">
-                                    <img src="assets/images/history/02.png" alt="user">
+                            <div class="thumb">
+                                    <img src="assets/images/profile.png" alt="user">
                                 </div>
                                 <label for="profile-pic" class="profile-pic-edit"><i class="flaticon-pencil"></i></label>
                                 <input type="file" id="profile-pic" class="d-none">
                             </div>
                             <div class="content">
-                                <h5 class="title">Kara Heiniger</a></h5>
-                                <span class="username">h.kara6@gmail.com</span>
+                                <h5 class="title"><?php echo $_SESSION["firstname"]; echo " "; echo $_SESSION["lastname"];?></h5>
+                                <span class="username"><?php echo $_SESSION["email"];?></span>
                             </div>
                         </div>
                         <ul class="dashboard-menu">
@@ -140,9 +135,6 @@
                             </li>
                             <li>
                                 <a href="seller_profile.php"><i class="flaticon-settings"></i>Personal Profile </a>
-                            </li>
-                            <li>
-                                <a href="seller_bid.php"><i class="flaticon-auction"></i>My Bids</a>
                             </li>
                             <li>
                                 <a href="seller_favorites.php"><i class="flaticon-star"></i>My Favorites</a>
@@ -240,21 +232,6 @@
                                             <th>Expires</th>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td data-purchase="item">2018 Hyundai Sonata</td>
-                                                <td data-purchase="Bid Price">₵1,775.00</td>
-                                                <td data-purchase="Buy Price">₵1,775.00</td>
-                                                <td data-purchase="Lowest Bid Price">₵1,400.00</td>
-                                                <td data-purchase="expires">7/2/2021</td>
-                                            </tr>
-                                            
-                                            <tr>
-                                                <td data-purchase="item">2018 Hyundai Sonata</td>
-                                                <td data-purchase="Bid Price">₵1,775.00</td>
-                                                <td data-purchase="Buy Price">₵1,775.00</td>
-                                                <td data-purchase="Lowest Bid Price">₵1,400.00</td>
-                                                <td data-purchase="expires">7/2/2021</td>
-                                            </tr>
                                             <tr>
                                                 <td data-purchase="item">2018 Hyundai Sonata</td>
                                                 <td data-purchase="Bid Price">₵1,775.00</td>
@@ -417,7 +394,7 @@
                 <div class="copyright-area">
                     <div class="footer-bottom-wrapper">
                         <div class="logo">
-                            <a href="home.php"><img src="assets/images/logo/footer-logo.png" alt="logo"></a>
+                            <a href="seller_page.php"><img src="assets/images/logo/footer-logo.png" alt="logo"></a>
                         </div>
                         <div class="copyright"><p>&copy; Copyright 2021 | <a> Divanta is created by Dramani Alhassan </a></p></div>
                     </div>
