@@ -356,7 +356,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     <div class="section-header mb-0">
                         <h3 class="title mt-0">ALREADY HAVE AN ACCOUNT?</h3>
                         <p>Log in and go to your Dashboard.</p>
-                        <a href="sign_in.php" class="custom-button transparent"style='text-decoration: none'>Login</a>
+                        <a href="sign_login.php" class="custom-button transparent"style='text-decoration: none'>Login</a>
                     </div>
                 </div>
             </div>

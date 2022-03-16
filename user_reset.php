@@ -1,5 +1,69 @@
 <?php
- session_start();
+// Initialize the session
+session_start();
+
+ 
+// Including the config file
+require_once "connection.php";
+ 
+// Variable are initialize with empty values
+$new_password = $confirm_password = "";
+$new_password_err = $confirm_password_err = "";
+ 
+// Data being processed when form is submitted
+if($_SERVER["REQUEST_METHOD"] == "POST"){
+ 
+    // Validating the new password
+    if(empty(trim($_POST["new_password"]))){
+        $new_password_err = "Please enter the new password.";     
+    } elseif(strlen(trim($_POST["new_password"])) < 6){
+        $new_password_err = "Password must have atleast 6 characters.";
+    } else{
+        $new_password = trim($_POST["new_password"]);
+    }
+    
+    // Validating the confirm password
+    if(empty(trim($_POST["confirm_password"]))){
+        $confirm_password_err = "Please confirm the password.";
+    } else{
+        $confirm_password = trim($_POST["confirm_password"]);
+        if(empty($new_password_err) && ($new_password != $confirm_password)){
+            $confirm_password_err = "Password did not match.";
+        }
+    }
+        
+    // Checking the input errors before updating into the database
+    if(empty($new_password_err) && empty($confirm_password_err)){
+        // Prepare an update statement
+        $sql = "UPDATE sign_up_buyer SET password = ? WHERE buyer_id= ?";
+        
+        if($stmt = $mysqli->prepare($sql)){
+            // Binding variables to parameters
+            $stmt->bind_param("si", $param_password, $param_id);
+            
+            // Setting parameters
+            $param_password = password_hash($new_password, PASSWORD_DEFAULT);
+            $param_id = $_SESSION["id"];
+            
+            // Attemptings to execute the prepared statement
+            if($stmt->execute()){
+                // Password updated successfully. Destroy the session, and redirect to login page
+                session_destroy();
+                header("location: sign_in.php");
+                exit();
+            } else{
+                echo "Oops! Something went wrong. Please try again later.";
+            }
+
+            // Closing the statement
+            $stmt->close();
+        }
+    }
+    
+    // Close connection
+    $mysqli->close();
+}
+?>
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -8,7 +72,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <title>Personal Profile</title>
+    <title>Login in Page</title>
 
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/all.min.css">
@@ -18,8 +82,8 @@
     <link rel="stylesheet" href="assets/css/magnific-popup.css">
     <link rel="stylesheet" href="assets/css/flaticon.css">
     <link rel="stylesheet" href="assets/css/jquery-ui.min.css">
-    <link rel="stylesheet" href="assets/css/main.css">
-
+    <link rel="stylesheet" href="assets/css/reset_password.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
     <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon">
 </head>
 
@@ -61,45 +125,38 @@
                     </div>
                     <ul class="menu ml-auto">
                         <li>
-                            <a href="home.php">Home</a>
+                            <a href="home.php" style='text-decoration: none'>Home</a>
                         </li>
                         <li>
-                            <a href="my_favorites.php">My Favorites</a>
+                            <a href="my_favorites.php" style='text-decoration: none'>My Favorites</a>
                         </li>
                         
                         <li>
-                            <a href="user_contact.php">Contact</a>
+                            <a href="user_contact.php"style='text-decoration: none'>Contact</a>
+                        </li>
+                        <li>
+                            <a href="user_faqs.php"style='text-decoration: none'>Faqs</a>
                         </li>
                     </ul>
-                    <form class="search-form">
-                        <input type="text" placeholder="Search for brand, model....">
-                        <button type="submit"><i class="fas fa-search"></i></button>
-                    </form>
-                    <div class="search-bar d-md-none">
-                        <a href="#0"><i class="fas fa-search"></i></a>
-                    </div>
-                    <div class="header-bar d-lg-none">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </div>
                 </div>
             </div>
         </div>
     </header>
     <!--============= Header Section Ends Here =============-->
+
+  
+
     <!--============= Hero Section Starts Here =============-->
-    <div class="hero-section style-2">
-        <div class="container">
+    <div class="hero-section">
             <ul class="breadcrumb">
                 <li>
                     <a href="home.php">Home</a>
                 </li>
                 <li>
-                    <a href="#0">My Account</a>
+                    <a href="#0">Account</a>
                 </li>
                 <li>
-                    <span>Personal profile</span>
+                    <span>Login</span>
                 </li>
             </ul>
         </div>
@@ -108,136 +165,31 @@
     <!--============= Hero Section Ends Here =============-->
 
 
-    <!--============= Dashboard Section Starts Here =============-->
-    <section class="dashboard-section padding-bottom mt--240 mt-lg--440 pos-rel">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-sm-10 col-md-7 col-lg-4">
-                    <div class="dashboard-widget mb-30 mb-lg-0 sticky-menu">
-                        <div class="user">
-                            <div class="thumb-area">
-                                <div class="thumb">
-                                    <img src="assets/images/profile.png" alt="user">
-                                </div>
-                                <label for="profile-pic" class="profile-pic-edit"><i class="flaticon-pencil"></i></label>
-                                <input type="file" id="profile-pic" class="d-none">
-                            </div>
-                            <div class="content">
-                                <h5 class="title"><?php echo $_SESSION["firstname"]; echo " "; echo $_SESSION["lastname"];?></h5>
-                                <span class="username"><?php echo $_SESSION["email"];?></span>
-                            </div>
-                        </div>
-                        <ul class="dashboard-menu">
-                            <li>
-                                <a href="dashboard.php"><i class="flaticon-dashboard"></i>Dashboard</a>
-                            </li>
-                            <li>
-                                <a href="profile.php" class="active"><i class="flaticon-settings"></i>Personal Profile </a>
-                            </li>
-                            <li>
-                                <a href="my_favorites.php"><i class="flaticon-star"></i>My Favorites</a>
-                            </li>
-                        </ul>
+    <!--============= Account Section Starts Here =============-->
+    <section class="account-section padding-bottom">
+        <div class="comb">
+                    <div class="section-header">
+                        <h2 class="title">RESET PASSWORD</h2>
                     </div>
-                </div>
-                <div class="col-lg-8">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="dash-pro-item mb-30 dashboard-widget">
-                                <div class="header">
-                                    <h4 class="title">Personal Details</h4>
-                                    <span class="edit"><i class="flaticon-edit"></i> Edit</span>
-                                </div>
-                                <ul class="dash-pro-body">
-                                    <li>
-                                        <div class="info-name">Name</div>
-                                        <div class="info-value"><?php echo $_SESSION["firstname"]; echo " "; echo $_SESSION["lastname"];?></div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="dash-pro-item mb-30 dashboard-widget">
-                                <div class="header">
-                                    <h4 class="title">Account Settings</h4>
-                                </div>
-                                <ul class="dash-pro-body">
-                                    <li>
-                                        <div class="info-name">Language</div>
-                                        <div class="info-value">English (United States)</div>
-                                    </li>
-                                    <li>
-                                        <div class="info-name">Time Zone</div>
-                                        <div class="info-value">(UTC +0) Ghana</div>
-                                    </li>
-                                    <li>
-                                        <div class="info-name">Status</div>
-                                        <div class="info-value"><i class="flaticon-check text-success"></i> Active</div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="dash-pro-item mb-30 dashboard-widget">
-                                <div class="header">
-                                    <h4 class="title">Email Address</h4>
-                                    <span class="edit"><i class="flaticon-edit"></i> Edit</span>
-                                </div>
-                                <ul class="dash-pro-body">
-                                    <li>
-                                        <div class="info-name">Email</div>
-                                        <div class="info-value"><?php echo $_SESSION["email"];?></div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="dash-pro-item mb-30 dashboard-widget">
-                                <div class="header">
-                                    <h4 class="title">City</h4>
-                                    <span class="edit"><i class="flaticon-edit"></i> Edit</span>
-                                </div>
-                                <ul class="dash-pro-body">
-                                    <li>
-                                        <div class="info-name">City</div>
-                                        <div class="info-value"><?php echo $_SESSION["city"];?></div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="dash-pro-item mb-30 dashboard-widget">
-                                <div class="header">
-                                    <h4 class="title">Phone</h4>
-                                    <span class="edit"><i class="flaticon-edit"></i> Edit</span>
-                                </div>
-                                <ul class="dash-pro-body">
-                                    <li>
-                                        <div class="info-name">Mobile</div>
-                                        <div class="info-value"><?php echo $_SESSION["phone"];?></div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="dash-pro-item mb-30 dashboard-widget">
-                                <div class="header">
-                                    <h4 class="title">Password</h4>
-                                </div>
-                                <ul class="dash-pro-body">
-                                    <li>
-                                        <div class="info-name">Want to Reset your Password?</div>
-                                        <div class="info-value">If yes, then click on the link Reset Password <br><a href="user_reset.php">Reset Password</a></br></div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <form class="form-group" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+            <div class="form-group <?php echo (!empty($new_password_err)) ? 'has-error' : ''; ?>">
+                <label>New Password</label>
+                <input type="password" name="new_password" class="form-control" value="<?php echo $new_password; ?>">
+                <span class="help-block"><?php echo $new_password_err; ?></span>
             </div>
+            <div class="form-group <?php echo (!empty($confirm_password_err)) ? 'has-error' : ''; ?>">
+                <label>Confirm Password</label>
+                <input type="password" name="confirm_password" class="form-control">
+                <span class="help-block"><?php echo $confirm_password_err; ?></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" class="btn btn-primary" value="Submit">
+                <a class="btn btn-link" href="profile.php" >Cancel</a>
+            </div>
+            </form>
         </div>
     </section>
-    <!--============= Dashboard Section Ends Here =============-->
+    <!--============= Account Section Ends Here =============-->
 
 
     <!--============= Footer Section Starts Here =============-->
@@ -316,7 +268,7 @@
                                     <a href="#0">Divanta</a>
                                 </li>
                                 <li>
-                                    <a href="Terms.php">Terms and Conditions</a>
+                                    <a href="user_terms.php">Terms and Conditions</a>
                                 </li>
                                 
                                     <a style ="color:white;">Created by Dramani Alhassan</a>
@@ -332,7 +284,7 @@
                                     <a href="user_contact.php">Contact Us</a>
                                 </li>
                                 <li>
-                                    <a href="faqs.php">Help & FAQ</a>
+                                    <a href="user_faqs.php">Help & FAQ</a>
                                 </li>
                             </ul>
                         </div>

@@ -21,6 +21,7 @@
 </head>
 
 <body>
+
     <!--============= ScrollToTop Section Starts Here =============-->
     <div class="overlayer" id="overlayer">
         <div class="loader">
@@ -42,13 +43,8 @@
                                 <a href="dashboard.php" class="mr-3"><i class="fa fa-bars"></i><span class="ml-2 d-none d-sm-inline-block">Dashboard</span></a>
                             </li>
                         </ul>
-                    <ul class="cart-button-area">
-                        <li>
-                            <a href="seller_sign.php" class="user-button"><i class="fa fa-search-dollar"></i></a><p style="color:white";>Sell</p>
-                        </li>                        
-                        <li>
-                            <a href="sign_in.php" class="user-button"><i class="flaticon-user"></i></a><p style="color:white";>Account</p>
-                        </li>                        
+                    <ul class="cart-button-area">                       
+                        <li><a href="log_out.php" class="user-button"><i class='fa fa-sign-out-alt' style='color: red'></i></a><p style="color:black";><strong>Log Out</strong></p><li>
                     </ul>
                 </div>
             </div>
@@ -70,7 +66,7 @@
                         </li>
                         
                         <li>
-                            <a href="contact.php">Contact</a>
+                            <a href="user_contact.php">Contact</a>
                         </li>
                     </ul>
                     <form class="search-form">
@@ -181,27 +177,31 @@
                                 <div class="search-icon">
                                     <img src="assets/images/product/search-icon.png" alt="product">
                                 </div>
-                                <input type="text" placeholder="Enter you bid amount">
-                                <button type="submit" class="custom-button">Submit a bid</button>
-                                <div id="id01" class="modal">
-                                <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">×</span>
-                                <form class="modal-content" action="/action_page.php">
-                                <div class="container">
-                                    <h1>Library Account</h1>
-                                    <p>Are you sure you want to Add this to your library?</p>
-                                    <div class="clearfix">
-                                    <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
-                                    <button type="button" onclick="document.getElementById('id01').style.display='none'" class="addbtn">Yes</button>
-                                    </div>
-                                </div>
+                                <input type="number" placeholder="Enter your bid amount in GH₵">
+                                <button onclick="document.getElementById('id01').style.display='block'" class="custom-button">Submit a bid</button>
                                 </form>
-                            </div>
-                            </form>
-                        </div>
-                        <div class="buy-now-area">
+                            </div>    
+                                <div id="id01" class="modal">
+                                    <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">×</span>
+                                    <form class="modal-content" action="/action_page.php">
+                                    <h1 style="text-align:center;">Confriming your Bid</h1>
+                                        <div class="testing">
+                                        <p><br>Before finalizing your bid:</br><br></br>
+                                    Submitting this bid means that you have accepted the product and will comply if you are the winning bidder.<br><br></br>If you are not sure on bidding this product, please cancel it. Once you place your bid, you cannot cancel it.</br>
+                                    <br>By submitting your bid, you have agree to all terms and conditions of Davinta</br>
+
+                                    <br><a href="user_terms.php"><p style="text-align:center;">Terms and Condition</a></p></br></p>
+                                        
+                                        <div class="clearfix">
+                                            <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+                                            <button type="button" onclick="document.getElementById('id01').style.display='none'" class="acceptbtn">Accept</button>
+                                        </div>
+                                        </div>
+                                    </form>
+                                    </div>
+                            <div class="buy-now-area">
                             <a href="#0" class="custom-button">Buy Now: ₵4,200</a>
                             <a href="#0" class="rating custom-button active border"><i class="fas fa-star"></i> Add to Favorites</a>
-                            
                         </div>
                     </div>
                 </div>
@@ -233,7 +233,7 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="Terms.php" class="cart-link">View Terms and Conditions for the Auction</a>
+                        <a href="user_terms.php" class="cart-link">View Terms and Conditions for the Auction</a>
                     </div>
                 </div>
             </div>
@@ -483,10 +483,10 @@
                             <h5 class="title">We're Here to Help</h5>
                             <ul class="links-list">
                                 <li>
-                                    <a href="contact.php">Contact Us</a>
+                                    <a href="user_contact.php">Contact Us</a>
                                 </li>
                                 <li>
-                                    <a href="faqs.php">Help & FAQ</a>
+                                    <a href="user_faqs.php">Help & FAQ</a>
                                 </li>
                             </ul>
                         </div>
@@ -555,5 +555,14 @@
     <script src="assets/js/yscountdown.min.js"></script>
     <script src="assets/js/jquery-ui.min.js"></script>
     <script src="./assets/js/main.js"></script>
+    <script>
+// Get the modal
+var modal = document.getElementById('id01');
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+
+</script>
 </body>
 </html>

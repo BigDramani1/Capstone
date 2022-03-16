@@ -42,13 +42,8 @@
                             <a href="dashboard.php" class="mr-3"><i class="fa fa-bars"></i><span class="ml-2 d-none d-sm-inline-block">Dashboard</span></a>
                         </li>
                     </ul>
-                    <ul class="cart-button-area">
-                        <li>
-                            <a href="seller_sign.php" class="user-button"><i class="fa fa-search-dollar"></i></a><p style="color:white";>Sell</p>
-                        </li>                        
-                        <li>
-                            <a href="sign_in.php" class="user-button"><i class="flaticon-user"></i></a><p style="color:white";>Account</p>
-                        </li>                        
+                    <ul class="cart-button-area">                       
+                        <li><a href="log_out.php" class="user-button"><i class='fa fa-sign-out-alt' style='color: red'></i></a><p style="color:black";><strong>Log Out</strong></p><li>
                     </ul>
                 </div>
             </div>
@@ -70,7 +65,7 @@
                         </li>
                         
                         <li>
-                            <a href="contact.php">Contact</a>
+                            <a href="user_contact.php">Contact</a>
                         </li>
                     </ul>
                     <form class="search-form">
@@ -657,7 +652,7 @@
                                     <a href="#0">Divanta</a>
                                 </li>
                                 <li>
-                                    <a href="Terms.php">Terms and Conditions</a>
+                                    <a href="user_terms.php">Terms and Conditions</a>
                                 </li>
                                 
                                     <a style ="color:white;">Created by Dramani Alhassan</a>
@@ -670,10 +665,10 @@
                             <h5 class="title">We're Here to Help</h5>
                             <ul class="links-list">
                                 <li>
-                                    <a href="contact.php">Contact Us</a>
+                                    <a href="user_contact.php">Contact Us</a>
                                 </li>
                                 <li>
-                                    <a href="faqs.php">Help & FAQ</a>
+                                    <a href="user_faqs.php">Help & FAQ</a>
                                 </li>
                             </ul>
                         </div>

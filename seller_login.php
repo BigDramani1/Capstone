@@ -245,7 +245,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     <div class="section-header mb-0">
                         <h3 class="title mt-0">BUYER'S LOGIN?</h3>
                         <P>Log in and go to your Dashboard.</P>
-                        <a href="sign_in.php" class="custom-button transparent"style='text-decoration: none'>LOGIN </a>
+                        <a href="sign_login.php" class="custom-button transparent"style='text-decoration: none'>LOGIN </a>
                     </div>
                 </div>
             </div>

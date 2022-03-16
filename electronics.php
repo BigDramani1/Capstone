@@ -42,13 +42,8 @@
                             <a href="dashboard.php" class="mr-3"><i class="fa fa-bars"></i><span class="ml-2 d-none d-sm-inline-block">Dashboard</span></a>
                         </li>
                     </ul>
-                    <ul class="cart-button-area">
-                        <li>
-                            <a href="seller_sign.php" class="user-button"><i class="fa fa-search-dollar"></i></a><p style="color:white";>Sell</p>
-                        </li>                       
-                        <li>
-                            <a href="sign_in.php" class="user-button"><i class="flaticon-user"></i></a><p style="color:white";>Account</p>
-                        </li>                        
+                    <ul class="cart-button-area">                       
+                        <li><a href="log_out.php" class="user-button"><i class='fa fa-sign-out-alt' style='color: red'></i></a><p style="color:black";><strong>Log Out</strong></p><li>
                     </ul>
                 </div>
             </div>
@@ -57,20 +52,20 @@
             <div class="container">
                 <div class="header-wrapper">
                     <div class="logo">
-                        <a href="index.php">
+                        <a href="home.php">
                             <img src="assets/images/logo/logo.png" alt="logo">
                         </a>
                     </div>
                     <ul class="menu ml-auto">
                         <li>
-                            <a href="index.php">Home</a>
+                            <a href="home.php">Home</a>
                         </li>
                         <li>
                             <a href="my_favorites.php">My Favorites</a>
                         </li>
                         
                         <li>
-                            <a href="contact.php">Contact</a>
+                            <a href="user_contact.php">Contact</a>
                         </li>
                     </ul>
                     <form class="search-form">
@@ -96,7 +91,7 @@
         <div class="container">
             <ul class="breadcrumb">
                 <li>
-                    <a href="index.php">Home</a>
+                    <a href="home.php">Home</a>
                 </li>
                 <li>
                     <span>Sports</span>
@@ -779,10 +774,10 @@
                             <h5 class="title">We're Here to Help</h5>
                             <ul class="links-list">
                                 <li>
-                                    <a href="contact.php">Contact Us</a>
+                                    <a href="user_contact.php">Contact Us</a>
                                 </li>
                                 <li>
-                                    <a href="faqs.php">Help & FAQ</a>
+                                    <a href="user_faqs.php">Help & FAQ</a>
                                 </li>
                             </ul>
                         </div>
@@ -825,7 +820,7 @@
                 <div class="copyright-area">
                     <div class="footer-bottom-wrapper">
                         <div class="logo">
-                            <a href="index.php"><img src="assets/images/logo/footer-logo.png" alt="logo"></a>
+                            <a href="home.php"><img src="assets/images/logo/footer-logo.png" alt="logo"></a>
                         </div>
                         <div class="copyright"><p>&copy; Copyright 2021 | <a> Divanta is created by Dramani Alhassan </a></p></div>
                     </div>

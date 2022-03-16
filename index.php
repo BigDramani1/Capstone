@@ -184,13 +184,13 @@
                     <div class="col-sm-10 col-md-6 col-lg-4">
                         <div class="auction-item-2">
                             <div class="auction-thumb">
-                                <a href="product-details.html"><img src="assets/images/auction/car/auction-2.jpg" alt="car"></a>
+                                <a href="sign_in.php"><img src="assets/images/auction/car/auction-2.jpg" alt="car"></a>
                                 <a href="#0" class="rating"><i class="far fa-star"></i></a>
                                 <a href="#0" class="bid"><i class="flaticon-auction"></i></a>
                             </div>
                             <div class="auction-content">
                                 <h6 class="title">
-                                    <a href="product-details.html">2018 Nissan Versa, S</a>
+                                    <a href="sign_in.php">2018 Nissan Versa, S</a>
                                 </h6>
                                 <div class="bid-area">
                                     <div class="bid-amount">
@@ -233,7 +233,7 @@
                             </div>
                             <div class="auction-content">
                                 <h6 class="title">
-                                    <a href="vehicle1_bid.php">2019, Hyundai Venue</a>
+                                    <a href="sign_in.php">2019, Hyundai Venue</a>
                                 </h6>
                                 <div class="bid-area">
                                     <div class="bid-amount">
@@ -270,13 +270,13 @@
                     <div class="col-sm-10 col-md-6 col-lg-4">
                         <div class="auction-item-2">
                             <div class="auction-thumb">
-                                <a href="product-details.html"><img src="assets/images/auction/car/auction-3.jpg" alt="car"></a>
+                                <a href="sign_in.php"><img src="assets/images/auction/car/auction-3.jpg" alt="car"></a>
                                 <a href="#0" class="rating"><i class="far fa-star"></i></a>
                                 <a href="#0" class="bid"><i class="flaticon-auction"></i></a>
                             </div>
                             <div class="auction-content">
                                 <h6 class="title">
-                                    <a href="product-details.html">2018 Honda Accord, Sport</a>
+                                    <a href="sign_in.php">2018 Honda Accord, Sport</a>
                                 </h6>
                                 <div class="bid-area">
                                     <div class="bid-amount">
@@ -337,13 +337,13 @@
                 <div class="col-sm-10 col-md-6 col-lg-4">
                     <div class="auction-item-2">
                         <div class="auction-thumb">
-                            <a href="product-details.html"><img src="assets/images/auction/jewelry/auction-1.jpg" alt="jewelry"></a>
+                            <a href="sign_in.php"><img src="assets/images/auction/jewelry/auction-1.jpg" alt="jewelry"></a>
                             <a href="#0" class="rating"><i class="far fa-star"></i></a>
                             <a href="#0" class="bid"><i class="flaticon-auction"></i></a>
                         </div>
                         <div class="auction-content">
                             <h6 class="title">
-                                <a href="product-details.html">Gold Ring With Clear Stones</a>
+                                <a href="sign_in.php">Gold Ring With Clear Stones</a>
                             </h6>
                             <div class="bid-area">
                                 <div class="bid-amount">
@@ -380,13 +380,13 @@
                 <div class="col-sm-10 col-md-6 col-lg-4">
                     <div class="auction-item-2">
                         <div class="auction-thumb">
-                            <a href="product-details.html"><img src="assets/images/auction/jewelry/auction-2.jpg" alt="jewelry"></a>
+                            <a href="sign_in.php"><img src="assets/images/auction/jewelry/auction-2.jpg" alt="jewelry"></a>
                             <a href="#0" class="rating"><i class="far fa-star"></i></a>
                             <a href="#0" class="bid"><i class="flaticon-auction"></i></a>
                         </div>
                         <div class="auction-content">
                             <h6 class="title">
-                                <a href="product-details.html">Ring With Clear Stone Accents</a>
+                                <a href="sign_in.php">Ring With Clear Stone Accents</a>
                             </h6>
                             <div class="bid-area">
                                 <div class="bid-amount">
@@ -423,13 +423,13 @@
                 <div class="col-sm-10 col-md-6 col-lg-4">
                     <div class="auction-item-2">
                         <div class="auction-thumb">
-                            <a href="product-details.html"><img src="assets/images/auction/jewelry/auction-3.jpg" alt="jewelry"></a>
+                            <a href="sign_in.php"><img src="assets/images/auction/jewelry/auction-3.jpg" alt="jewelry"></a>
                             <a href="#0" class="rating"><i class="far fa-star"></i></a>
                             <a href="#0" class="bid"><i class="flaticon-auction"></i></a>
                         </div>
                         <div class="auction-content">
                             <h6 class="title">
-                                <a href="product-details.html">Gold Ring With Clear Stones</a>
+                                <a href="sign_in.php">Gold Ring With Clear Stones</a>
                             </h6>
                             <div class="bid-area">
                                 <div class="bid-amount">
@@ -503,13 +503,13 @@
                 <div class="col-sm-10 col-md-6 col-lg-4">
                     <div class="auction-item-2">
                         <div class="auction-thumb">
-                            <a href="product-details.html"><img src="assets/images/auction/watches/auction-1.jpg" alt="watches"></a>
+                            <a href="sign_in.php"><img src="assets/images/auction/watches/auction-1.jpg" alt="watches"></a>
                             <a href="#0" class="rating"><i class="far fa-star"></i></a>
                             <a href="#0" class="bid"><i class="flaticon-auction"></i></a>
                         </div>
                         <div class="auction-content">
                             <h6 class="title">
-                                <a href="product-details.html">Vintage Rolex</a>
+                                <a href="sign_in.php">Vintage Rolex</a>
                             </h6>
                             <div class="bid-area">
                                 <div class="bid-amount">
@@ -546,13 +546,13 @@
                 <div class="col-sm-10 col-md-6 col-lg-4">
                     <div class="auction-item-2">
                         <div class="auction-thumb">
-                            <a href="product-details.html"><img src="assets/images/auction/watches/auction-2.jpg" alt="watches"></a>
+                            <a href="sign_in.php"><img src="assets/images/auction/watches/auction-2.jpg" alt="watches"></a>
                             <a href="#0" class="rating"><i class="far fa-star"></i></a>
                             <a href="#0" class="bid"><i class="flaticon-auction"></i></a>
                         </div>
                         <div class="auction-content">
                             <h6 class="title">
-                                <a href="product-details.html">Lady’s Vintage Rolex Datejust</a>
+                                <a href="sign_in.php">Lady’s Vintage Rolex Datejust</a>
                             </h6>
                             <div class="bid-area">
                                 <div class="bid-amount">
@@ -589,13 +589,13 @@
                 <div class="col-sm-10 col-md-6 col-lg-4">
                     <div class="auction-item-2">
                         <div class="auction-thumb">
-                            <a href="product-details.html"><img src="assets/images/auction/watches/auction-3.jpg" alt="watches"></a>
+                            <a href="sign_in.php"><img src="assets/images/auction/watches/auction-3.jpg" alt="watches"></a>
                             <a href="#0" class="rating"><i class="far fa-star"></i></a>
                             <a href="#0" class="bid"><i class="flaticon-auction"></i></a>
                         </div>
                         <div class="auction-content">
                             <h6 class="title">
-                                <a href="product-details.html">Lady’s Retro Diamond</a>
+                                <a href="sign_in.php">Lady’s Retro Diamond</a>
                             </h6>
                             <div class="bid-area">
                                 <div class="bid-amount">
@@ -653,12 +653,12 @@
             <div class="auction-slider-4 owl-theme owl-carousel">
                 <div class="auction-item-4">
                     <div class="auction-thumb">
-                        <a href="product-details.html"><img src="assets/images/house/8.png" alt="realstate"></a>
+                        <a href="sign_in.php"><img src="assets/images/house/8.png" alt="realstate"></a>
                         <a href="#0" class="bid"><i class="flaticon-auction"></i></a>
                     </div>
                     <div class="auction-content">
                         <h4 class="title">
-                            <a href="product-details.html">Six Bedroom House, Tema Community 18</a>
+                            <a href="sign_in.php">Six Bedroom House, Tema Community 18</a>
                         </h4>
                         <div class="bid-area">
                             <div class="bid-amount">
@@ -693,12 +693,12 @@
                 </div>
                 <div class="auction-item-4">
                     <div class="auction-thumb">
-                        <a href="product-details.html"><img src="assets/images/house/4.jpg" alt="realstate"></a>
+                        <a href="sign_in.php"><img src="assets/images/house/4.jpg" alt="realstate"></a>
                         <a href="#0" class="bid"><i class="flaticon-auction"></i></a>
                     </div>
                     <div class="auction-content">
                         <h4 class="title">
-                            <a href="product-details.html">Four Bedrooom House, Tesano</a>
+                            <a href="sign_in.php">Four Bedrooom House, Tesano</a>
                         </h4>
                         <div class="bid-area">
                             <div class="bid-amount">
@@ -733,12 +733,12 @@
                 </div>
                 <div class="auction-item-4">
                     <div class="auction-thumb">
-                        <a href="product-details.html"><img src="assets/images/house/7.jpg" alt="realstate"></a>
+                        <a href="sign_in.php"><img src="assets/images/house/7.jpg" alt="realstate"></a>
                         <a href="#0" class="bid"><i class="flaticon-auction"></i></a>
                     </div>
                     <div class="auction-content">
                         <h4 class="title">
-                            <a href="product-details.html">Three Bedroom House, North Legon</a>
+                            <a href="sign_in.php">Three Bedroom House, North Legon</a>
                         </h4>
                         <div class="bid-area">
                             <div class="bid-amount">
@@ -778,7 +778,7 @@
                     </div>
                     <div class="auction-content">
                         <h4 class="title">
-                            <a href="product-details.html">Two Bedroom House, Tema Community 16</a>
+                            <a href="sign_in.php">Two Bedroom House, Tema Community 16</a>
                         </h4>
                         <div class="bid-area">
                             <div class="bid-amount">
@@ -864,7 +864,7 @@
     <section class="how-video-section pos-rel">
         <div class="how-video-shape bg_img d-none d-md-block" data-background="assets/css/img/how-video.png"></div>
         <div class="container">
-            <div class="how-video-wrapper">
+        <div class="how-video-wrapper">
                 <div class="tutorial">
                 <p>Watch our tutorial video</p>
                 </div>

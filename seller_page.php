@@ -90,10 +90,15 @@
                         <h1 class="title"><span class="d-xl-block">Start Making</span> Money!</h1>
                     </div>
                 </div>
+                <div class="col-md-3 col-lg-6 col-xl-6 d-none d-lg-block">
+                    <div class="banner-thumb-3">
+                        <img src="assets/images/banner/banner-3.png" alt="banner">
+                    </div>
+                </div>                
             </div>
         </div>
-        <div class="banner-shape d-none d-lg-block">
-            <img src="assets/css/img/banner-shape.png" alt="css">
+        <div class="banner-shape-2 d-none d-lg-block">
+            <img src="assets/css/img/banner-shape-3.png" alt="css">
         </div>
     </section>
     <!--============= Banner Section Ends Here =============-->

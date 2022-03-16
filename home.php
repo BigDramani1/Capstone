@@ -103,7 +103,7 @@
                 </div>
                 <div class="d-none d-lg-block col-lg-6">
                     <div class="banner-thumb-2">
-                        <img src="assets/images/banner/banner-1.png" alt="banner">
+                        <img src="assets/images/banner/banner-2.png" alt="banner">
                     </div>
                 </div>
             </div>
@@ -1169,7 +1169,7 @@
                                     <a href="#0">Divanta</a>
                                 </li>
                                 <li>
-                                    <a href="Terms.php">Terms and Conditions</a>
+                                    <a href="user_terms.php">Terms and Conditions</a>
                                 </li>
                                 
                                     <a style ="color:white;">Created by Dramani Alhassan</a>

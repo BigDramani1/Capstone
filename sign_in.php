@@ -188,7 +188,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <div class="hero-section">
             <ul class="breadcrumb">
                 <li>
-                    <a href="home.php">Home</a>
+                    <a href="index.php">Home</a>
                 </li>
                 <li>
                     <a href="#0">Account</a>
@@ -385,7 +385,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 <div class="copyright-area">
                     <div class="footer-bottom-wrapper">
                         <div class="logo">
-                            <a href="home.php"><img src="assets/images/logo/footer-logo.png" alt="logo"></a>
+                            <a href="index.php"><img src="assets/images/logo/footer-logo.png" alt="logo"></a>
                         </div>
                         <div class="copyright"><p>&copy; Copyright 2021 | <a> Divanta is created by Dramani Alhassan </a></p></div>
                     </div>

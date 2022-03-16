@@ -333,7 +333,7 @@ session_start();
                                     <a href="user_contact.php">Contact Us</a>
                                 </li>
                                 <li>
-                                    <a href="faqs.php">Help & FAQ</a>
+                                    <a href="user_faqs.php">Help & FAQ</a>
                                 </li>
                             </ul>
                         </div>
