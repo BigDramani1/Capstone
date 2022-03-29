@@ -8,7 +8,7 @@ require_once "connection.php";
 $username = $firstname = $lastname = $phone = $city = $email = $password = $confirm_password = "";
 $username_err = $firstname_err = $lastname_err = $phone_err = $city_err=  $email_err= $password_err = $confirm_password_err = "";
 
-
+ 
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
  
@@ -225,7 +225,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             <a href="seller_sign.php" class="user-button"><i class="fa fa-search-dollar"></i></a><p style="color:white";>Sell</p>
                         </li>                        
                         <li>
-                            <a href="sign_login.php" class="user-button"><i class="flaticon-user"></i></a><p style="color:white";>Account</p>
+                            <a href="seller_login.php" class="user-button"><i class="flaticon-user"></i></a><p style="color:white";>Account</p>
                         </li>                        
                     </ul>
                 </div>

@@ -20,8 +20,8 @@ password varchar(60) not null,
 fname varchar (50) not null,
 lname varchar (50) not null,
 email varchar(50) unique not null,
-phone varchar (50) not null, 
 city varchar(50) not null,
+phone varchar (50) not null, 
 primary key (seller_id, email, phone));
 
 Create table buyer_profile(
@@ -47,7 +47,7 @@ create table seller_item(
 item_id int not null auto_increment,
 categories enum("SPORTS", "REAL ESTATE", "WATCHES", "VEHICLES", "JEWELRY", "ELECTRONICS"),
 descriptions  varchar (100),
-photo_dir varchar(255),
+image blob,
 min_bid_price int not null,
 title varchar(50) not null, 
 buy_price int not null,
@@ -118,5 +118,9 @@ bid_time date,
 winStatus enum ("won", "lost"),
 primary key(bid_id)); 
 
-show databases;
-select * from sign_up_buyer;
+
+insert into seller_item(Categories, descriptions, image, min_bid_price, title, buy_price)
+values ("VEHICLES", "The car is brand new from Germany. It came in Ghana on 25th March 2020", load_file("C:/xampp/htdocs/Capstone/assets/images/auction/car/auction-2.jpg"), 10000, "2018 Nissan Versa",
+44200);
+
+select * from seller_item;

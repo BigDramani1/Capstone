@@ -8837,8 +8837,8 @@ button.custom-button {
     font-size: 16px;
 }
 .cont{
-    background-color: #ffff;
-    width: 64%;
+    background-color: lightblue;
+    width: 50%;
     min-width: 420px;
     padding: 35px 50px;
     transform: translate(-50%,-50%);
@@ -8925,7 +8925,7 @@ h2 {
   flex-direction: column;
   position:relative;
   top:-10px;
-  left:-8%;
+  left:-5%;
 }
 
 .select-box .options-containers {
@@ -9013,7 +9013,7 @@ h2 {
   flex-direction: column;
   position:relative;
   top:20px;
-  left:0%;
+  left:2%;
 
 }
 

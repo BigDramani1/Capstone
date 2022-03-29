@@ -58,14 +58,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             // Password is correct, so start a new session
                             
                             // Store data in session variables
+                            $_SESSION["firstname"] =  $firstname;
+                            $_SESSION["lastname"] = $lastname;     
+                            $_SESSION["email"] = $email; 
+                            $_SESSION["phone"] = $phone; 
+                            $_SESSION["city"] = $city; 
                             $_SESSION["loggedin"] = true;
                             $_SESSION["id"] = $id;
-                            $_SESSION["username"] = $username;  
-                            $_SESSION["firstname"]=$firstname;
-                            $_SESSION["city"] = $city; 
-                            $_SESSION["phone"]=$phone;
-                            $_SESSION["email"]=$email;
-                            $_SESSION["lastname"]=$lastname;
+                            $_SESSION["username"] = $username; 
                          // Setting parameters                          
                             
                             // Redirect user to Home page
@@ -147,7 +147,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             <a href="seller_sign.php" class="user-button"><i class="fa fa-search-dollar"></i></a><p style="color:white";>Sell</p>
                         </li>                       
                         <li>
-                            <a href="sign_login.php" class="user-button"><i class="flaticon-user"></i></a><p style="color:white";>Account</p>
+                            <a href="seller_login.php" class="user-button"><i class="flaticon-user"></i></a><p style="color:white";>Account</p>
                         </li>                        
                     </ul>
                 </div>

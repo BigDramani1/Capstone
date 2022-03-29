@@ -46,7 +46,7 @@
                         </li>
                     </ul>
                     <ul class="cart-button-area">                       
-                        <li><a href="log_out.php" class="user-button"><i class='fa fa-sign-out-alt' style='color: red'></i></a><p style="color:black";><strong>Log Out</strong></p><li>
+                    <li><a href="log_out.php" class="user-button"><i class='fa fa-sign-out-alt' style='color: white'></i></a><p style="color:white";><strong>Log Out</strong></p><li>
                     </ul>
                 </div>
             </div>
@@ -119,8 +119,6 @@
                                 <div class="thumb">
                                     <img src="assets/images/profile.png" alt="user">
                                 </div>
-                                <label for="profile-pic" class="profile-pic-edit"><i class="flaticon-pencil"></i></label>
-                                <input type="file" id="profile-pic" class="d-none">
                             </div>
                             <div class="content">
                                 <h5 class="title"><?php echo $_SESSION["firstname"]; echo " "; echo $_SESSION["lastname"];?></h5>
@@ -159,7 +157,7 @@
                         <div class="col-12">
                             <div class="dash-pro-item mb-30 dashboard-widget">
                                 <div class="header">
-                                    <h4 class="title">Account Settings</h4>.µdsaxzx\
+                                    <h4 class="title">Account Settings</h4>
                                 </div>
                                 <ul class="dash-pro-body">
                                     <li>

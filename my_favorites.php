@@ -1,10 +1,9 @@
 <?php
 session_start();
-require_once ("component.php");
 if (isset($_POST['remove'])){
     if ($_GET['action'] == 'remove'){
         foreach ($_SESSION['favorites'] as $key => $value){
-            if($value["item_id"] == $_GET['id']){
+            if($value["item_id"] == $_GET['item_id']){
                 unset($_SESSION['favorites'][$key]);
                 echo "<script>alert('Product has been Removed...!')</script>";
                 echo "<script>window.location = 'my_favorites.php'</script>";
@@ -59,7 +58,7 @@ if (isset($_POST['remove'])){
                         </li>
                     </ul>
                     <ul class="cart-button-area">                       
-                        <li><a href="log_out.php" class="user-button"><i class='fa fa-sign-out-alt' style='color: red'></i></a><p style="color:black";><strong>Log Out</strong></p><li>
+                    <li><a href="log_out.php" class="user-button"><i class='fa fa-sign-out-alt' style='color: white'></i></a><p style="color:white";><strong>Log Out</strong></p><li>
                     </ul>
                 </div>
             </div>
@@ -165,32 +164,68 @@ if (isset($_POST['remove'])){
                                 <input type="text" placeholder="Item Name">
                                 <button type="submit"><i class="fas fa-search"></i></button>
                             </form>
-                            <div class="sort-winning-bid">
-                                <div class="item">Sort By : </div>
-                                <select name="sort-by" class="select-bar">
-                                    <option value="all">All</option>
-                                    <option value="name">Name</option>
-                                    <option value="date">Date</option>
-                                    <option value="car">Car</option>
-                                </select>
-                            </div>
                         </div>
                     </div>
                     <div class="row mb-30-none justify-content-center">
+                    <?php require_once ("component.php");?>
                     <?php
                     if (isset($_SESSION['favorites'])){
-                        $product_id = array_column($_SESSION['favorites'], 'item_id');
+                        $item_id = array_column($_SESSION['favorites'], 'item_id');
+                        require_once('assets/Config/const.php');
+                        $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+                        $sql = "SELECT * FROM seller_item";
+                        $result = mysqli_query($mysqli, $sql);
 
-                        $result = $db->getData();
                         while ($row = mysqli_fetch_assoc($result)){
                             foreach ($item_id as $id){
-                                if ($row['id'] == $id){
-                                    cartElement($row['photo_dir'], $row['title'], $row['buy_price'],$row['min_bid_price'], $row['id']);
+                                if ($row['item_id'] == $id){
+                                    cartElement($row['title'], $row['min_bid_price'], base64_encode( $row['image']),$row['item_id'], $row['buy_price']);
                                 }
                             }
                         }
                     }
                     ?>
+                     <div class="col-sm-10 col-md-6">
+                            <div class="auction-item-2">
+                                <div class="auction-thumb">
+                                    <a href="product-details.html"><img src="assets/images/auction/product/09.png" alt="product"></a>
+                                    <a href="#0" class="bid"><i class="flaticon-auction"></i></a>
+                                </div>
+                                <div class="auction-content">
+                                    <h6 id= "title" class="title">
+                                        2017 Harley-Davidson XG750
+                                    </h6>
+                                    <div class="bid-area">
+                                        <div class="bid-amount">
+                                            <div class="icon">
+                                                <i class="flaticon-auction"></i>
+                                            </div>
+                                            <div class="amount-content">
+                                                <div class="current">Current Bid</div>
+                                                <div class="amount">₵876.00</div>
+                                            </div>
+                                        </div>
+                                        <div class="bid-amount">
+                                            <div class="icon">
+                                                <i class="flaticon-money"></i>
+                                            </div>
+                                            <div class="amount-content">
+                                                <div class="current">Buy Now</div>
+                                                <div class="amount">₵5,00.00</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="countdown-area">
+                                        <div class="countdown">
+                                            <div id="bid_counter2"></div>
+                                        </div>
+                                    </div>
+                                    <div class="text-center">
+                                        <a href="#0" class="custom-button">Delete</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="col-sm-10 col-md-6">
                             <div class="auction-item-2">
                                 <div class="auction-thumb">

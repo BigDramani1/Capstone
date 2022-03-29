@@ -1342,6 +1342,7 @@ input[type="submit"] {
 
 .section-header-3 .normal-button {
     margin-top: 30px;
+    text-decoration: none;
 }
 
 @media (max-width: 575px) {
@@ -1363,6 +1364,8 @@ input[type="submit"] {
         font-size: 14px;
         padding: 5px 25px 3px;
         line-height: 40px;
+        text-decoration: none;
+        
     }
 }
 
@@ -3372,10 +3375,6 @@ div[class*="auction"] .custom-button {
     position: absolute;
     top: 20px;
     right: 20px;
-}
-
-.auction-item-2 .auction-thumb .rating.isChecked{
-    color:red;
 }
 
 .btn-danger {
@@ -6913,6 +6912,8 @@ button.custom-button {
     border-radius: 30px;
     color: #171d1c;
     line-height: 46px;
+    text-decoration: none;
+  
 }
 
 .normal-button:hover {
@@ -6921,6 +6922,7 @@ button.custom-button {
     background: -ms-linear-gradient(90deg, #3da9f5 0%, #683df5 100%);
     background: -webkit-linear-gradient(90deg, #3da9f5 0%, #683df5 100%);
     box-shadow: -1.04px 4.891px 20px 0px rgba(69, 49, 183, 0.5);
+    text-decoration: none;
 }
 
 @keyframes outer-ripple {
@@ -7268,12 +7270,21 @@ button:hover {
        width: 100%;
     }
   }
-
+.fav{
+color:yellowgreen;
+border:none;
+outline:none;
+position: absolute;
+width:40px;
+height:30px;
+top: 1px;
+right: 20px;
+}
   /*favorites for users*/
-  #cart_count{
+#cart_count{
     text-align: center;
     padding: 0 0.9rem 0.1rem 0.9rem;
-    border-radius: 3rem;   
+    border-radius: 3rem;
 }
   
 /*All Animation Ends Here*/

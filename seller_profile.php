@@ -46,8 +46,7 @@
                         </li>
                     </ul>
                     <ul class="cart-button-area">                       
-                        <li><a href="log_out.php" class="user-button"><i class='fa fa-sign-out-alt' style='color: red'></i></a><p style="color:black";><strong>Log Out</strong></p><li>
-                    </ul>
+                    <li><a href="log_out.php" class="user-button"><i class='fa fa-sign-out-alt' style='color: white'></i></a><p style="color:white";><strong>Log Out</strong></p><li>
                 </div>
             </div>
         </div>
@@ -146,7 +145,7 @@
                             <div class="dash-pro-item mb-30 dashboard-widget">
                                 <div class="header">
                                     <h4 class="title">Personal Details</h4>
-                                    <span class="edit"><a href="user_reset.php"><i class="flaticon-edit"></i> Edit</a></span>
+                                    <span class="edit"><a href="seller_update.php"><i class="flaticon-edit"></i> Edit</a></span>
                                 </div>
                                 <ul class="dash-pro-body">
                                     <li>
@@ -224,7 +223,7 @@
                                 <ul class="dash-pro-body">
                                     <li>
                                         <div class="info-name">Want to Reset your Password?</div>
-                                        <div class="info-value">If yes, then click on the link Reset Password <br><a href="user_reset.php">Reset Password</a></br></div>
+                                        <div class="info-value">If yes, then click on the link Reset Password <br><a href="seller_reset.php">Reset Password</a></br></div>
                                     </li>
                                 </ul>
                             </div>
@@ -372,7 +371,7 @@
                 <div class="copyright-area">
                     <div class="footer-bottom-wrapper">
                         <div class="logo">
-                            <a href="seller_pag.php"><img src="assets/images/logo/footer-logo.png" alt="logo"></a>
+                            <a href="seller_page.php"><img src="assets/images/logo/footer-logo.png" alt="logo"></a>
                         </div>
                         <div class="copyright"><p>&copy; Copyright 2021 | <a> Divanta is created by Dramani Alhassan </a></p></div>
                     </div>

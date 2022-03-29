@@ -43,8 +43,7 @@
                             </li>
                         </ul>
                         <ul class="cart-button-area">                       
-                        <li><a href="log_out.php" class="user-button"><i class='fa fa-sign-out-alt' style='color: red'></i></a><p style="color:black";><strong>Log Out</strong></p><li>
-                    </ul>
+                        <li><a href="log_out.php" class="user-button"><i class='fa fa-sign-out-alt' style='color: white'></i></a><p style="color:white";><strong>Log Out</strong></p><li>
                 </div>
             </div>
         </div>
@@ -61,7 +60,7 @@
                             <a href="seller_page.php">Home</a>
                         </li>
                         <li>
-                            <a href="home.php">Contact</a>
+                            <a href="home.php">Auction Page</a>
                         </li>
                         <li>
                             <a href="seller_favorites.php">My Favorites</a>

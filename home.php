@@ -1,4 +1,7 @@
-<?php session_start();
+<?php 
+session_start();
+
+//adding to cart
 if (isset($_POST['add'])){
     /// print_r($_POST['product_id']);
     if(isset($_SESSION['favorites'])){
@@ -29,7 +32,6 @@ if (isset($_POST['add'])){
         print_r($_SESSION['favorites']);
     }
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -49,7 +51,6 @@ if (isset($_POST['add'])){
     <link rel="stylesheet" href="assets/css/jquery-ui.min.css">
     <link rel="stylesheet" href="assets/css/main.css">
     <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
     <!--============= ScrollToTop Section Starts Here =============-->
@@ -73,20 +74,19 @@ if (isset($_POST['add'])){
                             <a href="dashboard.php" class="mr-3"><i class="fa fa-bars"></i><span class="ml-2 d-none d-sm-inline-block">Dashboard</span></a>
                         </li>
                     </ul>
-                    <ul class="cart-button-area"> 
-                        <li><a href="my_favorites.php" class="cart-button"><i class='fa fa-star' style='color: yellowgreen'></i></a>
-                        <?php
+                    <ul class="cart-button-area">
+                    <li><a href="my_favorites.php" class="cart-button"><i class='fa fa-star' style='color: yellowgreen'></i></a></li>                       
+                    <?php
 
-                    if (isset($_SESSION['favorites'])){
-                        $count = count($_SESSION['favorites']);
-                        echo "<span id=\"cart_count\" class=\"text-warning bg-light\">$count</span>";
-                    }else{
-                        echo "<span id=\"cart_count\" class=\"text-warning bg-light\">0</span>";
-                    }
+                        if (isset($_SESSION['favorites'])){
+                            $count = count($_SESSION['favorites']);
+                            echo "<span id=\"cart_count\" class=\"text-warning bg-light\">$count</span>";
+                        }else{
+                            echo "<span id=\"cart_count\" class=\"text-warning bg-light\">0</span>";
+                        }
 
-                    ?> 
-                    <li>                     
-                        <li><a href="log_out.php" class="user-button"><i class='fa fa-sign-out-alt' style='color: red'></i></a><p style="color:black";><strong>Log Out</strong></p><li>
+                     ?> 
+                    <li><a href="log_out.php" class="user-button"><i class='fa fa-sign-out-alt' style='color: white'></i></a><p style="color:white";><strong>Log Out</strong></p><li>
                     </ul>
                 </div>
             </div>
@@ -218,18 +218,22 @@ if (isset($_POST['add'])){
                     <a href="vehicles.php" class="normal-button">View All</a>
                 </div>
                 <div class="row justify-content-center mb-30-none">
-                   <?php require_once ("component.php");?>
-                    <?php
-                        $result = $stmt->fetch();
+                <?php require_once ("component.php");?>
+                        <?php
+                         require_once('assets/Config/const.php');
+                         $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+                         $sql = "SELECT * FROM seller_item";
+                         $result = mysqli_query($mysqli, $sql);
+                        // Associative while loop array
                         while ($row = mysqli_fetch_assoc($result)){
-                            component($row['photo_dir'], $row['title'], $row['buy_price'],$row['min_bid_price'], $row['id']);
-                        }
+                            component($row['title'], $row['min_bid_price'], base64_encode( $row['image']),$row['item_id'], $row['buy_price']);
+                        }                                                                              
                     ?>
                     <div class="col-sm-10 col-md-6 col-lg-4">
                         <div class="auction-item-2">
                             <div class="auction-thumb">
                                 <a href="vehicle1_bid.php"><img src="assets/images/product/14.jpg" alt="car"></a>
-                                <buttons type="button" class="rating" ><i class="fa fa-star"></i></buttons>
+                                <button type="button" name ="add" class="fav"><i class="fa fa-star"></i></button>
                                 <a href="#0" class="bid"><i class="flaticon-auction"></i></a>
                             </div>
                             <div class="auction-content">
@@ -268,56 +272,10 @@ if (isset($_POST['add'])){
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-10 col-md-6 col-lg-4">
-                        <div class="auction-item-2">
-                            <div class="auction-thumb">
-                                <a href="product-details.html"><img src="assets/images/auction/car/auction-3.jpg" alt="car"></a>
-                                <buttons type="button" class="rating" ><i class="fa fa-star"></i></buttons>
-                                <a href="#0" class="bid"><i class="flaticon-auction"></i></a>
-                            </div>
-                            <div class="auction-content">
-                                <h6 id="title" class="title">
-                                   2018 Honda Accord, Sport
-                                </h6>
-                                <div class="bid-area">
-                                    <div class="bid-amount">
-                                        <div class="icon">
-                                            <i class="flaticon-auction"></i>
-                                        </div>
-                                        <div class="amount-content">
-                                            <div class="current">Current Bid</div>
-                                            <div class="amount">₵876.00</div>
-                                        </div>
-                                    </div>
-                                    <div class="bid-amount">
-                                        <div class="icon">
-                                            <i class="flaticon-money"></i>
-                                        </div>
-                                        <div class="amount-content">
-                                            <div class="current">Buy Now</div>
-                                            <div class="amount">₵5,00.00</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="countdown-area">
-                                    <div class="countdown">
-                                        <div id="bid_counter28"></div>
-                                    </div>
-                                    <span class="total-bids">min bid: ₵300</span>
-                                </div>
-                                <div class="text-center">
-                                    <a href="#0" class="custom-button">Submit a bid</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </section>
         <!--============= Car Auction Section Ends Here =============-->
-    </div>
-
-
     <!--============= Jewelry Auction Section Starts Here =============-->
     <section class="jewelry-auction-section padding-bottom padding-top pos-rel">
         <div class="jewelry-bg d-none d-xl-block"><img src="assets/images/auction/jewelry/jwelry-bg.png" alt="jewelry"></div>
@@ -339,7 +297,7 @@ if (isset($_POST['add'])){
                     <div class="auction-item-2">
                         <div class="auction-thumb">
                             <a href="product-details.html"><img src="assets/images/auction/jewelry/auction-1.jpg" alt="jewelry"></a>
-                            <buttons type="button" class="rating" ><i class="fa fa-star"></i></buttons>
+                            <button type="button" name ="add" class="fav"><i class="fa fa-star"></i></button>
                             <a href="#0" class="bid"><i class="flaticon-auction"></i></a>
                         </div>
                         <div class="auction-content">
@@ -382,7 +340,7 @@ if (isset($_POST['add'])){
                     <div class="auction-item-2">
                         <div class="auction-thumb">
                             <a href="product-details.html"><img src="assets/images/auction/jewelry/auction-2.jpg" alt="jewelry"></a>
-                            <buttons type="button" class="rating" ><i class="fa fa-star"></i></buttons>
+                            <button type="button" name ="add" class="fav"><i class="fa fa-star"></i></button>
                             <a href="#0" class="bid"><i class="flaticon-auction"></i></a>
                         </div>
                         <div class="auction-content">
@@ -425,7 +383,7 @@ if (isset($_POST['add'])){
                     <div class="auction-item-2">
                         <div class="auction-thumb">
                             <a href="product-details.html"><img src="assets/images/auction/jewelry/auction-3.jpg" alt="jewelry"></a>
-                            <buttons type="button" class="rating" ><i class="fa fa-star"></i></buttons>
+                            <button type="button" name ="add" class="fav"><i class="fa fa-star"></i></button>
                             <a href="#0" class="bid"><i class="flaticon-auction"></i></a>
                         </div>
                         <div class="auction-content">
@@ -505,7 +463,7 @@ if (isset($_POST['add'])){
                     <div class="auction-item-2">
                         <div class="auction-thumb">
                             <a href="product-details.html"><img src="assets/images/auction/watches/auction-1.jpg" alt="watches"></a>
-                            <buttons type="button" class="rating" ><i class="fa fa-star"></i></buttons>
+                            <button type="button" name ="add" class="fav"><i class="fa fa-star"></i></button>
                             <a href="#0" class="bid"><i class="flaticon-auction"></i></a>
                         </div>
                         <div class="auction-content">
@@ -548,7 +506,7 @@ if (isset($_POST['add'])){
                     <div class="auction-item-2">
                         <div class="auction-thumb">
                             <a href="product-details.html"><img src="assets/images/auction/watches/auction-2.jpg" alt="watches"></a>
-                            <buttons type="button" class="rating" ><i class="fa fa-star"></i></buttons>
+                            <button type="button" name ="add" class="fav"><i class="fa fa-star"></i></button>
                             <a href="#0" class="bid"><i class="flaticon-auction"></i></a>
                         </div>
                         <div class="auction-content">
@@ -591,7 +549,7 @@ if (isset($_POST['add'])){
                     <div class="auction-item-2">
                         <div class="auction-thumb">
                             <a href="product-details.html"><img src="assets/images/auction/watches/auction-3.jpg" alt="watches"></a>
-                            <buttons type="button" class="rating" ><i class="fa fa-star"></i></buttons>
+                            <button type="button" name ="add" class="fav"><i class="fa fa-star"></i></button>
                             <a href="#0" class="bid"><i class="flaticon-auction"></i></a>
                         </div>
                         <div class="auction-content">
@@ -862,7 +820,7 @@ if (isset($_POST['add'])){
     <!--============= Real Estate Section Starts Here =============-->
      <!--=========== Video Starts Here =========-->
     <section class="how-video-section pos-rel">
-        <div class="how-video-shape bg_img d-none d-md-block" data-background="assets/css/img/how-video.png"></div>
+        <div class="how-video-shape bg_img d-none d-md-block"></div>
         <div class="container">
             <div class="how-video-wrapper">
                 <div class="tutorial">
@@ -1085,9 +1043,6 @@ if (isset($_POST['add'])){
     <script src="assets/js/yscountdown.min.js"></script>
     <script src="assets/js/jquery-ui.min.js"></script>
     <script src="assets/js/main.js"></script>
-    <script src="assets/js/favorites.js"></script> 
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>                 
+    <script src="assets/js/favorites.js"></script>              
 </body>
 </html>
