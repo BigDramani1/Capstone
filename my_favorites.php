@@ -1,16 +1,17 @@
 <?php
 session_start();
 if (isset($_POST['remove'])){
-    if ($_GET['action'] == 'remove'){
-        foreach ($_SESSION['favorites'] as $key => $value){
-            if($value["item_id"] == $_GET['item_id']){
-                unset($_SESSION['favorites'][$key]);
-                echo "<script>alert('Product has been Removed...!')</script>";
-                echo "<script>window.location = 'my_favorites.php'</script>";
+    require_once('assets/Config/const.php');
+        if ($_GET['action'] == 'remove'){
+            foreach ($_SESSION['favorites'] as $key => $value){
+                if($value["product_id"] == $_GET['id']){
+                    unset($_SESSION['favorites'][$key]);
+                    echo "<script>alert('Product has been Removed...!')</script>";
+                    echo "<script>window.location = 'my_favorites.php'</script>";
+                }
             }
-        }
-    }
-  }
+        }      
+    }        
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -29,9 +30,7 @@ if (isset($_POST['remove'])){
     <link rel="stylesheet" href="assets/css/magnific-popup.css">
     <link rel="stylesheet" href="assets/css/flaticon.css">
     <link rel="stylesheet" href="assets/css/jquery-ui.min.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="assets/css/main.css">
-
     <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon">
 </head>
 
@@ -158,115 +157,30 @@ if (isset($_POST['remove'])){
                     <div class="dash-bid-item dashboard-widget mb-40-60">
                         <div class="header">
                             <h4 class="title">My Favorites</h4>
-                        </div>
-                        <div class="button-area justify-content-between">
-                            <form class="product-search">
-                                <input type="text" placeholder="Item Name">
-                                <button type="submit"><i class="fas fa-search"></i></button>
-                            </form>
+                            <div class="thumb">
+                            <img src="assets/images/dashboard/03.png">
+                              </div>
                         </div>
                     </div>
                     <div class="row mb-30-none justify-content-center">
                     <?php require_once ("component.php");?>
                     <?php
                     if (isset($_SESSION['favorites'])){
-                        $item_id = array_column($_SESSION['favorites'], 'item_id');
+                        $product_id = array_column($_SESSION['favorites'], 'product_id');
                         require_once('assets/Config/const.php');
                         $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
                         $sql = "SELECT * FROM seller_item";
                         $result = mysqli_query($mysqli, $sql);
 
                         while ($row = mysqli_fetch_assoc($result)){
-                            foreach ($item_id as $id){
+                            foreach ($product_id as $id){
                                 if ($row['item_id'] == $id){
-                                    cartElement($row['title'], $row['min_bid_price'], base64_encode( $row['image']),$row['item_id'], $row['buy_price']);
+                                    cartElement($row['title'], $row['min_bid_price'],$row['image'],$row['item_id'], $row['buy_price']);
                                 }
                             }
                         }
                     }
                     ?>
-                     <div class="col-sm-10 col-md-6">
-                            <div class="auction-item-2">
-                                <div class="auction-thumb">
-                                    <a href="product-details.html"><img src="assets/images/auction/product/09.png" alt="product"></a>
-                                    <a href="#0" class="bid"><i class="flaticon-auction"></i></a>
-                                </div>
-                                <div class="auction-content">
-                                    <h6 id= "title" class="title">
-                                        2017 Harley-Davidson XG750
-                                    </h6>
-                                    <div class="bid-area">
-                                        <div class="bid-amount">
-                                            <div class="icon">
-                                                <i class="flaticon-auction"></i>
-                                            </div>
-                                            <div class="amount-content">
-                                                <div class="current">Current Bid</div>
-                                                <div class="amount">₵876.00</div>
-                                            </div>
-                                        </div>
-                                        <div class="bid-amount">
-                                            <div class="icon">
-                                                <i class="flaticon-money"></i>
-                                            </div>
-                                            <div class="amount-content">
-                                                <div class="current">Buy Now</div>
-                                                <div class="amount">₵5,00.00</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="countdown-area">
-                                        <div class="countdown">
-                                            <div id="bid_counter2"></div>
-                                        </div>
-                                    </div>
-                                    <div class="text-center">
-                                        <a href="#0" class="custom-button">Delete</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-10 col-md-6">
-                            <div class="auction-item-2">
-                                <div class="auction-thumb">
-                                    <a href="product-details.html"><img src="assets/images/auction/product/09.png" alt="product"></a>
-                                    <a href="#0" class="bid"><i class="flaticon-auction"></i></a>
-                                </div>
-                                <div class="auction-content">
-                                    <h6 id= "title" class="title">
-                                        2017 Harley-Davidson XG750
-                                    </h6>
-                                    <div class="bid-area">
-                                        <div class="bid-amount">
-                                            <div class="icon">
-                                                <i class="flaticon-auction"></i>
-                                            </div>
-                                            <div class="amount-content">
-                                                <div class="current">Current Bid</div>
-                                                <div class="amount">₵876.00</div>
-                                            </div>
-                                        </div>
-                                        <div class="bid-amount">
-                                            <div class="icon">
-                                                <i class="flaticon-money"></i>
-                                            </div>
-                                            <div class="amount-content">
-                                                <div class="current">Buy Now</div>
-                                                <div class="amount">₵5,00.00</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="countdown-area">
-                                        <div class="countdown">
-                                            <div id="bid_counter2"></div>
-                                        </div>
-                                    </div>
-                                    <div class="text-center">
-                                        <a href="#0" class="custom-button">Delete</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -436,6 +350,9 @@ if (isset($_POST['remove'])){
     <script src="assets/js/yscountdown.min.js"></script>
     <script src="assets/js/jquery-ui.min.js"></script>
     <script src="assets/js/main.js"></script>
-    <script src="assets/js/favorites.js" async></script>
+   
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
 </html>

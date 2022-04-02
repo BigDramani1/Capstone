@@ -6,9 +6,9 @@ function component($title, $min_bid_price, $image, $item_id, $buy_price){
     <form action=\"home.php\" method=\"post\">
     <div class=\"auction-item-2\">
         <div class=\"auction-thumb\">
-            <a href=\"vehicle1_bid.php\"><img src=\"data:$image/jpg;base64\" alt=\"car\"></a>
+            <a href=\"vehicle1_bid.php\"><img src=\"$image\" alt=\"car\ width=\"330\" height=\"247\"></a>
             <button type=\"submit\" name =\"add\" class=\"fav\"><i class=\"fa fa-star\"></i></button>
-            <input type='hidden' name='item_id' value='$item_id'>
+            <input type='hidden' name='product_id' value='$item_id'>
             <a href=\"#0\" class=\"bid\"><i class=\"flaticon-auction\"></i></a>
         </div>
         <div class=\"auction-content\">
@@ -37,7 +37,7 @@ function component($title, $min_bid_price, $image, $item_id, $buy_price){
             </div>
             <div class=\"countdown-area\">
                 <div class=\"countdown\">
-                    <div id=\"bid_counter27\"></div>
+                    <div id=\"bid_counter1\"></div>
                 </div>
             </div>
             <div class=\"text-center\">
@@ -88,7 +88,7 @@ function cartElement($title, $min_bid_price, $image, $item_id, $buy_price){
             </div>
             <div class=\"countdown-area\">
                 <div class=\"countdown\">
-                    <div id=\"bid_counter26\"></div>
+                    <div id=\"bid_counter10\"></div>
                 </div>
             </div>
             <div class=\"text-center\">

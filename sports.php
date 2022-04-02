@@ -113,7 +113,7 @@
                 <div class="col-sm-10 col-md-6 col-lg-4">
                     <div class="auction-item-2">
                         <div class="auction-thumb">
-                            <a href="product-details.php"><img src="assets/images/sports/22.jpg" alt="car"></a>
+                            <a href="product-details.php"><img src="assets/images/sports/22.jpg" alt="car" width="330" height="247"></a>
                             <a href="#0" class="rating"><i class="far fa-star"></i></a>
                             <a href="#0" class="bid"><i class="flaticon-auction"></i></a>
                         </div>
@@ -156,7 +156,7 @@
                 <div class="col-sm-10 col-md-6 col-lg-4">
                     <div class="auction-item-2">
                         <div class="auction-thumb">
-                            <a href="product-details.html"><img src="assets/images/sports/2.jpg" alt="car"></a>
+                            <a href="product-details.html"><img src="assets/images/sports/2.jpg" alt="car" width="330" height="247"></a>
                             <a href="#0" class="rating"><i class="far fa-star"></i></a>
                             <a href="#0" class="bid"><i class="flaticon-auction"></i></a>
                         </div>
@@ -199,7 +199,7 @@
                 <div class="col-sm-10 col-md-6 col-lg-4">
                     <div class="auction-item-2">
                         <div class="auction-thumb">
-                            <a href="product-details.html"><img src="assets/images/sports/3.jpg" alt="car"></a>
+                            <a href="product-details.html"><img src="assets/images/sports/3.jpg" alt="car" width="330" height="247"></a>
                             <a href="#0" class="rating"><i class="far fa-star"></i></a>
                             <a href="#0" class="bid"><i class="flaticon-auction"></i></a>
                         </div>
@@ -278,7 +278,7 @@
                 <div class="col-sm-10 col-md-6 col-lg-4">
                     <div class="auction-item-2">
                         <div class="auction-thumb">
-                            <a href="product-details.html"><img src="assets/images/sports/17.webp" alt="product"></a>
+                            <a href="product-details.html"><img src="assets/images/sports/17.webp" alt="product"width="330" height="247"></a>
                             <a href="#0" class="rating"><i class="far fa-star"></i></a>
                             <a href="#0" class="bid"><i class="flaticon-auction"></i></a>
                         </div>
@@ -321,7 +321,7 @@
                 <div class="col-sm-10 col-md-6 col-lg-4">
                     <div class="auction-item-2">
                         <div class="auction-thumb">
-                            <a href="product-details.html"><img src="assets/images/sports/1.jpg" alt="product"></a>
+                            <a href="product-details.html"><img src="assets/images/sports/1.jpg" alt="product" width="330" height="247"></a>
                             <a href="#0" class="rating"><i class="far fa-star"></i></a>
                             <a href="#0" class="bid"><i class="flaticon-auction"></i></a>
                         </div>
@@ -364,7 +364,7 @@
                 <div class="col-sm-10 col-md-6 col-lg-4">
                     <div class="auction-item-2">
                         <div class="auction-thumb">
-                            <a href="product-details.html"><img src="assets/images/sports/6.webp" alt="product"></a>
+                            <a href="product-details.html"><img src="assets/images/sports/6.webp" alt="product" width="330" height="247"></a>
                             <a href="#0" class="rating"><i class="far fa-star"></i></a>
                             <a href="#0" class="bid"><i class="flaticon-auction"></i></a>
                         </div>
@@ -407,7 +407,7 @@
                 <div class="col-sm-10 col-md-6 col-lg-4">
                     <div class="auction-item-2">
                         <div class="auction-thumb">
-                            <a href="product-details.html"><img src="assets/images/sports/4.webp" alt="product"></a>
+                            <a href="product-details.html"><img src="assets/images/sports/4.webp" alt="product" width="330" height="247"></a>
                             <a href="#0" class="rating"><i class="far fa-star"></i></a>
                             <a href="#0" class="bid"><i class="flaticon-auction"></i></a>
                         </div>
@@ -450,7 +450,7 @@
                 <div class="col-sm-10 col-md-6 col-lg-4">
                     <div class="auction-item-2">
                         <div class="auction-thumb">
-                            <a href="product-details.html"><img src="assets/images/sports/44.jpg" alt="product"></a>
+                            <a href="product-details.html"><img src="assets/images/sports/44.jpg" alt="product" width="330" height="247"></a>
                             <a href="#0" class="rating"><i class="far fa-star"></i></a>
                             <a href="#0" class="bid"><i class="flaticon-auction"></i></a>
                         </div>
@@ -493,7 +493,7 @@
                 <div class="col-sm-10 col-md-6 col-lg-4">
                     <div class="auction-item-2">
                         <div class="auction-thumb">
-                            <a href="product-details.html"><img src="assets/images/sports/12.jpg" alt="product"></a>
+                            <a href="product-details.html"><img src="assets/images/sports/12.jpg" alt="product" width="330" height="247"></a>
                             <a href="#0" class="rating"><i class="far fa-star"></i></a>
                             <a href="#0" class="bid"><i class="flaticon-auction"></i></a>
                         </div>
@@ -536,7 +536,7 @@
                 <div class="col-sm-10 col-md-6 col-lg-4">
                     <div class="auction-item-2">
                         <div class="auction-thumb">
-                            <a href="product-details.html"><img src="assets/images/sports/16.webp" alt="product"></a>
+                            <a href="product-details.html"><img src="assets/images/sports/16.webp" alt="product" width="330" height="247"></a>
                             <a href="#0" class="rating"><i class="far fa-star"></i></a>
                             <a href="#0" class="bid"><i class="flaticon-auction"></i></a>
                         </div>
@@ -579,7 +579,7 @@
                 <div class="col-sm-10 col-md-6 col-lg-4">
                     <div class="auction-item-2">
                         <div class="auction-thumb">
-                            <a href="product-details.html"><img src="assets/images/sports/14.webp" alt="product"></a>
+                            <a href="product-details.html"><img src="assets/images/sports/14.webp" alt="product" width="330" height="247"></a>
                             <a href="#0" class="rating"><i class="far fa-star"></i></a>
                             <a href="#0" class="bid"><i class="flaticon-auction"></i></a>
                         </div>
@@ -622,7 +622,7 @@
                 <div class="col-sm-10 col-md-6 col-lg-4">
                     <div class="auction-item-2">
                         <div class="auction-thumb">
-                            <a href="product-details.html"><img src="assets/images/sports/15.webp" alt="product"></a>
+                            <a href="product-details.html"><img src="assets/images/sports/15.webp" alt="product" width="330" height="247"></a>
                             <a href="#0" class="rating"><i class="far fa-star"></i></a>
                             <a href="#0" class="bid"><i class="flaticon-auction"></i></a>
                         </div>

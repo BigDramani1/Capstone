@@ -6,16 +6,16 @@ if (isset($_POST['add'])){
     /// print_r($_POST['product_id']);
     if(isset($_SESSION['favorites'])){
 
-        $item_array_id = array_column($_SESSION['favorites'], "item_id");
+        $item_array_id = array_column($_SESSION['favorites'], "product_id");
 
-        if(in_array($_POST['item_id'], $item_array_id)){
+        if(in_array($_POST['product_id'], $item_array_id)){
             echo "<script>alert('Product is already added in the Favorites..!')</script>";
             echo "<script>window.location = 'home.php'</script>";
         }else{
 
             $count = count($_SESSION['favorites']);
             $item_array = array(
-                'item_id' => $_POST['item_id']
+                'product_id' => $_POST['product_id']
             );
 
             $_SESSION['favorites'][$count] = $item_array;
@@ -24,12 +24,12 @@ if (isset($_POST['add'])){
     }else{
 
         $item_array = array(
-                'item_id' => $_POST['item_id']
+                'product_id' => $_POST['product_id']
         );
 
         // Create new session variable
         $_SESSION['favorites'][0] = $item_array;
-        print_r($_SESSION['favorites']);
+        
     }
 }
 ?>
@@ -226,52 +226,9 @@ if (isset($_POST['add'])){
                          $result = mysqli_query($mysqli, $sql);
                         // Associative while loop array
                         while ($row = mysqli_fetch_assoc($result)){
-                            component($row['title'], $row['min_bid_price'], base64_encode( $row['image']),$row['item_id'], $row['buy_price']);
+                            component($row['title'], $row['min_bid_price'], $row['image'],$row['item_id'], $row['buy_price']);
                         }                                                                              
                     ?>
-                    <div class="col-sm-10 col-md-6 col-lg-4">
-                        <div class="auction-item-2">
-                            <div class="auction-thumb">
-                                <a href="vehicle1_bid.php"><img src="assets/images/product/14.jpg" alt="car"></a>
-                                <button type="button" name ="add" class="fav"><i class="fa fa-star"></i></button>
-                                <a href="#0" class="bid"><i class="flaticon-auction"></i></a>
-                            </div>
-                            <div class="auction-content">
-                                <h6 id="title" class="title">
-                                   2019, Hyundai Venue
-                                </h6>
-                                <div class="bid-area">
-                                    <div class="bid-amount">
-                                        <div class="icon">
-                                            <i class="flaticon-auction"></i>
-                                        </div>
-                                        <div class="amount-content">
-                                            <div class="current">Current Bid</div>
-                                            <div class="amount">₵876.00</div>
-                                        </div>
-                                    </div>
-                                    <div class="bid-amount">
-                                        <div class="icon">
-                                            <i class="flaticon-money"></i>
-                                        </div>
-                                        <div class="amount-content">
-                                            <div class="current">Buy Now</div>
-                                            <div class="amount">₵5,00.00</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="countdown-area">
-                                    <div class="countdown">
-                                        <div id="bid_counter26"></div>
-                                    </div>
-                                    <span class="total-bids">min bid: ₵500</span>
-                                </div>
-                                <div class="text-center">
-                                    <a href="vehicle1_bid.php" class="custom-button">Submit a bid</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </section>
