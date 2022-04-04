@@ -1,3 +1,7 @@
+<?php
+session_start();
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -44,7 +48,7 @@
                             </li>
                         </ul>
                     <ul class="cart-button-area">                       
-                        <li><a href="log_out.php" class="user-button"><i class='fa fa-sign-out-alt' style='color: red'></i></a><p style="color:black";><strong>Log Out</strong></p><li>
+                    <li><a href="log_out.php" class="user-button"><i class='fa fa-sign-out-alt' style='color: white'></i></a><p style="color:white";><strong>Log Out</strong></p><li>
                     </ul>
                 </div>
             </div>
@@ -197,11 +201,20 @@
                                             <button type="button" onclick="document.getElementById('id01').style.display='none'" class="acceptbtn">Accept</button>
                                         </div>
                                         </div>
+                                        <script>
+                                            var modal = document.getElementById('id01');
+                                                
+                                                // When the user clicks anywhere outside of the modal, close it
+                                                window.onclick = function(event) {
+                                                if (event.target == modal) {
+                                                    modal.style.display = "none";
+                                                }
+                                                }
+                                            </script>
                                     </form>
                                     </div>
                             <div class="buy-now-area">
                             <a href="#0" class="custom-button">Buy Now: ₵4,200</a>
-                            <a href="#0" class="rating custom-button active border"><i class="fas fa-star"></i> Add to Favorites</a>
                         </div>
                     </div>
                 </div>
@@ -266,6 +279,7 @@
                     <div class="tab-details-content">
                         <div class="header-area">
                             <h3 class="title">2019 Hyundai Venue (Spintex, Accra)</h3>
+                            <p>This car is the best to ever great. It really lovely
                             <div class="item">
                                 <table class="product-info-table">
                                     <tbody>
@@ -274,32 +288,16 @@
                                             <td>New</td>
                                         </tr>
                                         <tr>
-                                            <th>Mileage</th>
-                                            <td>15,000 miles</td>
-                                        </tr>
-                                        <tr>
                                             <th>Year</th>
-                                            <td>05-2019</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Engine</th>
-                                            <td>I-4 1,5 l</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Fuel</th>
-                                            <td>Regular</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Transmission</th>
-                                            <td>Automatic</td>
+                                            <td>2019</td>
                                         </tr>
                                         <tr>
                                             <th>Color</th>
                                             <td>Blue</td>
                                         </tr>
                                         <tr>
-                                            <th>Doors</th>
-                                            <td>5</td>
+                                            <th>Location</th>
+                                            <td>Kumasi</td>
                                         </tr>
                                     </tbody>
                                 </table>

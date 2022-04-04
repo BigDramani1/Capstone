@@ -35,7 +35,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     // Validating the  credentials
     if(empty($username_err) && empty($password_err)){
         // Prepare a select statement
-        $sql = "SELECT seller_id, username, password FROM sign_up_seller WHERE username = ?";
+        $sql = "SELECT *  FROM sign_up_seller WHERE username = ?";
         
         if($stmt = $mysqli->prepare($sql)){
             // Binding variables to parameters
@@ -52,19 +52,20 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 // Check if username exists, if yes then verify password
                 if($stmt->num_rows == 1){                    
                     // Bind result variables
-                    $stmt->bind_result($id, $username, $hashed_password);
+                    $stmt->bind_result($id, $username,$hashed_password, $firstname, $lastname, $email, $city, $phone);
                     if($stmt->fetch()){
                         if(password_verify($password, $hashed_password)){
                             // Password is correct, so start a new session
                             
                             // Store data in session variables
+                            $_SESSION["firstname"] =  $firstname;
+                            $_SESSION["lastname"] = $lastname;     
+                            $_SESSION["email"] = $email; 
+                            $_SESSION["phone"] = $phone; 
+                            $_SESSION["city"] = $city; 
                             $_SESSION["loggedin"] = true;
                             $_SESSION["id"] = $id;
-                            $_SESSION["username"] = $username;  
-                            $_SESSION["firstname"]=$firstname;
-                            $_SESSION["phone"]=$phone;
-                            $_SESSION["email"]=$email;
-                            $_SESSION["lastname"]=$lastname;
+                            $_SESSION["username"] = $username; 
                          // Setting parameters                          
                             
                             // Redirect user to Home page
@@ -72,13 +73,17 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             header("location:seller_page.php?login=success");
                         } else{
                             // Display an error message if password is not valid
-                            $password_err = "The password is not valid.";
+                            $password_err = "Either the password or username is incorrect";
+                            $username_err = "Either the username or pasword is incorrect";
+                            
                             
                         }
                     }
                 } else{
                     // Display an error message if username doesn't exist
-                    $username_err = "Sorry, such username doesn't exist.";
+                    $password_err = "Either the password or username is incorrect";
+                    $username_err = "Either the username or pasword is incorrect";
+                    
                 }
             } else{
                 echo "Oops! Something went wrong. Please try again later.";
@@ -142,7 +147,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             <a href="seller_sign.php" class="user-button"><i class="fa fa-search-dollar"></i></a><p style="color:white";>Sell</p>
                         </li>                       
                         <li>
-                            <a href="sign_in.php" class="user-button"><i class="flaticon-user"></i></a><p style="color:white";>Account</p>
+                            <a href="seller_login.php" class="user-button"><i class="flaticon-user"></i></a><p style="color:white";>Account</p>
                         </li>                        
                     </ul>
                 </div>
@@ -232,9 +237,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             <button type="submit" class="custom-button">LOG IN</button>
                         </div>
                     </form>
-                    <div class="work">
-                            <a href="#0" style='text-decoration: none'>Forgot Password?</a>
-                        </div>
                 </div>
                 <div class="right-side cl-white">
                     <div class="section-header mb-0">
@@ -245,7 +247,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     <div class="section-header mb-0">
                         <h3 class="title mt-0">BUYER'S LOGIN?</h3>
                         <P>Log in and go to your Dashboard.</P>
-                        <a href="sign_login.php" class="custom-button transparent"style='text-decoration: none'>LOGIN </a>
+                        <a href="sign_in.php" class="custom-button transparent"style='text-decoration: none'>LOGIN </a>
                     </div>
                 </div>
             </div>

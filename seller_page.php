@@ -13,11 +13,6 @@
     <link rel="stylesheet" href="assets/css/all.min.css">
     <link rel="stylesheet" href="assets/css/flaticon.css">
     <link rel="stylesheet" href="assets/css/seller_page.css">
-    
-    
-   
-
-    <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon">
 </head>
 
 <body>
@@ -43,7 +38,7 @@
                         </li>
                     </ul>
                     <ul class="cart-button-area">                       
-                        <li><a href="log_out.php" class="user-button"><i class='fa fa-sign-out-alt' style='color: red'></i></a><p style="color:black";><strong>Log Out</strong></p><li>
+                        <li><a href="log_out.php" class="user-button"><i class='fa fa-sign-out-alt' style='color: white'></i></a><p style="color:white";><strong>Log Out</strong></p><li>
                     </ul>
                 </div>
             </div>
@@ -98,7 +93,7 @@
             </div>
         </div>
         <div class="banner-shape-2 d-none d-lg-block">
-            <img src="assets/css/img/banner-shape-3.png" alt="css">
+            <img src="assets/css/img/banner-shape-2.png" alt="css">
         </div>
     </section>
     <!--============= Banner Section Ends Here =============-->
@@ -233,6 +228,15 @@
                     <label for="name"></label>
                     <input type="text" id="name" placeholder="Description of Product">
                 </div>
+                <!---make row and column for this and make the phone num echo
+                <div class="column">
+                    <label for="name"></label>
+                    <input type="text" id="name" placeholder="Title of the product">
+                </div>
+                <div class="column">
+                    <label for="name"></label>
+                    <input type="phone" id="name" placeholder="phone number +233">
+                </div>-->
                 <div class="column">
                     <label for="subject"></label>
                     <input type="number" id="num" placeholder="Enter your min bid amount in GH₵">
@@ -260,12 +264,10 @@
     </div>
      <!--=========== Video Starts Here =========-->
     <section class="how-video-section pos-rel">
-        <div class="how-video-shape bg_img d-none d-md-block" data-background="assets/css/img/how-video.png"></div>
+        <div class="how-video-shape bg_img d-none d-md-block"></div>
         <div class="container">
             <div class="how-video-wrapper">
-                <div class="tutorial">
-                <em>Watch our tutorial video</em>
-                </div>
+                <p style="font-size:40px; color:#f22876; padding:10px">Watch our tutorial video</p>
                 <div class="how-video-area">
                     <iframe width="800" height="430" src="https://www.youtube.com/embed/dIIbltnAcHs" allowfullscreen="true">
                     </iframe>
@@ -398,7 +400,7 @@
                                     <a href="#0">Divanta</a>
                                 </li>
                                 <li>
-                                    <a href="Terms.php">Terms and Conditions</a>
+                                    <a href="seller_terms.php">Terms and Conditions</a>
                                 </li>
                                 
                                     <a style ="color:white;">Created by Dramani Alhassan</a>
@@ -414,7 +416,7 @@
                                     <a href="seller_contact.php">Contact Us</a>
                                 </li>
                                 <li>
-                                    <a href="faqs.php">Help & FAQ</a>
+                                    <a href="seller_faqs.php">Help & FAQ</a>
                                 </li>
                             </ul>
                         </div>
@@ -457,7 +459,7 @@
                 <div class="copyright-area">
                     <div class="footer-bottom-wrapper">
                         <div class="logo">
-                            <a href="home.php"><img src="assets/images/logo/footer-logo.png" alt="logo"></a>
+                            <a href="seller_page.php"><img src="assets/images/logo/footer-logo.png" alt="logo"></a>
                         </div>
                         <div class="copyright"><p>&copy; Copyright 2021 | <a> Divanta is created by Dramani Alhassan </a></p></div>
                     </div>

@@ -1,5 +1,17 @@
 <?php
 session_start();
+if (isset($_POST['remove'])){
+    require_once('assets/Config/const.php');
+        if ($_GET['action'] == 'remove'){
+            foreach ($_SESSION['favorites'] as $key => $value){
+                if($value["product_id"] == $_GET['id']){
+                    unset($_SESSION['favorites'][$key]);
+                    echo "<script>alert('Product has been Removed...!')</script>";
+                    echo "<script>window.location = 'my_favorites.php'</script>";
+                }
+            }
+        }      
+    }        
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,7 +31,6 @@ session_start();
     <link rel="stylesheet" href="assets/css/flaticon.css">
     <link rel="stylesheet" href="assets/css/jquery-ui.min.css">
     <link rel="stylesheet" href="assets/css/main.css">
-
     <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon">
 </head>
 
@@ -46,7 +57,7 @@ session_start();
                         </li>
                     </ul>
                     <ul class="cart-button-area">                       
-                        <li><a href="log_out.php" class="user-button"><i class='fa fa-sign-out-alt' style='color: red'></i></a><p style="color:black";><strong>Log Out</strong></p><li>
+                    <li><a href="log_out.php" class="user-button"><i class='fa fa-sign-out-alt' style='color: white'></i></a><p style="color:white";><strong>Log Out</strong></p><li>
                     </ul>
                 </div>
             </div>
@@ -73,7 +84,7 @@ session_start();
                     </ul>
                     <form class="search-form">
                         <input type="text" placeholder="Search for brand, model....">
-                        <button type="submit"><i class="fas fa-search"></i></button>
+                        <button type="submit"><i class="fas fa-search "></i></button>
                     </form>
                     <div class="search-bar d-md-none">
                         <a href="#0"><i class="fas fa-search"></i></a>
@@ -137,7 +148,7 @@ session_start();
                                 <a href="profile.php"><i class="flaticon-settings"></i>Personal Profile </a>
                             </li>
                             <li>
-                                <a href="my-favorites.php" class="active"><i class="flaticon-star"></i>My Favorites</a>
+                                <a href="my_favorites.php" class="active"><i class="flaticon-star"></i>My Favorites</a>
                             </li>
                         </ul>
                     </div>
@@ -146,110 +157,30 @@ session_start();
                     <div class="dash-bid-item dashboard-widget mb-40-60">
                         <div class="header">
                             <h4 class="title">My Favorites</h4>
-                        </div>
-                        <div class="button-area justify-content-between">
-                            <form class="product-search">
-                                <input type="text" placeholder="Item Name">
-                                <button type="submit"><i class="fas fa-search"></i></button>
-                            </form>
-                            <div class="sort-winning-bid">
-                                <div class="item">Sort By : </div>
-                                <select name="sort-by" class="select-bar">
-                                    <option value="all">All</option>
-                                    <option value="name">Name</option>
-                                    <option value="date">Date</option>
-                                    <option value="car">Car</option>
-                                </select>
-                            </div>
+                            <div class="thumb">
+                            <img src="assets/images/dashboard/03.png">
+                              </div>
                         </div>
                     </div>
                     <div class="row mb-30-none justify-content-center">
-                        <div class="col-sm-10 col-md-6">
-                            <div class="auction-item-2">
-                                <div class="auction-thumb">
-                                    <a href="product-details.html"><img src="assets/images/auction/product/04.png" alt="car"></a>
-                                    <a href="#0" class="rating"><i class="far fa-star"></i></a>
-                                    <a href="#0" class="bid"><i class="flaticon-auction"></i></a>
-                                </div>
-                                <div class="auction-content">
-                                    <h6 class="title">
-                                        <a href="#0">2018 Hyundai Sonata</a>
-                                    </h6>
-                                    <div class="bid-area">
-                                        <div class="bid-amount">
-                                            <div class="icon">
-                                                <i class="flaticon-auction"></i>
-                                            </div>
-                                            <div class="amount-content">
-                                                <div class="current">Current Bid</div>
-                                                <div class="amount">₵876.00</div>
-                                            </div>
-                                        </div>
-                                        <div class="bid-amount">
-                                            <div class="icon">
-                                                <i class="flaticon-money"></i>
-                                            </div>
-                                            <div class="amount-content">
-                                                <div class="current">Buy Now</div>
-                                                <div class="amount">₵5,00.00</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="countdown-area">
-                                        <div class="countdown">
-                                            <div id="bid_counter26"></div>
-                                        </div>
-                                        <span class="total-bids">30 Bids</span>
-                                    </div>
-                                    <div class="text-center">
-                                        <a href="#0" class="custom-button">Submit a bid</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-10 col-md-6">
-                            <div class="auction-item-2">
-                                <div class="auction-thumb">
-                                    <a href="product-details.html"><img src="assets/images/auction/product/09.png" alt="product"></a>
-                                    <a href="#0" class="rating"><i class="far fa-star"></i></a>
-                                    <a href="#0" class="bid"><i class="flaticon-auction"></i></a>
-                                </div>
-                                <div class="auction-content">
-                                    <h6 class="title">
-                                        <a href="#0">2017 Harley-Davidson XG750,</a>
-                                    </h6>
-                                    <div class="bid-area">
-                                        <div class="bid-amount">
-                                            <div class="icon">
-                                                <i class="flaticon-auction"></i>
-                                            </div>
-                                            <div class="amount-content">
-                                                <div class="current">Current Bid</div>
-                                                <div class="amount">₵876.00</div>
-                                            </div>
-                                        </div>
-                                        <div class="bid-amount">
-                                            <div class="icon">
-                                                <i class="flaticon-money"></i>
-                                            </div>
-                                            <div class="amount-content">
-                                                <div class="current">Buy Now</div>
-                                                <div class="amount">₵5,00.00</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="countdown-area">
-                                        <div class="countdown">
-                                            <div id="bid_counter2"></div>
-                                        </div>
-                                        <span class="total-bids">30 Bids</span>
-                                    </div>
-                                    <div class="text-center">
-                                        <a href="#0" class="custom-button">Submit a bid</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <?php require_once ("component.php");?>
+                    <?php
+                    if (isset($_SESSION['favorites'])){
+                        $product_id = array_column($_SESSION['favorites'], 'product_id');
+                        require_once('assets/Config/const.php');
+                        $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+                        $sql = "SELECT * FROM seller_item";
+                        $result = mysqli_query($mysqli, $sql);
+
+                        while ($row = mysqli_fetch_assoc($result)){
+                            foreach ($product_id as $id){
+                                if ($row['item_id'] == $id){
+                                    cartElement($row['title'], $row['min_bid_price'],$row['image'],$row['item_id'], $row['buy_price']);
+                                }
+                            }
+                        }
+                    }
+                    ?>
                     </div>
                 </div>
             </div>
@@ -419,5 +350,9 @@ session_start();
     <script src="assets/js/yscountdown.min.js"></script>
     <script src="assets/js/jquery-ui.min.js"></script>
     <script src="assets/js/main.js"></script>
+   
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
 </html>

@@ -1,3 +1,107 @@
+<?php
+// Initialize the session
+session_start();
+// Including the config file
+require_once "connection.php";
+ 
+// Variable are initialize with empty values
+$username = $firstname = $lastname = $phone = $city=  $email= "";
+$new_username_err = $new_firstname_err = $new_lastname_err = $new_phone_err = $new_city_err=  $new_email_err = "";
+
+// Data being processed when form is submitted
+if($_SERVER["REQUEST_METHOD"] == "POST"){
+     //Validating the city
+ if(empty(trim($_POST["city"]))){
+    $new_city_err = "Please enter your city.";
+}else{
+    $city = trim($_POST["city"]);
+}
+
+ //validating the username
+ if(empty(trim($_POST["username"]))){
+    $new_username_err = "Please enter your first name.";
+}else{
+    $username = trim($_POST["username"]);
+}
+ //validating the first name
+ if(empty(trim($_POST["firstname"]))){
+    $new_firstname_err = "Please enter your first name.";
+}else{
+    $firstname = trim($_POST["firstname"]);
+}
+
+ //validating the last name
+ if(empty(trim($_POST["lastname"]))){
+    $new_lastname_err = "Please enter your last name.";
+}else{
+    $lastname = trim($_POST["lastname"]);
+}
+
+//validating the phone number
+if(empty(trim($_POST["phone"]))){
+    $new_phone_err = "Please enter your phone number.";
+    }else if (!preg_match( "/^[\W][0-9]{3}?[\s]?[0-9]{2}?[\s]?[0-9]{3}[\s]?[0-9]{4}$/", $_POST["phone"])){
+        $new_phone_err= "please enter a valid phone number";
+    }
+else{
+    $phone = trim($_POST["phone"]);
+}
+
+// Validating the email
+if(empty(trim($_POST["email"]))){
+    $new_email_err = "Please your email.";
+    }else if (!preg_match( "/^\b[A-Z0-9._%-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b$/i", $_POST["email"])){
+        $email_err= "please enter a valid email";
+    }  
+    else{
+        $email = trim($_POST["email"]);
+    }
+
+
+// Checking the input errors before updating into the database
+if(empty($new_username_err) && empty($new_firstname_err) && empty($new_lastname_err) && empty($new_email_err)  && empty($new_city_err)&& empty($new_phone_err)){
+    // Prepare an update statement
+    $sql = "UPDATE sign_up_seller SET username = ?, fname = ?, lname = ?, email = ?, city = ?, phone = ? WHERE seller_id= ?";
+      // Binding variables to parameters
+    if($stmt = $mysqli->prepare($sql)){
+     
+        $stmt->bind_param("ssssssi", $param_username, $param_firstname, $param_lastname, $param_email,  $param_city, $param_phone, $param_id);
+          // Setting parameters
+          $param_lastname = $lastname;
+          $param_firstname = $firstname;
+          $param_phone = $phone;
+          $param_username = $username;
+          $param_email= $email;
+          $param_city= $city;
+          $param_id = $_SESSION["id"];
+        
+        // Attemptings to execute the prepared statement
+        if($stmt->execute()){
+
+            $_SESSION["username"] = $username;     
+            $_SESSION["firstname"] =  $firstname;
+            $_SESSION["lastname"] = $lastname;     
+            $_SESSION["email"] = $email; 
+            $_SESSION["phone"] = $phone; 
+            $_SESSION["city"] = $city; 
+            
+            header("location: seller_page.php");
+        } else{
+            echo "Oops! Something went wrong. Please try again later.";
+        }
+
+        // Closing the statement
+        $stmt->close();
+    }
+}
+
+// Close connection
+$mysqli->close();
+}
+
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,7 +109,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <title>FAQ page</title>
+    <title>Login in Page</title>
 
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/all.min.css">
@@ -16,7 +120,7 @@
     <link rel="stylesheet" href="assets/css/flaticon.css">
     <link rel="stylesheet" href="assets/css/jquery-ui.min.css">
     <link rel="stylesheet" href="assets/css/main.css">
-
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
     <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon">
 </head>
 
@@ -31,18 +135,19 @@
     <div class="overlay"></div>
     <!--============= ScrollToTop Section Ends Here =============-->
 
+
     <!--============= Header Section Starts Here =============-->
     <header>
         <div class="header-top">
             <div class="container">
                 <div class="header-top-wrapper">
-                        <ul class="customer-support">
-                            <li>
-                                <a href="dashboard.php" class="mr-3"><i class="fa fa-bars"></i><span class="ml-2 d-none d-sm-inline-block">Dashboard</span></a>
-                            </li>
-                        </ul>
-                        <ul class="cart-button-area">                       
-                        <li><a href="log_out.php" class="user-button"><i class='fa fa-sign-out-alt' style='color: white'></i></a><p style="color:white";><strong>Log Out</strong></p><li>
+                    <ul class="customer-support">
+                        <li>
+                            <a href="dashboard.php" class="mr-3"><i class="fa fa-bars"></i><span class="ml-2 d-none d-sm-inline-block">Dashboard</span></a>
+                        </li>
+                    </ul>
+                    <ul class="cart-button-area">                       
+                    <li><a href="log_out.php" class="user-button"><i class='fa fa-sign-out-alt' style='color: white'></i></a><p style="color:white";><strong>Log Out</strong></p><li>
                     </ul>
                 </div>
             </div>
@@ -51,23 +156,23 @@
             <div class="container">
                 <div class="header-wrapper">
                     <div class="logo">
-                        <a href="home.php">
+                        <a href="seller_page.php">
                             <img src="assets/images/logo/logo.png" alt="logo">
                         </a>
                     </div>
                     <ul class="menu ml-auto">
                         <li>
-                            <a href="home.php">Home</a>
+                            <a href="seller_page.php" style='text-decoration: none'>Home</a>
                         </li>
                         <li>
-                            <a href="my_favorites.php">My Favorites</a>
+                            <a href="seller_favorites.php" style='text-decoration: none'>My Favorites</a>
                         </li>
                         
                         <li>
-                            <a href="user_contact.php">Contact</a>
+                            <a href="seller_contact.php"style='text-decoration: none'>Contact</a>
                         </li>
                         <li>
-                            <a href="user_faqs.php">Faqs</a>
+                            <a href="seller_faqs.php"style='text-decoration: none'>Faqs</a>
                         </li>
                     </ul>
                 </div>
@@ -75,16 +180,20 @@
         </div>
     </header>
     <!--============= Header Section Ends Here =============-->
-    
+
+  
+
     <!--============= Hero Section Starts Here =============-->
-    <div class="hero-section style-2">
-        <div class="container">
+    <div class="hero-section">
             <ul class="breadcrumb">
                 <li>
-                    <a href="home.php">Home</a>
+                    <a href="seller_page.php">Home</a>
                 </li>
                 <li>
-                    <span>FAQ</span>
+                    <a href="#0">Account</a>
+                </li>
+                <li>
+                    <span>Login</span>
                 </li>
             </ul>
         </div>
@@ -93,140 +202,51 @@
     <!--============= Hero Section Ends Here =============-->
 
 
-    <!--============= Faq Section Starts Here =============-->
-    <section class="faq-section padding-bottom mt--240 mt-lg--440 pos-rel">
-        <div class="container">
-            <div class="product-details-slider-top-wrapper">
-                <div class="product-details-slider owl-theme owl-carousel" id="sync1">
-                        <div class="slide-inner">
-                            <img src="assets/images/faq.webp" alt="product">
-                        </div>
-                         </div>
-                         <div class="tutorials">
-                              <h2 class="free">Frequently Asked Questions</h2>
-                            <p>Do not hesitate to send us an email if you can't find what you're looking for.</p></div>
-                     </div>
-                </div>
-            </div>
-            <div class="container">
-            <div class="section-header cl-white mw-100 left-style">
-        </div>
-            <div class="row mb--50">
-                <div class="col-lg-8 mb-50">
-                    <div class="faq-wrapper">
-                        <div class="faq-item">
-                            <div class="faq-title">
-                                <img src="assets/css/img/faq.png" alt="css"><span class="title">How to start bidding?</span><span class="right-icon"></span>
-                            </div>
-                            <div class="faq-content">
-                                <p>You can start bidding by logging into your account or registering for an account and then logging in.</p>
-                            </div>
-                        </div>
-                        <div class="faq-item">
-                            <div class="faq-title">
-                                <img src="assets/css/img/faq.png" alt="css"><span class="title">Should I make some form of payment to the Seller before seeing the product? </span><span class="right-icon"></span>
-                            </div>
-                            <div class="faq-content">
-                                <p>Please do not make any payment until you have seen the product in person. You should only purchase the product if it satisfies you. You are not obliged to make a payment right after seeing the product.</p>
-                            </div>
-                        </div>
-                        <div class="faq-item">
-                            <div class="faq-title">
-                                <img src="assets/css/img/faq.png" alt="css"><span class="title">Is Delivery free? </span><span class="right-icon"></span>
-                            </div>
-                            <div class="faq-content">
-                                <p>Whether delivery is free or not can only be discussed with you and the seller. </p>
-                            </div>
-                        </div>
-                        <div class="faq-item">
-                            <div class="faq-title">
-                                <img src="assets/css/img/faq.png" alt="css"><span class="title">How to register to bid in an auction?</span><span class="right-icon"></span>
-                            </div>
-                            <div class="faq-content">
-                                <p>On the top right corner of any page, click on the account icon. Once you click it, you can follow the procedure to create a successful account.</p>
-                            </div>
-                        </div>
-                        <div class="faq-item open active">
-                            <div class="faq-title">
-                                <img src="assets/css/img/faq.png" alt="css"><span class="title">How will I know if my bid was successful?</span><span class="right-icon"></span>
-                            </div>
-                            <div class="faq-content">
-                                <p>All successful bidders can confirm their winning bid by checking their emails. They will be notified of their winning bid after the auction closes.</p>
-                            </div>
-                        </div>
-                        <div class="faq-item">
-                            <div class="faq-title">
-                                <img src="assets/css/img/faq.png" alt="css"><span class="title">What happens if I bid on the wrong lot?</span><span class="right-icon"></span>
-                            </div>
-                            <div class="faq-content">
-                                <p>Unfortunately, right now, you cannot do anything about it. Before you bid for any product, there would be a prompt on whether you are sure to bid for the item. The same thing goes for anyone who plans on buying a bidding product. </p>
-                            </div>
-                        </div>
-                        <div class="faq-item open active">
-                            <div class="faq-title">
-                                <img src="assets/css/img/faq.png" alt="css"><span class="title">How will I get my product if I win?</span><span class="right-icon"></span>
-                            </div>
-                            <div class="faq-content">
-                                <p>You would receive the seller's contact through your mail. You can make arrangements with the seller on how to get your product. </p>
-                            </div>
-                        </div>
-                        <div class="faq-item open active">
-                            <div class="faq-title">
-                                <img src="assets/css/img/faq.png" alt="css"><span class="title">How can I contact the support team?</span><span class="right-icon"></span>
-                            </div>
-                            <div class="faq-content">
-                                <p>Look at the navigation bar which says "contact" and click on it. Or look at the buttom of any page and click on "contact" under the secton We're Here to help</p>
-                            </div>
-                        </div>
-                        <div class="faq-item">
-                            <div class="faq-title">
-                                <img src="assets/css/img/faq.png" alt="css"><span class="title">How do I know if I'm the high bidder?</span><span class="right-icon"></span>
-                            </div>
-                            <div class="faq-content">
-                                <p>You will know if you are the highest bidder by clicking on the product that you bid. You would see a tab called "bidders" in-between description and question. Click on "bidders," and you will know where you rank. </p>
-                            </div>
-                        </div>
-                        <div class="faq-item">
-                            <div class="faq-title">
-                                <img src="assets/css/img/faq.png" alt="css"><span class="title">Can I bid using my mobile device?</span><span class="right-icon"></span>
-                            </div>
-                            <div class="faq-content">
-                                <p>Yes, you can bid on your mobile device or any electronic device.</p>
-                            </div>
-                        </div>
-                        <div class="faq-item">
-                            <div class="faq-title">
-                                <img src="assets/css/img/faq.png" alt="css"><span class="title">What are the tips for winning?</span><span class="right-icon"></span>
-                            </div>
-                            <div class="faq-content">
-                                <p>The tip is to bid high for nobody to try and bid. Or you can buy it, and you will win the product. </p>
-                            </div>
-                        </div>
-                        <div class="faq-item">
-                            <div class="faq-title">
-                                <img src="assets/css/img/faq.png" alt="css"><span class="title">Where do I access my favorites items?</span><span class="right-icon"></span>
-                            </div>
-                            <div class="faq-content">
-                                <p>On the left corner, click on "dashboard." After that, navigate to my favorites and click on them.</p>
-                            </div>
-                        </div>
+    <!--============= Account Section Starts Here =============-->
+    <section class="account-section padding-bottom">
+        <div class="update">
+                    <div class="section-header">
+                        <h2 class="title">UPDATE ACCOUNT</h2>
                     </div>
+                <form class="form-group" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+                <div class="form-group <?php echo (!empty($new_username_err)) ? 'has-error' : ''; ?>">
+                    <label>Username</label>
+                    <input type="text" name="username" class="form-control" value="<?php echo $_SESSION["username"];?>" placeholder="Firstname" >
+                    <span class="help-block"><?php echo $new_username_err; ?></span>
                 </div>
-                <div class="col-lg-4 mb-50">
-                    <aside class="sticky-menu">
-                        <div class="faq-menu bg_img mb-30" data-background="./assets/images/faq/faq-menu.png">
-                        </div>
-                            <div class="tutorial">
-                            <h5 class="title">Watch our tutorial video</h5>
-                            <iframe width="485" height="430" src="https://www.youtube.com/embed/dIIbltnAcHs"allowfullscreen> </iframe>
-                                </div>
-                        </div>
-                    </aside>
+                <div class="form-group <?php echo (!empty($new_firstname_err)) ? 'has-error' : ''; ?>">
+                    <label>Firstname</label>
+                    <input type="text" name="firstname" class="form-control" value="<?php echo $_SESSION["firstname"];?>" placeholder="Firstname">
+                    <span class="help-block"><?php echo $new_firstname_err; ?></span>
                 </div>
+                <div class="form-group <?php echo (!empty($new_lastname_err)) ? 'has-error' : ''; ?>">
+                    <label>Lastname</label>
+                    <input type="text" name="lastname" class="form-control" value="<?php echo $_SESSION["lastname"];?>" placeholder="Lastname" >
+                    <span class="help-block"><?php echo $new_lastname_err; ?></span>
+                </div>
+                <div class="form-group <?php echo (!empty($new_phone_err)) ? 'has-error' : ''; ?>">
+                    <label>Phone Number</label>
+                    <input type="tel" name="phone" class="form-control" value="<?php echo $_SESSION["phone"];?>" placeholder="tel" >
+                    <span class="help-block"><?php echo $new_phone_err; ?></span>
+                </div>
+                <div class="form-group <?php echo (!empty($new_email_err)) ? 'has-error' : ''; ?>">
+                    <label>Email</label>
+                    <input type="text" name="email" class="form-control" value="<?php echo $_SESSION["email"];?>" placeholder="Email" >
+                    <span class="help-block"><?php echo $new_email_err; ?></span>
+                </div>
+                <div class="form-group <?php echo (!empty($new_city_err)) ? 'has-error' : ''; ?>">
+                    <label>City</label>
+                    <input type="text" name="city" class="form-control" value="<?php echo $_SESSION["city"];?>" placeholder="City">
+                    <span class="help-block"><?php echo $new_city_err; ?></span>
+                </div>
+                <div class="form-group">
+                <input type="submit" class="btn btn-primary" value="Submit">
+                <a class="btn btn-link" href="seller_profile.php" >Cancel</a>
             </div>
+            </form>
         </div>
     </section>
-    <!--============= Faq Section Ends Here =============-->
+    <!--============= Account Section Ends Here =============-->
 
 
     <!--============= Footer Section Starts Here =============-->
@@ -305,7 +325,7 @@
                                     <a href="#0">Divanta</a>
                                 </li>
                                 <li>
-                                    <a href="Terms.php">Terms and Conditions</a>
+                                    <a href="seller_page.php">Terms and Conditions</a>
                                 </li>
                                 
                                     <a style ="color:white;">Created by Dramani Alhassan</a>
@@ -318,10 +338,10 @@
                             <h5 class="title">We're Here to Help</h5>
                             <ul class="links-list">
                                 <li>
-                                    <a href="contact.php">Contact Us</a>
+                                    <a href="seller_contact.php">Contact Us</a>
                                 </li>
                                 <li>
-                                    <a href="faqs.php">Help & FAQ</a>
+                                    <a href="seller_faqs.php">Help & FAQ</a>
                                 </li>
                             </ul>
                         </div>
@@ -364,7 +384,7 @@
                 <div class="copyright-area">
                     <div class="footer-bottom-wrapper">
                         <div class="logo">
-                            <a href="home.php"><img src="assets/images/logo/footer-logo.png" alt="logo"></a>
+                            <a href="seller_page.php"><img src="assets/images/logo/footer-logo.png" alt="logo"></a>
                         </div>
                         <div class="copyright"><p>&copy; Copyright 2021 | <a> Divanta is created by Dramani Alhassan </a></p></div>
                     </div>

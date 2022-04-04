@@ -8,7 +8,7 @@ require_once "connection.php";
 $username = $firstname = $lastname = $phone = $city = $email = $password = $confirm_password = "";
 $username_err = $firstname_err = $lastname_err = $phone_err = $city_err=  $email_err= $password_err = $confirm_password_err = "";
 
-
+ 
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
  
@@ -161,7 +161,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             // Attempting to execute the prepared statement
             if($stmt->execute()){
                 // Redirect to login page
-                header("location: seller_in.php");
+                header("location: seller_login.php");
             } else{
                 echo "Oops! Something went wrong. Please try again later.";
             
@@ -225,7 +225,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             <a href="seller_sign.php" class="user-button"><i class="fa fa-search-dollar"></i></a><p style="color:white";>Sell</p>
                         </li>                        
                         <li>
-                            <a href="sign_in.php" class="user-button"><i class="flaticon-user"></i></a><p style="color:white";>Account</p>
+                            <a href="seller_login.php" class="user-button"><i class="flaticon-user"></i></a><p style="color:white";>Account</p>
                         </li>                        
                     </ul>
                 </div>
@@ -354,7 +354,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     <div class="section-header mb-0">
                         <h3 class="title mt-0">ALREADY HAVE AN ACCOUNT?</h3>
                         <p>Log in and go to your Dashboard.</p>
-                        <a href="sign_in.php" class="custom-button transparent"style='text-decoration: none'>Login</a>
+                        <a href="seller_login.php" class="custom-button transparent"style='text-decoration: none'>Login</a>
                     </div>
                 </div>
             </div>

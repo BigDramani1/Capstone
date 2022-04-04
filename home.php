@@ -1,4 +1,37 @@
-<?php session_start();
+<?php 
+session_start();
+
+//adding to cart
+if (isset($_POST['add'])){
+    /// print_r($_POST['product_id']);
+    if(isset($_SESSION['favorites'])){
+
+        $item_array_id = array_column($_SESSION['favorites'], "product_id");
+
+        if(in_array($_POST['product_id'], $item_array_id)){
+            echo "<script>alert('Product is already added in the Favorites..!')</script>";
+            echo "<script>window.location = 'home.php'</script>";
+        }else{
+
+            $count = count($_SESSION['favorites']);
+            $item_array = array(
+                'product_id' => $_POST['product_id']
+            );
+
+            $_SESSION['favorites'][$count] = $item_array;
+        }
+
+    }else{
+
+        $item_array = array(
+                'product_id' => $_POST['product_id']
+        );
+
+        // Create new session variable
+        $_SESSION['favorites'][0] = $item_array;
+        
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -6,7 +39,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
     <title>Home Page</title>
 
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
@@ -18,10 +50,8 @@
     <link rel="stylesheet" href="assets/css/flaticon.css">
     <link rel="stylesheet" href="assets/css/jquery-ui.min.css">
     <link rel="stylesheet" href="assets/css/main.css">
-
     <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon">
 </head>
-
 <body>
     <!--============= ScrollToTop Section Starts Here =============-->
     <div class="overlayer" id="overlayer">
@@ -44,8 +74,19 @@
                             <a href="dashboard.php" class="mr-3"><i class="fa fa-bars"></i><span class="ml-2 d-none d-sm-inline-block">Dashboard</span></a>
                         </li>
                     </ul>
-                    <ul class="cart-button-area">                       
-                        <li><a href="log_out.php" class="user-button"><i class='fa fa-sign-out-alt' style='color: red'></i></a><p style="color:black";><strong>Log Out</strong></p><li>
+                    <ul class="cart-button-area">
+                    <li><a href="my_favorites.php" class="cart-button"><i class='fa fa-star' style='color: yellowgreen'></i></a></li>                       
+                    <?php
+
+                        if (isset($_SESSION['favorites'])){
+                            $count = count($_SESSION['favorites']);
+                            echo "<span id=\"cart_count\" class=\"text-warning bg-light\">$count</span>";
+                        }else{
+                            echo "<span id=\"cart_count\" class=\"text-warning bg-light\">0</span>";
+                        }
+
+                     ?> 
+                    <li><a href="log_out.php" class="user-button"><i class='fa fa-sign-out-alt' style='color: white'></i></a><p style="color:white";><strong>Log Out</strong></p><li>
                     </ul>
                 </div>
             </div>
@@ -177,142 +218,21 @@
                     <a href="vehicles.php" class="normal-button">View All</a>
                 </div>
                 <div class="row justify-content-center mb-30-none">
-                    <div class="col-sm-10 col-md-6 col-lg-4">
-                        <div class="auction-item-2">
-                            <div class="auction-thumb">
-                                <a href="product-details.html"><img src="assets/images/auction/car/auction-2.jpg" alt="car"></a>
-                                <a href="#0" class="rating"><i class="far fa-star"></i></a>
-                                <a href="#0" class="bid"><i class="flaticon-auction"></i></a>
-                            </div>
-                            <div class="auction-content">
-                                <h6 class="title">
-                                    <a href="product-details.html">2018 Nissan Versa, S</a>
-                                </h6>
-                                <div class="bid-area">
-                                    <div class="bid-amount">
-                                        <div class="icon">
-                                            <i class="flaticon-auction"></i>
-                                        </div>
-                                        <div class="amount-content">
-                                            <div class="current">Current Bid</div>
-                                            <div class="amount">₵876.00</div>
-                                        </div>
-                                    </div>
-                                    <div class="bid-amount">
-                                        <div class="icon">
-                                            <i class="flaticon-money"></i>
-                                        </div>
-                                        <div class="amount-content">
-                                            <div class="current">Buy Now</div>
-                                            <div class="amount">₵5,00.00</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="countdown-area">
-                                    <div class="countdown">
-                                        <div id="bid_counter27"></div>
-                                    </div>
-                                    <span class="total-bids">min bid: ₵300</span>
-                                </div>
-                                <div class="text-center">
-                                    <a href="#0" class="custom-button">Submit a bid</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-10 col-md-6 col-lg-4">
-                        <div class="auction-item-2">
-                            <div class="auction-thumb">
-                                <a href="vehicle1_bid.php"><img src="assets/images/product/14.jpg" alt="car"></a>
-                                <a href="#0" class="rating"><i class="far fa-star"></i></a>
-                                <a href="#0" class="bid"><i class="flaticon-auction"></i></a>
-                            </div>
-                            <div class="auction-content">
-                                <h6 class="title">
-                                    <a href="vehicle1_bid.php">2019, Hyundai Venue</a>
-                                </h6>
-                                <div class="bid-area">
-                                    <div class="bid-amount">
-                                        <div class="icon">
-                                            <i class="flaticon-auction"></i>
-                                        </div>
-                                        <div class="amount-content">
-                                            <div class="current">Current Bid</div>
-                                            <div class="amount">₵876.00</div>
-                                        </div>
-                                    </div>
-                                    <div class="bid-amount">
-                                        <div class="icon">
-                                            <i class="flaticon-money"></i>
-                                        </div>
-                                        <div class="amount-content">
-                                            <div class="current">Buy Now</div>
-                                            <div class="amount">₵5,00.00</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="countdown-area">
-                                    <div class="countdown">
-                                        <div id="bid_counter26"></div>
-                                    </div>
-                                    <span class="total-bids">min bid: ₵500</span>
-                                </div>
-                                <div class="text-center">
-                                    <a href="vehicle1_bid.php" class="custom-button">Submit a bid</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-10 col-md-6 col-lg-4">
-                        <div class="auction-item-2">
-                            <div class="auction-thumb">
-                                <a href="product-details.html"><img src="assets/images/auction/car/auction-3.jpg" alt="car"></a>
-                                <a href="#0" class="rating"><i class="far fa-star"></i></a>
-                                <a href="#0" class="bid"><i class="flaticon-auction"></i></a>
-                            </div>
-                            <div class="auction-content">
-                                <h6 class="title">
-                                    <a href="product-details.html">2018 Honda Accord, Sport</a>
-                                </h6>
-                                <div class="bid-area">
-                                    <div class="bid-amount">
-                                        <div class="icon">
-                                            <i class="flaticon-auction"></i>
-                                        </div>
-                                        <div class="amount-content">
-                                            <div class="current">Current Bid</div>
-                                            <div class="amount">₵876.00</div>
-                                        </div>
-                                    </div>
-                                    <div class="bid-amount">
-                                        <div class="icon">
-                                            <i class="flaticon-money"></i>
-                                        </div>
-                                        <div class="amount-content">
-                                            <div class="current">Buy Now</div>
-                                            <div class="amount">₵5,00.00</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="countdown-area">
-                                    <div class="countdown">
-                                        <div id="bid_counter28"></div>
-                                    </div>
-                                    <span class="total-bids">min bid: ₵300</span>
-                                </div>
-                                <div class="text-center">
-                                    <a href="#0" class="custom-button">Submit a bid</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <?php require_once ("component.php");?>
+                        <?php
+                         require_once('assets/Config/const.php');
+                         $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+                         $sql = "SELECT * FROM seller_item";
+                         $result = mysqli_query($mysqli, $sql);
+                        // Associative while loop array
+                        while ($row = mysqli_fetch_assoc($result)){
+                            component($row['title'], $row['min_bid_price'], $row['image'],$row['item_id'], $row['buy_price']);
+                        }                                                                              
+                    ?>
                 </div>
             </div>
         </section>
         <!--============= Car Auction Section Ends Here =============-->
-    </div>
-
-
     <!--============= Jewelry Auction Section Starts Here =============-->
     <section class="jewelry-auction-section padding-bottom padding-top pos-rel">
         <div class="jewelry-bg d-none d-xl-block"><img src="assets/images/auction/jewelry/jwelry-bg.png" alt="jewelry"></div>
@@ -334,12 +254,12 @@
                     <div class="auction-item-2">
                         <div class="auction-thumb">
                             <a href="product-details.html"><img src="assets/images/auction/jewelry/auction-1.jpg" alt="jewelry"></a>
-                            <a href="#0" class="rating"><i class="far fa-star"></i></a>
+                            <button type="button" name ="add" class="fav"><i class="fa fa-star"></i></button>
                             <a href="#0" class="bid"><i class="flaticon-auction"></i></a>
                         </div>
                         <div class="auction-content">
                             <h6 class="title">
-                                <a href="product-details.html">Gold Ring With Clear Stones</a>
+                                Gold Ring With Clear Stones
                             </h6>
                             <div class="bid-area">
                                 <div class="bid-amount">
@@ -377,12 +297,12 @@
                     <div class="auction-item-2">
                         <div class="auction-thumb">
                             <a href="product-details.html"><img src="assets/images/auction/jewelry/auction-2.jpg" alt="jewelry"></a>
-                            <a href="#0" class="rating"><i class="far fa-star"></i></a>
+                            <button type="button" name ="add" class="fav"><i class="fa fa-star"></i></button>
                             <a href="#0" class="bid"><i class="flaticon-auction"></i></a>
                         </div>
                         <div class="auction-content">
-                            <h6 class="title">
-                                <a href="product-details.html">Ring With Clear Stone Accents</a>
+                            <h6 id="title" class="title">
+                                Ring With Clear Stone Accents
                             </h6>
                             <div class="bid-area">
                                 <div class="bid-amount">
@@ -420,12 +340,12 @@
                     <div class="auction-item-2">
                         <div class="auction-thumb">
                             <a href="product-details.html"><img src="assets/images/auction/jewelry/auction-3.jpg" alt="jewelry"></a>
-                            <a href="#0" class="rating"><i class="far fa-star"></i></a>
+                            <button type="button" name ="add" class="fav"><i class="fa fa-star"></i></button>
                             <a href="#0" class="bid"><i class="flaticon-auction"></i></a>
                         </div>
                         <div class="auction-content">
-                            <h6 class="title">
-                                <a href="product-details.html">Gold Ring With Clear Stones</a>
+                            <h6 id="title" class="title">
+                                Gold Ring With Clear Stones
                             </h6>
                             <div class="bid-area">
                                 <div class="bid-amount">
@@ -500,12 +420,12 @@
                     <div class="auction-item-2">
                         <div class="auction-thumb">
                             <a href="product-details.html"><img src="assets/images/auction/watches/auction-1.jpg" alt="watches"></a>
-                            <a href="#0" class="rating"><i class="far fa-star"></i></a>
+                            <button type="button" name ="add" class="fav"><i class="fa fa-star"></i></button>
                             <a href="#0" class="bid"><i class="flaticon-auction"></i></a>
                         </div>
                         <div class="auction-content">
-                            <h6 class="title">
-                                <a href="product-details.html">Vintage Rolex</a>
+                            <h6 id="title" class="title">
+                           Vintage Rolex
                             </h6>
                             <div class="bid-area">
                                 <div class="bid-amount">
@@ -543,12 +463,12 @@
                     <div class="auction-item-2">
                         <div class="auction-thumb">
                             <a href="product-details.html"><img src="assets/images/auction/watches/auction-2.jpg" alt="watches"></a>
-                            <a href="#0" class="rating"><i class="far fa-star"></i></a>
+                            <button type="button" name ="add" class="fav"><i class="fa fa-star"></i></button>
                             <a href="#0" class="bid"><i class="flaticon-auction"></i></a>
                         </div>
                         <div class="auction-content">
-                            <h6 class="title">
-                                <a href="product-details.html">Lady’s Vintage Rolex Datejust</a>
+                            <h6 id="title" class="title">
+                              Lady’s Vintage Rolex Datejust</a>
                             </h6>
                             <div class="bid-area">
                                 <div class="bid-amount">
@@ -586,12 +506,12 @@
                     <div class="auction-item-2">
                         <div class="auction-thumb">
                             <a href="product-details.html"><img src="assets/images/auction/watches/auction-3.jpg" alt="watches"></a>
-                            <a href="#0" class="rating"><i class="far fa-star"></i></a>
+                            <button type="button" name ="add" class="fav"><i class="fa fa-star"></i></button>
                             <a href="#0" class="bid"><i class="flaticon-auction"></i></a>
                         </div>
                         <div class="auction-content">
-                            <h6 class="title">
-                                <a href="product-details.html">Lady’s Retro Diamond</a>
+                            <h6 id="title" class="title">
+                              Lady’s Retro Diamond
                             </h6>
                             <div class="bid-area">
                                 <div class="bid-amount">
@@ -629,181 +549,7 @@
         </div>
     </section>
     <!--============= Watches Auction Section Ends Here =============-->
-
-
-    <!--============= Popular Auction Section Starts Here =============-->
-    <section class="popular-auction padding-top pos-rel">
-        <div class="popular-bg bg_img" data-background="assets/images/auction/popular/popular-bg.png"></div>
-        <div class="container">
-            <div class="section-header cl-white">
-                <span class="cate">Closing Within 24 Hours</span>
-                <h2 class="title">Popular Auctions</h2>
-                <p>Bid and win great deals,Our auction process is simple, efficient, and transparent.</p>
-            </div>
-            <div class="popular-auction-wrapper">
-                <div class="row justify-content-center mb-30-none">
-                    <div class="col-lg-6">
-                        <div class="auction-item-3">
-                            <div class="auction-thumb">
-                                <a href="product-details.html"><img src="assets/images/auction/popular/auction-1.jpg" alt="popular"></a>
-                                <a href="#0" class="bid"><i class="flaticon-auction"></i></a>
-                            </div>
-                            <div class="auction-content">
-                                <h6 class="title">
-                                    <a href="product-details.html">Apple Macbook Pro Laptop</a>
-                                </h6>
-                                <div class="bid-amount">
-                                    <div class="icon">
-                                        <i class="flaticon-auction"></i>
-                                    </div>
-                                    <div class="amount-content">
-                                        <div class="current">Current Bid</div>
-                                        <div class="amount">₵876.00</div>
-                                    </div>
-                                </div>
-                                <div class="bids-area">
-                                    Total Bids : <span class="total-bids">min bid: ₵300</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="auction-item-3">
-                            <div class="auction-thumb">
-                                <a href="product-details.html"><img src="assets/images/auction/popular/auction-2.jpg" alt="popular"></a>
-                                <a href="#0" class="bid"><i class="flaticon-auction"></i></a>
-                            </div>
-                            <div class="auction-content">
-                                <h6 class="title">
-                                    <a href="product-details.html">Canon EOS Rebel T6I
-                                        Digital Camera</a>
-                                </h6>
-                                <div class="bid-amount">
-                                    <div class="icon">
-                                        <i class="flaticon-auction"></i>
-                                    </div>
-                                    <div class="amount-content">
-                                        <div class="current">Current Bid</div>
-                                        <div class="amount">₵876.00</div>
-                                    </div>
-                                </div>
-                                <div class="bids-area">
-                                    Total Bids : <span class="total-bids">min bid: ₵300</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="auction-item-3">
-                            <div class="auction-thumb">
-                                <a href="product-details.html"><img src="assets/images/auction/popular/auction-3.jpg" alt="popular"></a>
-                                <a href="#0" class="bid"><i class="flaticon-auction"></i></a>
-                            </div>
-                            <div class="auction-content">
-                                <h6 class="title">
-                                    <a href="product-details.html">14k Gold Geneve Watch,
-                                        24.5g</a>
-                                </h6>
-                                <div class="bid-amount">
-                                    <div class="icon">
-                                        <i class="flaticon-auction"></i>
-                                    </div>
-                                    <div class="amount-content">
-                                        <div class="current">Current Bid</div>
-                                        <div class="amount">₵876.00</div>
-                                    </div>
-                                </div>
-                                <div class="bids-area">
-                                    Total Bids : <span class="total-bids">min bid: ₵300</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="auction-item-3">
-                            <div class="auction-thumb">
-                                <a href="product-details.html"><img src="assets/images/auction/popular/auction-4.jpg" alt="popular"></a>
-                                <a href="#0" class="bid"><i class="flaticon-auction"></i></a>
-                            </div>
-                            <div class="auction-content">
-                                <h6 class="title">
-                                    <a href="product-details.html">14K White Gold 185.60
-                                        Grams 5.95 Carats</a>
-                                </h6>
-                                <div class="bid-amount">
-                                    <div class="icon">
-                                        <i class="flaticon-auction"></i>
-                                    </div>
-                                    <div class="amount-content">
-                                        <div class="current">Current Bid</div>
-                                        <div class="amount">₵876.00</div>
-                                    </div>
-                                </div>
-                                <div class="bids-area">
-                                    Total Bids : <span class="total-bids">min bid: ₵300</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="auction-item-3">
-                            <div class="auction-thumb">
-                                <a href="product-details.html"><img src="assets/images/auction/popular/auction-5.jpg" alt="popular"></a>
-                                <a href="#0" class="bid"><i class="flaticon-auction"></i></a>
-                            </div>
-                            <div class="auction-content">
-                                <h6 class="title">
-                                    <a href="product-details.html">2009 Toyota Prius
-                                        (Medford, NY 11763)</a>
-                                </h6>
-                                <div class="bid-amount">
-                                    <div class="icon">
-                                        <i class="flaticon-auction"></i>
-                                    </div>
-                                    <div class="amount-content">
-                                        <div class="current">Current Bid</div>
-                                        <div class="amount">₵876.00</div>
-                                    </div>
-                                </div>
-                                <div class="bids-area">
-                                    Total Bids : <span class="total-bids">min bid: ₵300</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="auction-item-3">
-                            <div class="auction-thumb">
-                                <a href="product-details.html"><img src="assets/images/auction/popular/auction-6.jpg" alt="popular"></a>
-                                <a href="#0" class="bid"><i class="flaticon-auction"></i></a>
-                            </div>
-                            <div class="auction-content">
-                                <h6 class="title">
-                                    <a href="product-details.html">.6 Gram Pure Gold
-                                        Nugget</a>
-                                </h6>
-                                <div class="bid-amount">
-                                    <div class="icon">
-                                        <i class="flaticon-auction"></i>
-                                    </div>
-                                    <div class="amount-content">
-                                        <div class="current">Current Bid</div>
-                                        <div class="amount">₵876.00</div>
-                                    </div>
-                                </div>
-                                <div class="bids-area">
-                                    Total Bids : <span class="total-bids">min bid: ₵300</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!--============= Popular Auction Section Ends Here =============-->
-
-    <!--============= Real Estate Section Starts Here =============-->
+    <!--============ Real Estate Section Starts Here =============-->
     <section class="real-estate-auction padding-top padding-bottom pos-rel oh">
         <div class="car-bg"><img src="assets/images/auction/realstate/real-bg.png" alt="realstate"></div>
         <div class="container">
@@ -827,7 +573,7 @@
                     </div>
                     <div class="auction-content">
                         <h4 class="title">
-                            <a href="product-details.html">Six Bedroom House, Tema Community 18</a>
+                          Six Bedroom House, Tema Community 18
                         </h4>
                         <div class="bid-area">
                             <div class="bid-amount">
@@ -866,8 +612,8 @@
                         <a href="#0" class="bid"><i class="flaticon-auction"></i></a>
                     </div>
                     <div class="auction-content">
-                        <h4 class="title">
-                            <a href="product-details.html">Four Bedrooom House, Tesano</a>
+                        <h4  class="title">
+                            Four Bedrooom House, Tesano
                         </h4>
                         <div class="bid-area">
                             <div class="bid-amount">
@@ -907,7 +653,7 @@
                     </div>
                     <div class="auction-content">
                         <h4 class="title">
-                            <a href="product-details.html">Three Bedroom House, North Legon</a>
+                            Three Bedroom House, North Legon
                         </h4>
                         <div class="bid-area">
                             <div class="bid-amount">
@@ -947,7 +693,7 @@
                     </div>
                     <div class="auction-content">
                         <h4 class="title">
-                            <a href="product-details.html">Two Bedroom House, Tema Community 16</a>
+                          Two Bedroom House, Tema Community 16
                         </h4>
                         <div class="bid-area">
                             <div class="bid-amount">
@@ -987,7 +733,7 @@
                     </div>
                     <div class="auction-content">
                         <h4 class="title">
-                            <a href="">Eight Bedroom House, East Legon </a>
+                            Eight Bedroom House, East Legon
                         </h4>
                         <div class="bid-area">
                             <div class="bid-amount">
@@ -1031,7 +777,7 @@
     <!--============= Real Estate Section Starts Here =============-->
      <!--=========== Video Starts Here =========-->
     <section class="how-video-section pos-rel">
-        <div class="how-video-shape bg_img d-none d-md-block" data-background="assets/css/img/how-video.png"></div>
+        <div class="how-video-shape bg_img d-none d-md-block"></div>
         <div class="container">
             <div class="how-video-wrapper">
                 <div class="tutorial">
@@ -1254,5 +1000,6 @@
     <script src="assets/js/yscountdown.min.js"></script>
     <script src="assets/js/jquery-ui.min.js"></script>
     <script src="assets/js/main.js"></script>
+    <script src="assets/js/favorites.js"></script>              
 </body>
 </html>

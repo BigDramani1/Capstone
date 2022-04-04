@@ -1,6 +1,70 @@
 <?php
+// Initialize the session
 session_start();
+
+ 
+// Including the config file
+require_once "connection.php";
+ 
+// Variable are initialize with empty values
+$new_password = $confirm_password = "";
+$new_password_err = $confirm_password_err = "";
+ 
+// Data being processed when form is submitted
+if($_SERVER["REQUEST_METHOD"] == "POST"){
+ 
+    // Validating the new password
+    if(empty(trim($_POST["new_password"]))){
+        $new_password_err = "Please enter the new password.";     
+    } elseif(strlen(trim($_POST["new_password"])) < 6){
+        $new_password_err = "Password must have atleast 6 characters.";
+    } else{
+        $new_password = trim($_POST["new_password"]);
+    }
+    
+    // Validating the confirm password
+    if(empty(trim($_POST["confirm_password"]))){
+        $confirm_password_err = "Please confirm the password.";
+    } else{
+        $confirm_password = trim($_POST["confirm_password"]);
+        if(empty($new_password_err) && ($new_password != $confirm_password)){
+            $confirm_password_err = "Password did not match.";
+        }
+    }
+        
+    // Checking the input errors before updating into the database
+    if(empty($new_password_err) && empty($confirm_password_err)){
+        // Prepare an update statement
+        $sql = "UPDATE sign_up_seller SET password = ? WHERE seller_id= ?";
+        
+        if($stmt = $mysqli->prepare($sql)){
+            // Binding variables to parameters
+            $stmt->bind_param("si", $param_password, $param_id);
+            
+            // Setting parameters
+            $param_password = password_hash($new_password, PASSWORD_DEFAULT);
+            $param_id = $_SESSION["id"];
+            
+            // Attemptings to execute the prepared statement
+            if($stmt->execute()){
+                // Password updated successfully. Destroy the session, and redirect to login page
+                session_destroy();
+                header("location: seller_login.php");
+                exit();
+            } else{
+                echo "Oops! Something went wrong. Please try again later.";
+            }
+
+            // Closing the statement
+            $stmt->close();
+        }
+    }
+    
+    // Close connection
+    $mysqli->close();
+}
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +72,7 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <title>Contact Page</title>
+    <title>Login in Page</title>
 
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/all.min.css">
@@ -18,35 +82,35 @@ session_start();
     <link rel="stylesheet" href="assets/css/magnific-popup.css">
     <link rel="stylesheet" href="assets/css/flaticon.css">
     <link rel="stylesheet" href="assets/css/jquery-ui.min.css">
-    <link rel="stylesheet" href="assets/css/main.css">
-
+    <link rel="stylesheet" href="assets/css/reset_password.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
     <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon">
 </head>
 
 <body>
     <!--============= ScrollToTop Section Starts Here =============-->
+    <div class="overlayer" id="overlayer">
+        <div class="loader">
+            <div class="loader-inner"></div>
+        </div>
+    </div>
     <a href="#0" class="scrollToTop"><i class="fas fa-angle-up"></i></a>
     <div class="overlay"></div>
     <!--============= ScrollToTop Section Ends Here =============-->
 
 
     <!--============= Header Section Starts Here =============-->
-    <div class="overlayer" id="overlayer">
-        <div class="loader">
-            <div class="loader-inner"></div>
-        </div>
-    </div>
     <header>
         <div class="header-top">
             <div class="container">
                 <div class="header-top-wrapper">
                     <ul class="customer-support">
                         <li>
-                            <a href="dashboard.php" class="mr-3"><i class="fa fa-bars"></i><span class="ml-2 d-none d-sm-inline-block">Dashboard</span></a>
+                            <a href="seller_dashboard.php" class="mr-3"><i class="fa fa-bars"></i><span class="ml-2 d-none d-sm-inline-block">Dashboard</span></a>
                         </li>
                     </ul>
                     <ul class="cart-button-area">                       
-                    <li><a href="log_out.php" class="user-button"><i class='fa fa-sign-out-alt' style='color: white'></i></a><p style="color:black";><strong>Log Out</strong></p><li>
+                    <li><a href="log_out.php" class="user-button"><i class='fa fa-sign-out-alt' style='color: white'></i></a><p style="color:white";><strong>Log Out</strong></p><li>
                     </ul>
                 </div>
             </div>
@@ -61,37 +125,38 @@ session_start();
                     </div>
                     <ul class="menu ml-auto">
                         <li>
-                            <a href="seller_page.php">Home</a>
+                            <a href="seller_page.php" style='text-decoration: none'>Home</a>
                         </li>
                         <li>
-                            <a href="home.php">Auction Page</a>
+                            <a href="seller_favorites.php" style='text-decoration: none'>My Favorites</a>
+                        </li>
+                        
+                        <li>
+                            <a href="seller_contact.php"style='text-decoration: none'>Contact</a>
                         </li>
                         <li>
-                            <a href="seller_favorites.php">My Favorites</a>
-                        </li>
-                        <li>
-                            <a href="seller_contact.php">Contact</a>
-                        </li>
-                        <li>
-                            <a href="seller_faqs.php">Faqs</a>
+                            <a href="seller_faqs.php"style='text-decoration: none'>Faqs</a>
                         </li>
                     </ul>
-                    
                 </div>
             </div>
         </div>
     </header>
     <!--============= Header Section Ends Here =============-->
 
+  
+
     <!--============= Hero Section Starts Here =============-->
     <div class="hero-section">
-        <div class="container">
             <ul class="breadcrumb">
                 <li>
                     <a href="seller_page.php">Home</a>
                 </li>
                 <li>
-                    <span>Contact Us</span>
+                    <a href="#0">Account</a>
+                </li>
+                <li>
+                    <span>Login</span>
                 </li>
             </ul>
         </div>
@@ -100,43 +165,31 @@ session_start();
     <!--============= Hero Section Ends Here =============-->
 
 
-    <!--============= Contact Section Starts Here =============-->
-    <section class="contact-section padding-bottom">
-        <div class="container">
-            <div class="contact-wrapper padding-top padding-bottom mt--100 mt-lg--440">
-                <div class="section-header">
-                    <h5 class="cate">Contact Us</h5>
-                    <h2 class="title">get in touch</h2>
-                    <p>We'd love to hear from you! Let us know how we can help.</p>
-                </div>
-                <div class="row">
-                    <div class="col-xl-8 col-lg-7">
-                    <form class="contact-form" methood="post" action="user_email.php" >
-                            <div class="form-group">
-                                <label for="name"><i class="far fa-user"></i></label>
-                                <input type="text" value ="<?php echo $_SESSION["firstname"]; echo " "; echo $_SESSION["lastname"];?>" placeholder="Your Name" name="name" id="name">
-                            </div>
-                            <div class="form-group">
-                                <label for="name"><i class="fas fa-envelope-open-text"></i></label>
-                                <input type="text" value="<?php echo $_SESSION["email"]; ?>" placeholder="Enter Your Email ID" name="email" id="email">
-                            </div>
-                            <div class="form-group">
-                                <label for="message" class="message"><i class="far fa-envelope"></i></label>
-                                <textarea name="message" id="message" placeholder="Type Your Message"></textarea>
-                            </div>
-                            <div class="form-group text-center mb-0">
-                                <button type="submit" class="custom-button">Send Message</button>
-                            </div>
-                        </form>
+    <!--============= Account Section Starts Here =============-->
+    <section class="account-section padding-bottom">
+        <div class="comb">
+                    <div class="section-header">
+                        <h2 class="title">RESET PASSWORD</h2>
                     </div>
-                    <div class="col-xl-4 col-lg-5 d-lg-block d-none">
-                        <img src="assets/images/contact.png" class="w-100" alt="images">
-                    </div>
-                </div>
+                <form class="form-group" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+            <div class="form-group <?php echo (!empty($new_password_err)) ? 'has-error' : ''; ?>">
+                <label>New Password</label>
+                <input type="password" name="new_password" class="form-control" value="<?php echo $new_password; ?>">
+                <span class="help-block"><?php echo $new_password_err; ?></span>
             </div>
+            <div class="form-group <?php echo (!empty($confirm_password_err)) ? 'has-error' : ''; ?>">
+                <label>Confirm Password</label>
+                <input type="password" name="confirm_password" class="form-control">
+                <span class="help-block"><?php echo $confirm_password_err; ?></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" class="btn btn-primary" value="Submit">
+                <a class="btn btn-link" href="profile.php" >Cancel</a>
+            </div>
+            </form>
         </div>
     </section>
-    <!--============= Contact Section Ends Here =============-->
+    <!--============= Account Section Ends Here =============-->
 
 
     <!--============= Footer Section Starts Here =============-->
@@ -215,7 +268,7 @@ session_start();
                                     <a href="#0">Divanta</a>
                                 </li>
                                 <li>
-                                    <a href="terms.php">Terms and Conditions</a>
+                                    <a href="seller_terms.php">Terms and Conditions</a>
                                 </li>
                                 
                                     <a style ="color:white;">Created by Dramani Alhassan</a>
@@ -298,7 +351,6 @@ session_start();
     <script src="assets/js/owl.min.js"></script>
     <script src="assets/js/magnific-popup.min.js"></script>
     <script src="assets/js/yscountdown.min.js"></script>
-    <script src="assets/js/contact.js"></script>
     <script src="assets/js/jquery-ui.min.js"></script>
     <script src="assets/js/main.js"></script>
 </body>

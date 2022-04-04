@@ -110,7 +110,7 @@
                 </div>
                 <div class="row">
                     <div class="col-xl-8 col-lg-7">
-                        <form class="contact-form" id="contact_form">
+                        <form class="contact-form" >
                             <div class="form-group">
                                 <label for="name"><i class="far fa-user"></i></label>
                                 <input type="text" placeholder="Your Name" name="name" id="name">

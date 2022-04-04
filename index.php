@@ -185,7 +185,6 @@
                         <div class="auction-item-2">
                             <div class="auction-thumb">
                                 <a href="sign_in.php"><img src="assets/images/auction/car/auction-2.jpg" alt="car"></a>
-                                <a href="#0" class="rating"><i class="far fa-star"></i></a>
                                 <a href="#0" class="bid"><i class="flaticon-auction"></i></a>
                             </div>
                             <div class="auction-content">
@@ -227,8 +226,7 @@
                     <div class="col-sm-10 col-md-6 col-lg-4">
                         <div class="auction-item-2">
                             <div class="auction-thumb">
-                                <a href="vehicle1_bid.php"><img src="assets/images/product/14.jpg" alt="car"></a>
-                                <a href="#0" class="rating"><i class="far fa-star"></i></a>
+                                <a href="sign_in.php"><img src="assets/images/product/14.jpg" alt="car"></a>
                                 <a href="#0" class="bid"><i class="flaticon-auction"></i></a>
                             </div>
                             <div class="auction-content">
@@ -271,7 +269,6 @@
                         <div class="auction-item-2">
                             <div class="auction-thumb">
                                 <a href="sign_in.php"><img src="assets/images/auction/car/auction-3.jpg" alt="car"></a>
-                                <a href="#0" class="rating"><i class="far fa-star"></i></a>
                                 <a href="#0" class="bid"><i class="flaticon-auction"></i></a>
                             </div>
                             <div class="auction-content">
@@ -338,7 +335,6 @@
                     <div class="auction-item-2">
                         <div class="auction-thumb">
                             <a href="sign_in.php"><img src="assets/images/auction/jewelry/auction-1.jpg" alt="jewelry"></a>
-                            <a href="#0" class="rating"><i class="far fa-star"></i></a>
                             <a href="#0" class="bid"><i class="flaticon-auction"></i></a>
                         </div>
                         <div class="auction-content">
@@ -381,7 +377,6 @@
                     <div class="auction-item-2">
                         <div class="auction-thumb">
                             <a href="sign_in.php"><img src="assets/images/auction/jewelry/auction-2.jpg" alt="jewelry"></a>
-                            <a href="#0" class="rating"><i class="far fa-star"></i></a>
                             <a href="#0" class="bid"><i class="flaticon-auction"></i></a>
                         </div>
                         <div class="auction-content">
@@ -424,7 +419,6 @@
                     <div class="auction-item-2">
                         <div class="auction-thumb">
                             <a href="sign_in.php"><img src="assets/images/auction/jewelry/auction-3.jpg" alt="jewelry"></a>
-                            <a href="#0" class="rating"><i class="far fa-star"></i></a>
                             <a href="#0" class="bid"><i class="flaticon-auction"></i></a>
                         </div>
                         <div class="auction-content">
@@ -504,7 +498,6 @@
                     <div class="auction-item-2">
                         <div class="auction-thumb">
                             <a href="sign_in.php"><img src="assets/images/auction/watches/auction-1.jpg" alt="watches"></a>
-                            <a href="#0" class="rating"><i class="far fa-star"></i></a>
                             <a href="#0" class="bid"><i class="flaticon-auction"></i></a>
                         </div>
                         <div class="auction-content">
@@ -547,7 +540,6 @@
                     <div class="auction-item-2">
                         <div class="auction-thumb">
                             <a href="sign_in.php"><img src="assets/images/auction/watches/auction-2.jpg" alt="watches"></a>
-                            <a href="#0" class="rating"><i class="far fa-star"></i></a>
                             <a href="#0" class="bid"><i class="flaticon-auction"></i></a>
                         </div>
                         <div class="auction-content">
@@ -590,7 +582,6 @@
                     <div class="auction-item-2">
                         <div class="auction-thumb">
                             <a href="sign_in.php"><img src="assets/images/auction/watches/auction-3.jpg" alt="watches"></a>
-                            <a href="#0" class="rating"><i class="far fa-star"></i></a>
                             <a href="#0" class="bid"><i class="flaticon-auction"></i></a>
                         </div>
                         <div class="auction-content">
@@ -972,22 +963,22 @@
                             <h5 class="title">Auction Categories</h5>
                             <ul class="links-list">
                                 <li>
-                                    <a href="vehicles.php">Vehicles</a>
+                                    <a href="sign_in.php">Vehicles</a>
                                 </li>
                                 <li>
-                                    <a href="watches.php">Watches</a>
+                                    <a href="sign_in.php">Watches</a>
                                 </li>
                                 <li>
-                                    <a href="electronics.php">Electronics</a>
+                                    <a href="sign_in.php">Electronics</a>
                                 </li>
                                 <li>
-                                    <a href="houses.php">Real Estate</a>
+                                    <a href="sign_in.php">Real Estate</a>
                                 </li>
                                 <li>
-                                    <a href="Jewelry.php">Jewelry</a>
+                                    <a href="sign_in.php">Jewelry</a>
                                 </li>
                                 <li>
-                                    <a href="sports.php">Sports & Outdoor</a>
+                                    <a href="sign_in.php">Sports & Outdoor</a>
                                 </li>
                             </ul>
                         </div>

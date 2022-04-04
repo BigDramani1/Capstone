@@ -46,7 +46,7 @@ session_start();
                         </li>
                     </ul>
                     <ul class="cart-button-area">                       
-                        <li><a href="log_out.php" class="user-button"><i class='fa fa-sign-out-alt' style='color: red'></i></a><p style="color:black";><strong>Log Out</strong></p><li>
+                    <li><a href="log_out.php" class="user-button"><i class='fa fa-sign-out-alt' style='color: white'></i></a><p style="color:white";><strong>Log Out</strong></p><li>
                     </ul>
                 </div>
             </div>
@@ -109,17 +109,17 @@ session_start();
                 </div>
                 <div class="row">
                     <div class="col-xl-8 col-lg-7">
-                        <form class="contact-form" id="contact_form">
+                        <form class="contact-form" methood="post" action="user_email.php" >
                             <div class="form-group">
                                 <label for="name"><i class="far fa-user"></i></label>
-                                <input type="text" value ="<?php echo $_SESSION["firstname"]; echo " "; echo $_SESSION["lastname"];?>" placeholder="Your Name" name="name" id="name">
+                                <input type="text" name="firstname" value ="<?php echo $_SESSION["firstname"]; echo " "; echo $_SESSION["lastname"];?>" placeholder="Your Name" name="name" id="name">
                             </div>
                             <div class="form-group">
                                 <label for="name"><i class="fas fa-envelope-open-text"></i></label>
-                                <input type="text" value="<?php echo $_SESSION["email"]; ?>" placeholder="Enter Your Email ID" name="email" id="email">
+                                <input type="text" name="email" value="<?php echo $_SESSION["email"]; ?>" placeholder="Enter Your Email ID" name="email" id="email">
                             </div>
                             <div class="form-group">
-                                <label for="message" class="message"><i class="far fa-envelope"></i></label>
+                                <label for="message" name= "message" class="message"><i class="far fa-envelope"></i></label>
                                 <textarea name="message" id="message" placeholder="Type Your Message"></textarea>
                             </div>
                             <div class="form-group text-center mb-0">
