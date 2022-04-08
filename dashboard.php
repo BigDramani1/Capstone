@@ -121,8 +121,6 @@ session_start();
                                 <div class="thumb">
                                     <img src="assets/images/profile.png" alt="user">
                                 </div>
-                                <label for="profile-pic" class="profile-pic-edit"><i class="flaticon-pencil"></i></label>
-                                <input type="file" id="profile-pic" class="d-none">
                             </div>
                             <div class="content">
                                 <h5 class="title"><?php echo $_SESSION["firstname"]; echo " "; echo $_SESSION["lastname"];?></h5>

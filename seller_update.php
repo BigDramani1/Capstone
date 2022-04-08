@@ -17,17 +17,38 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $city = trim($_POST["city"]);
 }
 
- //validating the username
- if(empty(trim($_POST["username"]))){
-    $new_username_err = "Please enter your first name.";
-}else{
-    $username = trim($_POST["username"]);
+   // Validating the username
+   if(empty(trim($_POST["username"]))){
+    $new_username_err = "Please enter a username.";
+} else{
+    // Preparing a select statement
+    $sql = "SELECT seller_id FROM sign_up_ WHERE username = ?";
+    
+    if($stmt = $mysqli->prepare($sql)){
+        //Binding variables to parameters
+        $stmt->bind_param("s", $param_username);
+        
+        // Setting parameters
+        $param_username = trim($_POST["username"]);
+        
+        // Attempting to execute the prepared statement
+        if($stmt->execute()){
+            // store result
+            $stmt->store_result();
+            
+            if($stmt->num_rows == 2){
+                $new_username_err = "This username is already used.";
+            } else{
+                $username = trim($_POST["username"]);
+            }
+        } else{
+            echo "Oops! Something went wrong. Please try again later.";
+        }
+
+        // Closing the statement
+        $stmt->close();
+    }
 }
- //validating the first name
- if(empty(trim($_POST["firstname"]))){
-    $new_firstname_err = "Please enter your first name.";
-}else{
-    $firstname = trim($_POST["firstname"]);
 }
 
  //validating the last name
@@ -50,12 +71,37 @@ else{
 // Validating the email
 if(empty(trim($_POST["email"]))){
     $new_email_err = "Please your email.";
-    }else if (!preg_match( "/^\b[A-Z0-9._%-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b$/i", $_POST["email"])){
-        $email_err= "please enter a valid email";
-    }  
-    else{
-        $email = trim($_POST["email"]);
+}else if (!preg_match( "/^\b[A-Z0-9._%-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b$/i", $_POST["email"])){
+    $new_email_err= "please enter a valid email";
+}   else{
+    // Preparing a select statement
+    $sql = "SELECT seller_id FROM sign_up_seller WHERE email = ?";
+    
+    if($stmt = $mysqli->prepare($sql)){
+        //Binding variables to parameters
+        $stmt->bind_param("s", $param_email);
+        
+        // Setting parameters
+        $param_email = trim($_POST["email"]);
+        
+        // Attempting to execute the prepared statement
+        if($stmt->execute()){
+            // store result
+            $stmt->store_result();
+            
+            if($stmt->num_rows == 2){
+                $new_email_err = "This email is already used.";
+            } else{
+                $email = trim($_POST["email"]);
+            }
+        } else{
+            echo "Oops! Something went wrong. Please try again later.";
+        }
+
+        // Closing the statement
+        $stmt->close();
     }
+}
 
 
 // Checking the input errors before updating into the database

@@ -1,12 +1,12 @@
 <?php
-function component($title, $min_bid_price, $image, $item_id, $buy_price){
+function component($title, $min_bid_price, $image, $item_id, $buy_price, $direction){
     $element = "
     
     <div class=\"col-sm-10 col-md-6 col-lg-4\">
     <form action=\"home.php\" method=\"post\">
     <div class=\"auction-item-2\">
         <div class=\"auction-thumb\">
-            <a href=\"vehicle1_bid.php\"><img src=\"$image\" alt=\"car\ width=\"330\" height=\"247\"></a>
+            <a href=\"$direction\"><img src=\"$image\" alt=\"car width=\"330\" height=\"247\"></a>
             <button type=\"submit\" name =\"add\" class=\"fav\"><i class=\"fa fa-star\"></i></button>
             <input type='hidden' name='product_id' value='$item_id'>
             <a href=\"#0\" class=\"bid\"><i class=\"flaticon-auction\"></i></a>

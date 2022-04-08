@@ -181,138 +181,21 @@
                     <a href="vehicles.php" class="normal-button">View All</a>
                 </div>
                 <div class="row justify-content-center mb-30-none">
-                    <div class="col-sm-10 col-md-6 col-lg-4">
-                        <div class="auction-item-2">
-                            <div class="auction-thumb">
-                                <a href="sign_in.php"><img src="assets/images/auction/car/auction-2.jpg" alt="car"></a>
-                                <a href="#0" class="bid"><i class="flaticon-auction"></i></a>
-                            </div>
-                            <div class="auction-content">
-                                <h6 class="title">
-                                    <a href="sign_in.php">2018 Nissan Versa, S</a>
-                                </h6>
-                                <div class="bid-area">
-                                    <div class="bid-amount">
-                                        <div class="icon">
-                                            <i class="flaticon-auction"></i>
-                                        </div>
-                                        <div class="amount-content">
-                                            <div class="current">Current Bid</div>
-                                            <div class="amount">₵876.00</div>
-                                        </div>
-                                    </div>
-                                    <div class="bid-amount">
-                                        <div class="icon">
-                                            <i class="flaticon-money"></i>
-                                        </div>
-                                        <div class="amount-content">
-                                            <div class="current">Buy Now</div>
-                                            <div class="amount">₵5,00.00</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="countdown-area">
-                                    <div class="countdown">
-                                        <div id="bid_counter27"></div>
-                                    </div>
-                                    <span class="total-bids">min bid: ₵300</span>
-                                </div>
-                                <div class="text-center">
-                                    <a href="#0" class="custom-button">Submit a bid</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-10 col-md-6 col-lg-4">
-                        <div class="auction-item-2">
-                            <div class="auction-thumb">
-                                <a href="sign_in.php"><img src="assets/images/product/14.jpg" alt="car"></a>
-                                <a href="#0" class="bid"><i class="flaticon-auction"></i></a>
-                            </div>
-                            <div class="auction-content">
-                                <h6 class="title">
-                                    <a href="sign_in.php">2019, Hyundai Venue</a>
-                                </h6>
-                                <div class="bid-area">
-                                    <div class="bid-amount">
-                                        <div class="icon">
-                                            <i class="flaticon-auction"></i>
-                                        </div>
-                                        <div class="amount-content">
-                                            <div class="current">Current Bid</div>
-                                            <div class="amount">₵876.00</div>
-                                        </div>
-                                    </div>
-                                    <div class="bid-amount">
-                                        <div class="icon">
-                                            <i class="flaticon-money"></i>
-                                        </div>
-                                        <div class="amount-content">
-                                            <div class="current">Buy Now</div>
-                                            <div class="amount">₵5,00.00</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="countdown-area">
-                                    <div class="countdown">
-                                        <div id="bid_counter26"></div>
-                                    </div>
-                                    <span class="total-bids">min bid: ₵500</span>
-                                </div>
-                                <div class="text-center">
-                                    <a href="vehicle1_bid.php" class="custom-button">Submit a bid</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-10 col-md-6 col-lg-4">
-                        <div class="auction-item-2">
-                            <div class="auction-thumb">
-                                <a href="sign_in.php"><img src="assets/images/auction/car/auction-3.jpg" alt="car"></a>
-                                <a href="#0" class="bid"><i class="flaticon-auction"></i></a>
-                            </div>
-                            <div class="auction-content">
-                                <h6 class="title">
-                                    <a href="sign_in.php">2018 Honda Accord, Sport</a>
-                                </h6>
-                                <div class="bid-area">
-                                    <div class="bid-amount">
-                                        <div class="icon">
-                                            <i class="flaticon-auction"></i>
-                                        </div>
-                                        <div class="amount-content">
-                                            <div class="current">Current Bid</div>
-                                            <div class="amount">₵876.00</div>
-                                        </div>
-                                    </div>
-                                    <div class="bid-amount">
-                                        <div class="icon">
-                                            <i class="flaticon-money"></i>
-                                        </div>
-                                        <div class="amount-content">
-                                            <div class="current">Buy Now</div>
-                                            <div class="amount">₵5,00.00</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="countdown-area">
-                                    <div class="countdown">
-                                        <div id="bid_counter28"></div>
-                                    </div>
-                                    <span class="total-bids">min bid: ₵300</span>
-                                </div>
-                                <div class="text-center">
-                                    <a href="#0" class="custom-button">Submit a bid</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <?php require_once ("component.php");?>
+                        <?php
+                         require_once('assets/Config/const.php');
+                         $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+                         $sql = "SELECT * FROM seller_item";
+                         $result = mysqli_query($mysqli, $sql);
+                        // Associative while loop array
+                        while ($row = mysqli_fetch_assoc($result)){
+                            component($row['title'], $row['min_bid_price'], $row['image'],$row['item_id'], $row['buy_price'], $row['direction']);
+                        }  
+                        ?>           
                 </div>
             </div>
         </section>
         <!--============= Car Auction Section Ends Here =============-->
-    </div>
-
 
     <!--============= Jewelry Auction Section Starts Here =============-->
     <section class="jewelry-auction-section padding-bottom padding-top pos-rel">

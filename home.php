@@ -226,7 +226,7 @@ if (isset($_POST['add'])){
                          $result = mysqli_query($mysqli, $sql);
                         // Associative while loop array
                         while ($row = mysqli_fetch_assoc($result)){
-                            component($row['title'], $row['min_bid_price'], $row['image'],$row['item_id'], $row['buy_price']);
+                            component($row['title'], $row['min_bid_price'], $row['image'],$row['item_id'], $row['buy_price'], $row['direction']);
                         }                                                                              
                     ?>
                 </div>
