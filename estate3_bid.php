@@ -1,156 +1,5 @@
 <?php
-// Initialize the session
 session_start();
-// Including the config file
-require_once "connection.php";
- 
-// Variable are initialize with empty values
-$username = $firstname = $lastname = $phone = $city=  $email= "";
-$new_username_err = $new_firstname_err = $new_lastname_err = $new_phone_err = $new_city_err=  $new_email_err = "";
-
-// Data being processed when form is submitted
-if($_SERVER["REQUEST_METHOD"] == "POST"){
-     //Validating the city
- if(empty(trim($_POST["city"]))){
-    $new_city_err = "Please enter your city.";
-}else{
-    $city = trim($_POST["city"]);
-}
-
-    // Validating the username
-    if(empty(trim($_POST["username"]))){
-        $new_username_err = "Please enter a username.";
-    } else{
-        // Preparing a select statement
-        $sql = "SELECT buyer_id FROM sign_up_buyer WHERE username = ?";
-        
-        if($stmt = $mysqli->prepare($sql)){
-            //Binding variables to parameters
-            $stmt->bind_param("s", $param_username);
-            
-            // Setting parameters
-            $param_username = trim($_POST["username"]);
-            
-            // Attempting to execute the prepared statement
-            if($stmt->execute()){
-                // store result
-                $stmt->store_result();
-                
-                if($stmt->num_rows == 2){
-                    $new_username_err = "This username is already used.";
-                } else{
-                    $username = trim($_POST["username"]);
-                }
-            } else{
-                echo "Oops! Something went wrong. Please try again later.";
-            }
-
-            // Closing the statement
-            $stmt->close();
-        }
-    }
- //validating the first name
- if(empty(trim($_POST["firstname"]))){
-    $new_firstname_err = "Please enter your first name.";
-}else{
-    $firstname = trim($_POST["firstname"]);
-}
-
- //validating the last name
- if(empty(trim($_POST["lastname"]))){
-    $new_lastname_err = "Please enter your last name.";
-}else{
-    $lastname = trim($_POST["lastname"]);
-}
-
-//validating the phone number
-if(empty(trim($_POST["phone"]))){
-    $new_phone_err = "Please enter your phone number.";
-    }else if (!preg_match( "/^[\W][0-9]{3}?[\s]?[0-9]{2}?[\s]?[0-9]{3}[\s]?[0-9]{4}$/", $_POST["phone"])){
-        $new_phone_err= "please enter a valid phone number";
-    }
-else{
-    $phone = trim($_POST["phone"]);
-}
-
-// Validating the email
-if(empty(trim($_POST["email"]))){
-    $new_email_err = "Please your email.";
-}else if (!preg_match( "/^\b[A-Z0-9._%-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b$/i", $_POST["email"])){
-    $new_email_err= "please enter a valid email";
-}   else{
-    // Preparing a select statement
-    $sql = "SELECT buyer_id FROM sign_up_buyer WHERE email = ?";
-    
-    if($stmt = $mysqli->prepare($sql)){
-        //Binding variables to parameters
-        $stmt->bind_param("s", $param_email);
-        
-        // Setting parameters
-        $param_email = trim($_POST["email"]);
-        
-        // Attempting to execute the prepared statement
-        if($stmt->execute()){
-            // store result
-            $stmt->store_result();
-            
-            if($stmt->num_rows == 2){
-                $new_email_err = "This email is already used.";
-            } else{
-                $email = trim($_POST["email"]);
-            }
-        } else{
-            echo "Oops! Something went wrong. Please try again later.";
-        }
-
-        // Closing the statement
-        $stmt->close();
-    }
-}
-
-
-// Checking the input errors before updating into the database
-if(empty($new_username_err) && empty($new_firstname_err) && empty($new_lastname_err) && empty($new_email_err)  && empty($new_city_err)&& empty($new_phone_err)){
-    // Prepare an update statement
-    $sql = "UPDATE sign_up_buyer SET username = ?, fname = ?, lname = ?, email = ?, city = ?, phone = ? WHERE buyer_id= ?";
-      // Binding variables to parameters
-    if($stmt = $mysqli->prepare($sql)){
-     
-        $stmt->bind_param("ssssssi", $param_username, $param_firstname, $param_lastname, $param_email,  $param_city, $param_phone, $param_id);
-          // Setting parameters
-          $param_lastname = $lastname;
-          $param_firstname = $firstname;
-          $param_phone = $phone;
-          $param_username = $username;
-          $param_email= $email;
-          $param_city= $city;
-          $param_id = $_SESSION["id"];
-        
-        // Attemptings to execute the prepared statement
-        if($stmt->execute()){
-
-            $_SESSION["username"] = $username;     
-            $_SESSION["firstname"] =  $firstname;
-            $_SESSION["lastname"] = $lastname;     
-            $_SESSION["email"] = $email; 
-            $_SESSION["phone"] = $phone; 
-            $_SESSION["city"] = $city; 
-            
-            header("location: home.php");
-        } else{
-            echo "Oops! Something went wrong. Please try again later.";
-        }
-
-        // Closing the statement
-        $stmt->close();
-    }
-}
-
-// Close connection
-$mysqli->close();
-}
-
-
 
 ?>
 <!DOCTYPE html>
@@ -160,7 +9,7 @@ $mysqli->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <title>Login in Page</title>
+    <title>Vehicle Biding Page</title>
 
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/all.min.css">
@@ -171,11 +20,12 @@ $mysqli->close();
     <link rel="stylesheet" href="assets/css/flaticon.css">
     <link rel="stylesheet" href="assets/css/jquery-ui.min.css">
     <link rel="stylesheet" href="assets/css/main.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
+
     <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon">
 </head>
 
 <body>
+
     <!--============= ScrollToTop Section Starts Here =============-->
     <div class="overlayer" id="overlayer">
         <div class="loader">
@@ -192,11 +42,11 @@ $mysqli->close();
         <div class="header-top">
             <div class="container">
                 <div class="header-top-wrapper">
-                    <ul class="customer-support">
-                        <li>
-                            <a href="dashboard.php" class="mr-3"><i class="fa fa-bars"></i><span class="ml-2 d-none d-sm-inline-block">Dashboard</span></a>
-                        </li>
-                    </ul>
+                        <ul class="customer-support">
+                            <li>
+                                <a href="dashboard.php" class="mr-3"><i class="fa fa-bars"></i><span class="ml-2 d-none d-sm-inline-block">Dashboard</span></a>
+                            </li>
+                        </ul>
                     <ul class="cart-button-area">                       
                     <li><a href="log_out.php" class="user-button"><i class='fa fa-sign-out-alt' style='color: white'></i></a><p style="color:white";><strong>Log Out</strong></p><li>
                     </ul>
@@ -213,38 +63,45 @@ $mysqli->close();
                     </div>
                     <ul class="menu ml-auto">
                         <li>
-                            <a href="home.php" style='text-decoration: none'>Home</a>
+                            <a href="home.php">Home</a>
                         </li>
                         <li>
-                            <a href="my_favorites.php" style='text-decoration: none'>My Favorites</a>
+                            <a href="my_favorites.php">My Favorites</a>
                         </li>
                         
                         <li>
-                            <a href="user_contact.php"style='text-decoration: none'>Contact</a>
-                        </li>
-                        <li>
-                            <a href="user_faqs.php"style='text-decoration: none'>Faqs</a>
+                            <a href="user_contact.php">Contact</a>
                         </li>
                     </ul>
+                    <form class="search-form">
+                        <input type="text" placeholder="Search for brand, model....">
+                        <button type="submit"><i class="fas fa-search"></i></button>
+                    </form>
+                    <div class="search-bar d-md-none">
+                        <a href="#0"><i class="fas fa-search"></i></a>
+                    </div>
+                    <div class="header-bar d-lg-none">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
                 </div>
             </div>
         </div>
     </header>
     <!--============= Header Section Ends Here =============-->
-
-  
-
     <!--============= Hero Section Starts Here =============-->
-    <div class="hero-section">
+    <div class="hero-section style-2">
+        <div class="container">
             <ul class="breadcrumb">
                 <li>
                     <a href="home.php">Home</a>
                 </li>
                 <li>
-                    <a href="#0">Account</a>
+                    <a href="#0">Vehicles</a>
                 </li>
                 <li>
-                    <span>Login</span>
+                    <span>Vehicle Bidding</span>
                 </li>
             </ul>
         </div>
@@ -253,51 +110,23 @@ $mysqli->close();
     <!--============= Hero Section Ends Here =============-->
 
 
-    <!--============= Account Section Starts Here =============-->
-    <section class="account-section padding-bottom">
-        <div class="update">
-                    <div class="section-header">
-                        <h2 class="title">UPDATE ACCOUNT</h2>
-                    </div>
-                <form class="form-group" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-                <div class="form-group <?php echo (!empty($new_username_err)) ? 'has-error' : ''; ?>">
-                    <label>Username</label>
-                    <input type="text" name="username" class="form-control" value="<?php echo $_SESSION["username"];?>" placeholder="Firstname" >
-                    <span class="help-block"><?php echo $new_username_err; ?></span>
-                </div>
-                <div class="form-group <?php echo (!empty($new_firstname_err)) ? 'has-error' : ''; ?>">
-                    <label>Firstname</label>
-                    <input type="text" name="firstname" class="form-control" value="<?php echo $_SESSION["firstname"];?>" placeholder="Firstname">
-                    <span class="help-block"><?php echo $new_firstname_err; ?></span>
-                </div>
-                <div class="form-group <?php echo (!empty($new_lastname_err)) ? 'has-error' : ''; ?>">
-                    <label>Lastname</label>
-                    <input type="text" name="lastname" class="form-control" value="<?php echo $_SESSION["lastname"];?>" placeholder="Lastname" >
-                    <span class="help-block"><?php echo $new_lastname_err; ?></span>
-                </div>
-                <div class="form-group <?php echo (!empty($new_phone_err)) ? 'has-error' : ''; ?>">
-                    <label>Phone Number</label>
-                    <input type="tel" name="phone" class="form-control" value="<?php echo $_SESSION["phone"];?>" placeholder="tel" >
-                    <span class="help-block"><?php echo $new_phone_err; ?></span>
-                </div>
-                <div class="form-group <?php echo (!empty($new_email_err)) ? 'has-error' : ''; ?>">
-                    <label>Email</label>
-                    <input type="text" name="email" class="form-control" value="<?php echo $_SESSION["email"];?>" placeholder="Email" >
-                    <span class="help-block"><?php echo $new_email_err; ?></span>
-                </div>
-                <div class="form-group <?php echo (!empty($new_city_err)) ? 'has-error' : ''; ?>">
-                    <label>City</label>
-                    <input type="text" name="city" class="form-control" value="<?php echo $_SESSION["city"];?>" placeholder="City">
-                    <span class="help-block"><?php echo $new_city_err; ?></span>
-                </div>
-                <div class="form-group">
-                <input type="submit" class="btn btn-primary" value="Submit">
-                <a class="btn btn-link" href="profile.php" >Cancel</a>
-            </div>
-            </form>
+    <!--============= Product Details Section Starts Here =============-->
+    <section class="product-details padding-bottom mt--240 mt-lg--440">
+        <div class="container">
+        <?php require_once ("All_components.php");?>
+                        <?php
+                         require_once('assets/Config/const.php');
+                         $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+                         $sql = "SELECT * FROM seller_item where item_id=12";
+                         $result = mysqli_query($mysqli, $sql);
+                        // Associative while loop array
+                        while ($row = mysqli_fetch_assoc($result)){
+                            vehicles($row['buy_price'], $row['bid_price'], $row['descriptions'],$row['image'], $row['image1'], $row['image2'],$row['image3'], $row['min_bid_price'], $row['location'],$row['item_id'],$row['title']);
+                        }                                                                            
+                    ?>
         </div>
     </section>
-    <!--============= Account Section Ends Here =============-->
+    <!--============= Product Details Section Ends Here =============-->
 
 
     <!--============= Footer Section Starts Here =============-->
@@ -376,7 +205,7 @@ $mysqli->close();
                                     <a href="#0">Divanta</a>
                                 </li>
                                 <li>
-                                    <a href="user_terms.php">Terms and Conditions</a>
+                                    <a href="Terms.php">Terms and Conditions</a>
                                 </li>
                                 
                                     <a style ="color:white;">Created by Dramani Alhassan</a>
@@ -460,6 +289,7 @@ $mysqli->close();
     <script src="assets/js/magnific-popup.min.js"></script>
     <script src="assets/js/yscountdown.min.js"></script>
     <script src="assets/js/jquery-ui.min.js"></script>
-    <script src="assets/js/main.js"></script>
+    <script src="./assets/js/main.js"></script>
+   
 </body>
 </html>

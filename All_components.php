@@ -1,51 +1,51 @@
 <!--Vehicle components-->
 <?php
-function vehicles($buy_price, $bid_price, $description, $image, $image1,$image2, $image3, $total_bids, $location, $item_id, $title){
+function vehicles($buy_price, $bid_price, $descriptions, $image, $image1,$image2, $image3, $min_bid_price, $location, $item_id, $title){
     $element = "
     <div class=\"product-details-slider-top-wrapper\">
     <div class=\"product-details-slider owl-theme owl-carousel\" id=\"sync1\">
     <div class=\"slide-top-item\">
             <div class=\"slide-inner\">
-                <img src=\"$image\" alt=\"product\">
+                <img src=\"$image\" alt=\"product\" width=\"1100\" height=\"625\">
             </div>
         </div>
         <div class=\slide-top-item\">
             <div class=\"slide-inner\">
-                <img src=\"$image1\" alt=\"product\">
+                <img src=\"$image1\" alt=\"product\" width=\"1100\" height=\"625\">
             </div>
         </div>
         <div class=\"slide-top-item\">
             <div class=\"slide-inner\">
-                <img src=\"$image2\" alt=\"product\">
+                <img src=\"$image2\" alt=\"product\" width=\"1100\" height=\"625\">
             </div>
         </div>
         <div class=\"slide-top-item\">
             <div class=\"slide-inner\">
-                <img src=\"$image3\" alt=\"product\">
+                <img src=\"$image3\" alt=\"product\" width=\"1100\" height=\"625\">
             </div>
         </div>
     </div>
 </div>
 <div class=\"product-details-slider-wrapper\">
     <div class=\"product-bottom-slider owl-theme owl-carousel\" id=\"sync2\">
-        <div class=\"slide-bottom-item\">
-        <div class=\"slide-top-item\">
-            <div class=\"slide-inner\">
-                <img src=\"$image\" alt=\"product\">
-            </div>
+    <div class=\"slide-bottom-item\">
+        <div class=\"slide-inner\">
+            <img src=\"$image\" alt=\"product\"  width=\"124.8\" height=\"124.8\">
         </div>
-            <div class=\"slide-inner\">
-                <img src=\"$image1\" alt=\"product\">
-            </div>
-        </div>
+    </div>
         <div class=\"slide-bottom-item\">
             <div class=\"slide-inner\">
-                <img src=\"$image2\" alt=\"product\">
+                <img src=\"$image1\" alt=\"product\" width=\"124.8\" height=\"124.8\">
             </div>
         </div>
         <div class=\"slide-bottom-item\">
             <div class=\"slide-inner\">
-                <img src=\"$image3\" alt=\"product\">
+                <img src=\"$image2\" alt=\"product\" width=\"124.8\" height=\"124.8\">
+            </div>
+        </div>
+        <div class=\"slide-bottom-item\">
+            <div class=\"slide-inner\">
+                <img src=\"$image3\" alt=\"product\" width=\"124.8\" height=\"124.8\">
             </div>
         </div>
     </div>
@@ -58,11 +58,13 @@ function vehicles($buy_price, $bid_price, $description, $image, $image1,$image2,
 </div>
 <div class=\"row mt-40-60-80\">
     <div class=\"col-lg-8\">
+
         <div class=\"product-details-content\">
             <div class=\"product-details-header\">
                 <h2 class=\"title\">$title</h2>
                 <ul>
                  <li>Item #: $item_id</li>
+                 <li><class=\"current\">$descriptions</></li>
              </ul>
             </div>
             <ul class=\"price-table mb-30\">
@@ -76,45 +78,56 @@ function vehicles($buy_price, $bid_price, $description, $image, $image1,$image2,
                 </li>
             </ul>
             <div class=\"product-bid-area\">
-                <form class=\"product-bid-form\">
-                    <div class=\"search-icon\">
-                        <img src=\"assets/images/product/search-icon.png\" alt=\"product\">
-                    </div>
-                    <input type=\"number\" placeholder=\"Enter your bid amount in GH₵\">
-                    <button onclick=\"document.getElementById('id01').style.display='block'\" class=\"custom-button\">Submit a bid</button>
-                    </form>
-                </div>    
-                    <div id=\"id01\" class=\"modal\">
-                        <span onclick=\"document.getElementById('id01').style.display='none'\" class=\"close\" title=\"Close Modal\">×</span>
-                        <form class=\"modal-content\" action=\"/action_page.php\">
-                        <h1 style=\"text-align:center;\">Confirming your Bid</h1>
-                            <div class=\"testing\">
-                            <p><br>Before finalizing your bid:</br><br></br>
-                        Submitting this bid means that you have accepted the product and will comply if you are the winning bidder.<br><br></br>If you are not sure on bidding this product, please cancel it. Once you place your bid, you cannot cancel it.</br>
-                        <br>By submitting your bid, you have agree to all terms and conditions of Davinta</br>
+            <form class=\"product-bid-form\">
+                <div class=\"search-icon\">
+                    <img src=\"assets/images/product/search-icon.png\" alt=\"product\">
+                </div>
+                <input type=\"number\" placeholder=\"Enter your bid amount in GH₵\">
+                </form>
+            </div>  
+            <div class=\"buy-now-area\">
+            <a href=\"#0\" class=\"custom-button\">Buy Now: ₵$buy_price</a> 
+            <button onclick=\"document.getElementById('id01').style.display='block'\" class=\"custom-button\">Submit a bid</button>  
+                <div id=\"id01\" class=\"modal\">
+                    <span onclick=\"document.getElementById('id01').style.display='none'\" class=\"close\" title=\"Close Modal\">×</span>
+                    <form class=\"modal-content\" action=\"/action_page.php\">
+                    <h1 style=\"text-align:center;\">Confriming your Bid</h1>
+                        <div class=\"testing\">
+                        <p><br>Before finalizing your bid:</br><br></br>
+    
+    
+                         Submitting this bid means that you have accepted the product and will comply if you are the winning bidder.<br><br></br>If you are not sure on bidding this product, please cancel it. Once you place your bid, you cannot cancel it.</br>
+                    <br>By submitting your bid, you have agree to all terms and conditions of Davinta</br>
 
-                        <br><a href=\"user_terms.php\"><p style=\"text-align:center;\">Terms and Condition</a></p></br></p>
-                            
-                            <div class=\"clearfix\">
-                                <button type=\"button\" onclick=\"document.getElementById('id01').style.display='none'\" class=\"cancelbtn\">Cancel</button>
-                                <button type=\"button\" onclick=\"document.getElementById('id01').style.display='none'\" class=\"acceptbtn\">Accept</button>
-                            </div>
-                            </div>
-                        </form>
+                    <br><a href=\"user_terms.php\"><p style=\"text-align:center;\">Terms and Condition</a></p></br></p>
+                        
+                        <div class=\"clearfix\">
+                            <button type=\"button\" onclick=\"document.getElementById('id01').style.display='none'\" class=\"cancelbtn\">Cancel</button>
+                            <button type=\"button\" onclick=\"document.getElementById('id01').style.display='none'\" class=\"acceptbtn\">Accept</button>
                         </div>
-                <div class=\"buy-now-area\">
-                <a href=\"#0\" class=\"custom-button\">Buy Now: ₵$buy_price</a>
-                <a href=\"#0\" class=\"rating custom-button active border\"><i class=\"fas fa-star\"></i> Add to Favorites</a>
-            </div>
+                        </div>
+                    </form>
+                    </div>
         </div>
     </div>
+</div>
+                <script>
+                var modal = document.getElementById('id01');
+                                                
+                // When the user clicks anywhere outside of the modal, close it
+                window.onclick = function(event) {
+                        if (event.target == modal) {
+                        modal.style.display = \"none\";
+                    }
+                        }
+                </script>
     <div class=\"col-lg-4\">
         <div class=\"product-sidebar-area\">
             <div class=\"product-single-sidebar mb-3\">
                 <h6 class=\"title\">This Auction Ends in:</h6>
                 <div class=\"countdown\">
                     <div id=\"bid_counter1\"></div>
-                </div>
+                </div>  
                 <div class=\"side-counter-area\">
                     <div class=\"side-counter-item\">
                         <div class=\"thumb\">
@@ -130,7 +143,7 @@ function vehicles($buy_price, $bid_price, $description, $image, $image1,$image2,
                             <img src=\"assets/images/product/icon3.png\" alt=\"product\">
                         </div>
                         <div class=\"content\">
-                            <h3 class=\"count-title\"><span class=\"counter\">$total_bids</span></h3>
+                            <h3 class=\"count-title\"><span class=\"counter\">1</span></h3>
                             <p>Total Bids</p>
                         </div>
                     </div>
@@ -298,3 +311,5 @@ function vehicles($buy_price, $bid_price, $description, $image, $image1,$image2,
     echo $element;
 
 }
+
+///Do this for each section and decide the size that you want to give to it
