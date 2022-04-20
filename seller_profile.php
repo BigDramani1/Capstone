@@ -63,7 +63,7 @@
                             <a href="seller_page.php">Home</a>
                         </li>
                         <li>
-                            <a href="seller_favorites.php">My Favorites</a>
+                            <a href="seller_items.php">My Items</a>
                         </li>
                         
                         <li>
@@ -134,7 +134,7 @@
                                 <a href="seller_profile.php" class="active"><i class="flaticon-settings"></i>Personal Profile </a>
                             </li>
                             <li>
-                                <a href="seller_favorites.php"><i class="flaticon-star"></i>My Favorites</a>
+                                <a href="seller_items.php"><i class="flaticon-star"></i>My Items</a>
                             </li>
                         </ul>
                     </div>

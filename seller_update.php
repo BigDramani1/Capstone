@@ -17,38 +17,43 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $city = trim($_POST["city"]);
 }
 
-   // Validating the username
-   if(empty(trim($_POST["username"]))){
-    $new_username_err = "Please enter a username.";
-} else{
-    // Preparing a select statement
-    $sql = "SELECT seller_id FROM sign_up_ WHERE username = ?";
-    
-    if($stmt = $mysqli->prepare($sql)){
-        //Binding variables to parameters
-        $stmt->bind_param("s", $param_username);
+    // Validating the username
+    if(empty(trim($_POST["username"]))){
+        $new_username_err = "Please enter a username.";
+    } else{
+        // Preparing a select statement
+        $sql = "SELECT seller_id FROM sign_up_seller WHERE username = ?";
         
-        // Setting parameters
-        $param_username = trim($_POST["username"]);
-        
-        // Attempting to execute the prepared statement
-        if($stmt->execute()){
-            // store result
-            $stmt->store_result();
+        if($stmt = $mysqli->prepare($sql)){
+            //Binding variables to parameters
+            $stmt->bind_param("s", $param_username);
             
-            if($stmt->num_rows == 2){
-                $new_username_err = "This username is already used.";
+            // Setting parameters
+            $param_username = trim($_POST["username"]);
+            
+            // Attempting to execute the prepared statement
+            if($stmt->execute()){
+                // store result
+                $stmt->store_result();
+                
+                if($stmt->num_rows == 2){
+                    $new_username_err = "This username is already used.";
+                } else{
+                    $username = trim($_POST["username"]);
+                }
             } else{
-                $username = trim($_POST["username"]);
+                echo "Oops! Something went wrong. Please try again later.";
             }
-        } else{
-            echo "Oops! Something went wrong. Please try again later.";
-        }
 
-        // Closing the statement
-        $stmt->close();
+            // Closing the statement
+            $stmt->close();
+        }
     }
-}
+ //validating the first name
+ if(empty(trim($_POST["firstname"]))){
+    $new_firstname_err = "Please enter your first name.";
+}else{
+    $firstname = trim($_POST["firstname"]);
 }
 
  //validating the last name
@@ -131,7 +136,7 @@ if(empty($new_username_err) && empty($new_firstname_err) && empty($new_lastname_
             $_SESSION["phone"] = $phone; 
             $_SESSION["city"] = $city; 
             
-            header("location: seller_page.php");
+            header("location: home.php");
         } else{
             echo "Oops! Something went wrong. Please try again later.";
         }
@@ -189,7 +194,7 @@ $mysqli->close();
                 <div class="header-top-wrapper">
                     <ul class="customer-support">
                         <li>
-                            <a href="dashboard.php" class="mr-3"><i class="fa fa-bars"></i><span class="ml-2 d-none d-sm-inline-block">Dashboard</span></a>
+                            <a href="seller_dashboard.php" class="mr-3"><i class="fa fa-bars"></i><span class="ml-2 d-none d-sm-inline-block">Dashboard</span></a>
                         </li>
                     </ul>
                     <ul class="cart-button-area">                       
@@ -211,7 +216,7 @@ $mysqli->close();
                             <a href="seller_page.php" style='text-decoration: none'>Home</a>
                         </li>
                         <li>
-                            <a href="seller_favorites.php" style='text-decoration: none'>My Favorites</a>
+                            <a href="seller_items.php" style='text-decoration: none'>My Items</a>
                         </li>
                         
                         <li>

@@ -1,27 +1,30 @@
 <!--Vehicle components-->
 <?php
-function vehicles($buy_price, $bid_price, $descriptions, $image, $image1,$image2, $image3, $min_bid_price, $location, $item_id, $title){
+function vehicles($buy_price, $descriptions, $image, $image1,$image2, $image3, $min_bid_price, $location, $item_id, $title){
+    $amount_err="";
+    $amount="";
+    
     $element = "
     <div class=\"product-details-slider-top-wrapper\">
     <div class=\"product-details-slider owl-theme owl-carousel\" id=\"sync1\">
     <div class=\"slide-top-item\">
             <div class=\"slide-inner\">
-                <img src=\"$image\" alt=\"product\" width=\"1100\" height=\"625\">
+                <img src=\"$image\" alt=\"product\" height=\"625\">
             </div>
         </div>
         <div class=\slide-top-item\">
             <div class=\"slide-inner\">
-                <img src=\"$image1\" alt=\"product\" width=\"1100\" height=\"625\">
+                <img src=\"$image1\" alt=\"product\"  height=\"625\">
             </div>
         </div>
         <div class=\"slide-top-item\">
             <div class=\"slide-inner\">
-                <img src=\"$image2\" alt=\"product\" width=\"1100\" height=\"625\">
+                <img src=\"$image2\" alt=\"product\" height=\"625\">
             </div>
         </div>
         <div class=\"slide-top-item\">
             <div class=\"slide-inner\">
-                <img src=\"$image3\" alt=\"product\" width=\"1100\" height=\"625\">
+                <img src=\"$image3\" alt=\"product\"height=\"625\">
             </div>
         </div>
     </div>
@@ -78,49 +81,23 @@ function vehicles($buy_price, $bid_price, $descriptions, $image, $image1,$image2
                 </li>
             </ul>
             <div class=\"product-bid-area\">
-            <form class=\"product-bid-form\">
-                <div class=\"search-icon\">
-                    <img src=\"assets/images/product/search-icon.png\" alt=\"product\">
-                </div>
-                <input type=\"number\" placeholder=\"Enter your bid amount in GH₵\">
-                </form>
+            <div class=\"product-bid-form\">
+            <div class=\"search-icon\">
+                <img src=\"assets/images/product/search-icon.png\" alt=\"product\">
+            </div>
+            <?php echo (!empty($amount_err)) ? 'has-error' : ''; ?>
+            <input type=\"number\" name=\"amount\" placeholder=\"Enter your bid amount in GH₵\" class=\"form-control\" value=\"<?php echo $amount; ?>\">
+            <span class=\"help-block\"><?php echo $amount_err; ?></span>
+            <button type=\"submit\" class=\"custom-button\">Submit a bid</button>
+            <input type=\"hidden\" name=\"item_id\" value=\"$item_id\">
+            <input type=\"hidden\" name=\"min_bid_price\" value=\"$min_bid_price\">
             </div>  
             <div class=\"buy-now-area\">
-            <a href=\"#0\" class=\"custom-button\">Buy Now: ₵$buy_price</a> 
-            <button onclick=\"document.getElementById('id01').style.display='block'\" class=\"custom-button\">Submit a bid</button>  
-                <div id=\"id01\" class=\"modal\">
-                    <span onclick=\"document.getElementById('id01').style.display='none'\" class=\"close\" title=\"Close Modal\">×</span>
-                    <form class=\"modal-content\" action=\"/action_page.php\">
-                    <h1 style=\"text-align:center;\">Confriming your Bid</h1>
-                        <div class=\"testing\">
-                        <p><br>Before finalizing your bid:</br><br></br>
-    
-    
-                         Submitting this bid means that you have accepted the product and will comply if you are the winning bidder.<br><br></br>If you are not sure on bidding this product, please cancel it. Once you place your bid, you cannot cancel it.</br>
-                    <br>By submitting your bid, you have agree to all terms and conditions of Davinta</br>
-
-                    <br><a href=\"user_terms.php\"><p style=\"text-align:center;\">Terms and Condition</a></p></br></p>
-                        
-                        <div class=\"clearfix\">
-                            <button type=\"button\" onclick=\"document.getElementById('id01').style.display='none'\" class=\"cancelbtn\">Cancel</button>
-                            <button type=\"button\" onclick=\"document.getElementById('id01').style.display='none'\" class=\"acceptbtn\">Accept</button>
-                        </div>
-                        </div>
-                    </form>
-                    </div>
+            <button type=\"submit\" class=\"custom-button\">Buy Now: ₵$buy_price</button> 
+             </div>
+             </div>
         </div>
     </div>
-</div>
-                <script>
-                var modal = document.getElementById('id01');
-                                                
-                // When the user clicks anywhere outside of the modal, close it
-                window.onclick = function(event) {
-                        if (event.target == modal) {
-                        modal.style.display = \"none\";
-                    }
-                        }
-                </script>
     <div class=\"col-lg-4\">
         <div class=\"product-sidebar-area\">
             <div class=\"product-single-sidebar mb-3\">
@@ -245,7 +222,7 @@ function vehicles($buy_price, $bid_price, $descriptions, $image, $image1,$image2
                 <div class=\"item\">
                     <h5 class=\"title\">Notes</h5>
                     <p>Please carefully review the product before purchasing or bidding. You are doing this in your own accord. 
-                        We are not repsonsible for any problems that might come with the product(s).</p>
+                        We are not responsible for any problems that might come with the product(s).</p>
                 </div>
             </div>
         </div>
@@ -312,4 +289,72 @@ function vehicles($buy_price, $bid_price, $descriptions, $image, $image1,$image2
 
 }
 
-///Do this for each section and decide the size that you want to give to it
+//This is for the carting in the favorite section
+function dashboard($title, $min_bid_price, $item_id, $buy_price, $bid_count){ 
+    $element = "
+                        
+                            <tr>
+                            <input type='hidden' name='product_id' value='$item_id'>
+                                <td data-purchase=\"item\">$bid_count</td>
+                                <td data-purchase=\"Price Bidded\">$title</td>
+                                <td data-purchase=\"Buy Price\">$min_bid_price</td>
+                                <td data-purchase=\"expires\">$buy_price</td>
+                            </tr>
+";
+ echo $element;
+}
+
+
+function vehicle($title, $min_bid_price, $image, $item_id, $buy_price, $direction){
+    $element = "
+    
+    <div class=\"col-sm-10 col-md-6 col-lg-4\">
+    <form action=\"home.php\" method=\"post\">
+    <div class=\"auction-item-2\">
+        <div class=\"auction-thumb\">
+            <a href=\"$direction\"><img src=\"$image\" alt=\"car width=\"330\" height=\"247\"></a>
+            <button type=\"submit\" name =\"add\" class=\"fav\"><i class=\"fa fa-star\"></i></button>
+            <input type='hidden' name='product_id' value='$item_id'>
+            <a href=\"$direction\" class=\"bid\"><i class=\"flaticon-auction\"></i></a>
+        </div>
+        <div class=\"auction-content\">
+            <h6 id=\"title\" class=\"title\">
+                    $title
+            </h6>
+            <div class=\"bid-area\">
+                <div class=\"bid-amount\">
+                    <div class=\"icon\">
+                        <i class=\"flaticon-auction\"></i>
+                    </div>
+                    <div class=\"amount-content\">
+                        <div class=\"current\">Current Bid</div>
+                        <div class=\"amount\">₵$min_bid_price</div>
+                    </div>
+                </div>
+                <div class=\"bid-amount\">
+                    <div class=\"icon\">
+                        <i class=\"flaticon-money\"></i>
+                    </div>
+                    <div class=\"amount-content\">
+                        <div class=\"current\">Buy Now</div>
+                        <div class=\"amount\">₵$buy_price</div>
+                    </div>
+                </div>
+            </div>
+            <div class=\"countdown-area\">
+                <div class=\"countdown\">
+                    <div id=\"bid_counter1\"></div>
+                </div>
+            </div>
+            <div class=\"text-center\">
+                <a href=\"#0\" class=\"custom-button\">Submit a bid</a>
+            </div>
+        </div>
+    </div>
+    </form>
+</div>
+    
+    ";
+    echo $element;
+
+}

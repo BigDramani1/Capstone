@@ -38,7 +38,7 @@
                 <div class="header-top-wrapper">
                         <ul class="customer-support">
                             <li>
-                                <a href="dashboard.php" class="mr-3"><i class="fa fa-bars"></i><span class="ml-2 d-none d-sm-inline-block">Dashboard</span></a>
+                                <a href="seller_dashboard.php" class="mr-3"><i class="fa fa-bars"></i><span class="ml-2 d-none d-sm-inline-block">Dashboard</span></a>
                             </li>
                         </ul>
                         <ul class="cart-button-area">                       
@@ -60,10 +60,10 @@
                             <a href="seller_page.php">Home</a>
                         </li>
                         <li>
-                            <a href="home.php">Auction Page</a>
+                            <a href="index.php">Auction Page</a>
                         </li>
                         <li>
-                            <a href="seller_favorites.php">My Favorites</a>
+                            <a href="seller_items.php">My Items</a>
                         </li>
                         
                         <li>

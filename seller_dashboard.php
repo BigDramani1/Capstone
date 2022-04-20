@@ -64,10 +64,10 @@
                             <a href="seller_page.php">Home</a>
                         </li>
                         <li>
-                            <a href="home.php">Auction Page</a>
+                            <a href="index.php">Auction Page</a>
                         </li>
                         <li>
-                            <a href="seller_favorites.php">My Favorites</a>
+                            <a href="seller_items.php">My Items</a>
                         </li>
                         
                         <li>
@@ -140,7 +140,7 @@
                                 <a href="seller_profile.php"><i class="flaticon-settings"></i>Personal Profile </a>
                             </li>
                             <li>
-                                <a href="seller_favorites.php"><i class="flaticon-star"></i>My Favorites</a>
+                                <a href="seller_items.php"><i class="flaticon-star"></i>My Items</a>
                             </li>
                         </ul>
                     </div>
@@ -148,7 +148,7 @@
                 <div class="col-lg-8">
                     <div class="dashboard-widget mb-40">
                         <div class="dashboard-title mb-30">
-                            <h5 class="title">My Activity</h5>
+                            <h5 class="title">My Product Activity</h5>
                         </div>
                         <div class="row justify-content-center mb-30-none">
                             <div class="col-md-4 col-sm-6">
@@ -162,97 +162,33 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4 col-sm-6">
-                                <div class="dashboard-item">
-                                    <div class="thumb">
-                                        <img src="assets/images/dashboard/02.png" alt="dashboard">
-                                    </div>
-                                    <div class="content">
-                                        <h2 class="title"><span class="counter">0</span></h2>
-                                        <h6 class="info">Items Won</h6>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4 col-sm-6">
-                                <div class="dashboard-item">
-                                    <div class="thumb">
-                                        <img src="assets/images/dashboard/03.png" alt="dashboard">
-                                    </div>
-                                    <div class="content">
-                                        <h2 class="title"><span class="counter">4</span></h2>
-                                        <h6 class="info">Favorites</h6>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                     <div class="dashboard-widget">
-                        <h5 class="title mb-10">Purchasing</h5>
+                    <h5 class="title mb-10" style="text-align:center">My Uploaded Products History</h5>
                         <div class="dashboard-purchasing-tabs">
                             <ul class="nav-tabs nav">
-                                <li>
-                                    <a href="#current" class="active" data-toggle="tab">Current</a>
-                                </li>
-                                <li>
-                                    <a href="#history" data-toggle="tab">History</a>
-                                </li>
                             </ul>
-                            <div class="tab-content">
-                                <div class="tab-pane show active fade" id="current">
-                                    <table class="purchasing-table">
-                                        <thead>
-                                            <th>Item</th>
-                                            <th>Bid Price</th>
-                                            <th>Buy Price</th>
-                                            <th>Lowest Bid Price</th>
-                                            <th>Expires</th>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td data-purchase="item">2018 Hyundai Sonata</td>
-                                                <td data-purchase="bid price">₵1,775.00</td>
-                                                <td data-purchase="Buy Price">₵1,775.00</td>
-                                                <td data-purchase="Lowest Bid Price">₵1,400.00</td>
-                                                <td data-purchase="expires">7/2/2021</td>
-                                            </tr>
-                                            <tr>
-                                                <td data-purchase="item">2018 Hyundai Sonata</td>
-                                                <td data-purchase="Bid Price">₵1,775.00</td>
-                                                <td data-purchase="Buy Price">₵1,775.00</td>
-                                                <td data-purchase="Lowest Bid Price">₵1,400.00</td>
-                                                <td data-purchase="expires">7/2/2021</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
                                 <div class="tab-pane show fade" id="history">
                                     <table class="purchasing-table">
                                         <thead>
-                                            <th>Item</th>
-                                            <th>Bid Price</th>
+                                            <th>Item Id</th>
+                                            <th>Title</th>
+                                            <th>Minimum Bid price</th>
                                             <th>Buy Price</th>
-                                            <th>Lowest Bid Price</th>
-                                            <th>Expires</th>
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td data-purchase="item">2018 Hyundai Sonata</td>
-                                                <td data-purchase="Bid Price">₵1,775.00</td>
-                                                <td data-purchase="Buy Price">₵1,775.00</td>
-                                                <td data-purchase="Lowest Bid Price">₵1,400.00</td>
-                                                <td data-purchase="expires">7/2/2021</td>
-                                            </tr>
-                                            <tr>
-                                                <td data-purchase="item">2018 Hyundai Sonata</td>
-                                                <td data-purchase="Bid Price">₵1,775.00</td>
-                                                <td data-purchase="Buy Price">₵1,775.00</td>
-                                                <td data-purchase="Lowest Bid Price">₵1,400.00</td>
-                                                <td data-purchase="expires">7/2/2021</td>
+                                                <td data-purchase="item"></td>
+                                                <td data-purchase="Price Bidded"></td>
+                                                <td data-purchase="Buy Price"></td>
+                                                <td data-purchase="expires"></td>
                                             </tr>
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
+                        </div>
                         </div>
                     </div>
                 </div>

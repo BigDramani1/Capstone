@@ -55,14 +55,14 @@ function component($title, $min_bid_price, $image, $item_id, $buy_price, $direct
 }
 
 //This is for the carting in the favorite section
-function cartElement($title, $min_bid_price, $image, $item_id, $buy_price){
+function cartElement($title, $min_bid_price, $image, $item_id, $buy_price, $direction){
     $element = "
     <div class=\"col-sm-10 col-md-6\">
     <form action=\"my_favorites.php?action=remove&id=$item_id\" method=\"post\">
     <div class=\"auction-item-2\">
         <div class=\"auction-thumb\">
-            <a href=\"#\"><img src=\"$image\" alt=\"car\" width=\"330\" height=\"247\"></a>
-            <a href=\"#0\" class=\"bid\"><i class=\"flaticon-auction\"></i></a>
+            <a href=\"$direction\"><img src=\"$image\" alt=\"car\" width=\"330\" height=\"247\"></a>
+            <a href=\"$direction\" class=\"bid\"><i class=\"flaticon-auction\"></i></a>
         </div>
         <div class=\"auction-content\">
             <h6 id=\"title\" class=\"title\">

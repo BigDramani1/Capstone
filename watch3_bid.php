@@ -9,7 +9,7 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <title>Vehicle Biding Page</title>
+    <title>Watch Biding Page</title>
 
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/all.min.css">
@@ -39,15 +39,28 @@ session_start();
 
     <!--============= Header Section Starts Here =============-->
     <header>
-        <div class="header-top">
+    <div class="header-top">
             <div class="container">
                 <div class="header-top-wrapper">
-                        <ul class="customer-support">
-                            <li>
-                                <a href="dashboard.php" class="mr-3"><i class="fa fa-bars"></i><span class="ml-2 d-none d-sm-inline-block">Dashboard</span></a>
-                            </li>
-                        </ul>
-                    <ul class="cart-button-area">                       
+                    <ul class="customer-support">
+                        <li>
+                            <a href="dashboard.php" class="mr-3"><i class="fa fa-bars"></i><span class="ml-2 d-none d-sm-inline-block">Dashboard</span></a>
+                        </li>
+                    </ul>
+                    <ul class="cart-button-area">
+                    <li><a href="my_favorites.php" class="cart-button"><i class='fa fa-star' style='color: yellowgreen'></i>
+                    <?php
+
+                    if (isset($_SESSION['favorites'])){
+                        $count = count($_SESSION['favorites']);
+                        echo "<span class=\"amount\">$count</span>";
+                    }else{
+                        echo "<span class=\"amount\">0</span>";
+                    }
+
+                    ?>
+                      </a></li>                       
+                    
                     <li><a href="log_out.php" class="user-button"><i class='fa fa-sign-out-alt' style='color: white'></i></a><p style="color:white";><strong>Log Out</strong></p><li>
                     </ul>
                 </div>
@@ -93,15 +106,15 @@ session_start();
     <!--============= Hero Section Starts Here =============-->
     <div class="hero-section style-2">
         <div class="container">
-            <ul class="breadcrumb">
+        <ul class="breadcrumb">
                 <li>
                     <a href="home.php">Home</a>
                 </li>
                 <li>
-                    <a href="#0">Vehicles</a>
+                    <a href="watches.php">Watches</a>
                 </li>
                 <li>
-                    <span>Vehicle Bidding</span>
+                    <span>Watches Bidding</span>
                 </li>
             </ul>
         </div>
@@ -113,17 +126,93 @@ session_start();
     <!--============= Product Details Section Starts Here =============-->
     <section class="product-details padding-bottom mt--240 mt-lg--440">
         <div class="container">
-        <?php require_once ("All_components.php");?>
+            <?php require_once("All_components.php"); ?>
+            <?php
+            require_once "connection.php";
+            // Processing form data when form is submitted
+            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+
+
+                // Validating the user amount
+                if (empty(trim($_POST["amount"]))) {
+                    $amount_err = "Please enter your an amount.";
+                } else {
+                    $amount = trim($_POST["amount"]);
+                }
+
+                if (empty($amount_err)) {
+                    if ($_POST['amount']  <=  $_POST['min_bid_price']) {
+                        echo "<script>alert('Sorry amount is lower than the minimum bid price. Please enter a number higher than that')</script>";
+                    } else {
+                        $param_id = $_POST["item_id"];
+                        // // Prepare an update statement
+                        $sql = "UPDATE seller_item SET min_bid_price  = ? WHERE item_id= ?";
+                        $sql1 = "INSERT into buyers_bid (item_id, buyer_id, min_bid_price, title, buy_price) values(?,?,?,?,?)";
+                
+                        $query = "SELECT * FROM seller_item where item_id=$param_id";
+                        $result = mysqli_query($mysqli, $query);
+                        // echo $result;
+                        // exit;
+
+                        $title = '';
+                        $buy_price = 0;
+                        // Associative while loop array
+                        while ($row = mysqli_fetch_assoc($result)) {
+
+                            $title = $row['title'];
+                            $buy_price = $row['buy_price'];                            
+                        }
+                        // Binding variables to parameters
+                        if ($stmt = $mysqli->prepare($sql)) {
+                            $stmt->bind_param("si",  $param_amount, $param_id);
+                            // Setting parameters
+                            $param_amount = $amount;
+                            $param_id = $_POST["item_id"];
+                            if ($stmt->execute()) {
+                                if ($stmt1 = $mysqli->prepare($sql1)) {
+                                    $stmt1->bind_param("iiisi",  $param_id, $buyer_id, $param_amount, $param_title, $param_price);
+                                    // Setting parameters
+                                    $param_amount = $amount;
+                                    $param_id = $_POST["item_id"];
+                                    $buyer_id = $_SESSION['id'];
+                                    $param_price = $buy_price;
+                                    $param_title = $title;
+
+                                    if ($stmt1->execute()) {
+                                        echo "<script>alert('Congratulations, your bid was successful')</script>";
+                                        header("location: home.php");
+                                    }else{
+                                        echo "Oops! Something went wrong. Please try again later.";
+                                    }
+                                }else{
+                                    echo "Oops! Something went wrong. Please try again later.";
+                                }
+                            } else {
+                                echo "Oops! Something went wrong. Please try again later.";
+                            }
+
+                            // Closing the statement
+                            $stmt->close();
+                        }
+                    }
+
+                    // Close connection
+                    $mysqli->close();
+                }
+            }
+            ?><form action=<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?> method="post">
                         <?php
                          require_once('assets/Config/const.php');
                          $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
-                         $sql = "SELECT * FROM seller_item where item_id=9";
+                         $sql = "SELECT * FROM seller_item where item_id=15";
                          $result = mysqli_query($mysqli, $sql);
                         // Associative while loop array
                         while ($row = mysqli_fetch_assoc($result)){
-                            vehicles($row['buy_price'], $row['bid_price'], $row['descriptions'],$row['image'], $row['image1'], $row['image2'],$row['image3'], $row['min_bid_price'], $row['location'],$row['item_id'],$row['title']);
+                            vehicles($row['buy_price'], $row['descriptions'],$row['image'], $row['image1'], $row['image2'],$row['image3'], $row['min_bid_price'], $row['location'],$row['item_id'],$row['title']);
                         }                                                                            
                     ?>
+                   </form>
         </div>
     </section>
     <!--============= Product Details Section Ends Here =============-->

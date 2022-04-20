@@ -1,9 +1,3 @@
-<?php
-// Including a config file to it
-require_once "connection.php";
- 
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,7 +5,8 @@ require_once "connection.php";
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <title>Sign Up Page</title>
+    <title>Electronics Page</title>
+
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/all.min.css">
     <link rel="stylesheet" href="assets/css/animate.css">
@@ -23,7 +18,6 @@ require_once "connection.php";
     <link rel="stylesheet" href="assets/css/main.css">
 
     <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon">
-
 </head>
 
 <body>
@@ -45,12 +39,12 @@ require_once "connection.php";
                 <div class="header-top-wrapper">
                     <ul class="customer-support">
                         <li>
-                            <a href="dashboard.php" class="mr-3"><i class="fa fa-bars"></i><span class="ml-2 d-none d-sm-inline-block">Dashboard</span></a>
+                            <a href="sign_in.php" class="mr-3"><i class="fa fa-bars"></i><span class="ml-2 d-none d-sm-inline-block">Dashboard</span></a>
                         </li>
                     </ul>
                     <ul class="cart-button-area">
                         <li>
-                            <a href="seller_sign.php" class="user-button"><i class="fa fa-search-dollar"></i></a><p style="color:white";>Sell</p>
+                            <a href="seller_login.php" class="user-button"><i class="fa fa-search-dollar"></i></a><p style="color:white";>Sell</p>
                         </li>                        
                         <li>
                             <a href="sign_in.php" class="user-button"><i class="flaticon-user"></i></a><p style="color:white";>Account</p>
@@ -63,16 +57,16 @@ require_once "connection.php";
             <div class="container">
                 <div class="header-wrapper">
                     <div class="logo">
-                        <a href="home.php">
+                        <a href="index.php">
                             <img src="assets/images/logo/logo.png" alt="logo">
                         </a>
                     </div>
                     <ul class="menu ml-auto">
                         <li>
-                            <a href="home.php">Home</a>
+                            <a href="index.php">Home</a>
                         </li>
                         <li>
-                            <a href="my_favorites.php">My Favorites</a>
+                            <a href="sign_in.php">My Favorites</a>
                         </li>
                         
                         <li>
@@ -98,17 +92,14 @@ require_once "connection.php";
     <!--============= Header Section Ends Here =============-->
 
     <!--============= Hero Section Starts Here =============-->
-    <div class="hero-section">
+    <div class="hero-section style-2">
         <div class="container">
             <ul class="breadcrumb">
                 <li>
                     <a href="home.php">Home</a>
                 </li>
                 <li>
-                    <a href="#0">Account</a>
-                </li>
-                <li>
-                    <span>Sign Up</span>
+                    <span> Watches</span>
                 </li>
             </ul>
         </div>
@@ -117,73 +108,31 @@ require_once "connection.php";
     <!--============= Hero Section Ends Here =============-->
 
 
-    <!--============= Account Section Starts Here =============-->
-    <section class="account-section padding-bottom">
+    <!--============= Featured Auction Section Starts Here =============-->
+    <section class="featured-auction-section padding-bottom mt--240 mt-lg--440 pos-rel">
         <div class="container">
-            <div class="account-wrapper mt--100 mt-lg--440">
-                <div class="left-side">
-                    <div class="section-header">
-                        <h2 class="title">BUYER'S SIGN UP ACCOUNT</h2>
-                        <p>We're happy you're here!</p>
-                    </div>
-                    <form class="login-form">
-                        <div class="form-group mb-30" id="__fname">
-                            <label for="f_name"><i class="fa fa-user"></i></label>
-                            <input type="text" name="firstname_" id="firstname" placeholder="&#xf007; First Name" autocomplete='off'>
-                            <div class="errorbox" id="invalidinput0"></div>
-                        </div>
-                        <div class="form-group mb-30" id="__lname">
-                            <label for="l_name"><i class="fa fa-user"></i></label>
-                            <input type="text" name="lastname_" id="lastname" placeholder="&#xf007; Last Name" autocomplete='off'>
-                            <div class="errorbox" id="invalidinput1"></div>
-                        </div>
-                        <div class="form-group mb-30" id="__email">
-                            <label for="Email"><i class="far fa-envelope"></i></label>
-                            <input type="text" name="email_" id="email" placeholder="&#xf007; Email" autocomplete='off'>
-                            <div class="errorbox" id="invalidinput2"></div>
-                        </div>
-                        <div class="form-group mb-30" id="__phone">
-                            <label for="phone"><i class="fa fa-phone"></i></label>
-                            <input type="tel" name="phone_" id="phone" placeholder="Phone Number eg. +233 54 834 2821" placeholder="&#xf007; Phone" autocomplete='off'>
-                            <div class="errorbox" id="invalidinput3"></div>
-                        </div>
-                        <div class="form-group mb-30" id="__password">
-                            <label for="login-pass"><i class="fas fa-lock"></i></label>
-                            <input type="password" name="password_" id="pass" placeholder="&#xf007; Password" autocomplete='off'>
-                            <span class="pass-type"><i class="fas fa-eye"></i></span>
-                            <div class="errorbox" id="invalidinput4"></div>
-                        </div>
-                        <div class="form-group mb-30" id="__confrim_password">
-                            <label for="login-pass"><i class="fas fa-lock"></i></label>
-                            <input type="password" name="password2_" id="pass2" placeholder="&#xf007; Confirm Password" autocomplete='off' >
-                            <span class="pass-type2"><i class="fas fa-eye"></i></span>
-                            <div class="errorbox" id="invalidinput5"></div>
-                        </div>
-                        <div class="form-group checkgroup mb-30">
-                            <input type="checkbox" name="terms" id="check"><label for="check">By clicking this button you are agreeing to the <a href="Terms.html"><p style="color:blue">terms and conditions</p></a></label>
-                        </div>
-                       <div class="form-group mb-0">
-                            <button type="submit" name="submit_" id="submit" class="custom-button">LOG IN</button>
-                        </div>
-                    </form>
-                </div>
-                <div class="right-side cl-white">
-                    <div class="section-header mb-0">
-                        <h3 class="title mt-0">WANT TO SIGN UP AS SELLER?</h3>
-                        <P>Sign up and start selling</P>
-                        <a href="seller_sign.php" class="custom-button transparent">Sign Up</a>
-                    </div>
-                    <div class="section-header mb-0">
-                        <h3 class="title mt-0">ALREADY HAVE AN ACCOUNT?</h3>
-                        <p>Log in and go to your Dashboard.</p>
-                        <a href="sign_in.php" class="custom-button transparent">Login</a>
-                    </div>
-                </div>
+            <div class="section-header cl-white mw-100 left-style">
+                <h3 class="title">Bid on These Featured Auctions!</h3>
+            </div>
+            <div class="row justify-content-center mb-30-none">
+            <?php require_once ("index_component.php");?>
+                        <?php
+                         require_once('assets/Config/const.php');
+                         $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+                         $sql = "SELECT * FROM seller_item where categories='ELECTRONICS'";
+                         $result = mysqli_query($mysqli, $sql);
+                        // Associative while loop array
+                        while ($row = mysqli_fetch_assoc($result)){
+                            all_index($row['title'], $row['min_bid_price'], $row['image'],$row['item_id'], $row['buy_price'], $row['direction']);
+                        }                                                                              
+                    ?>
             </div>
         </div>
     </section>
-    <!--============= Account Section Ends Here =============-->
+    <!--============= Featured Auction Section Ends Here =============-->
 
+
+   
 
     <!--============= Footer Section Starts Here =============-->
     <footer class="bg_img padding-top oh" data-background="assets/images/footer/footer-bg.jpg">
@@ -261,7 +210,7 @@ require_once "connection.php";
                                     <a href="#0">Divanta</a>
                                 </li>
                                 <li>
-                                    <a href="Terms.php">Terms and Conditions</a>
+                                    <a href="user_terms.php">Terms and Conditions</a>
                                 </li>
                                 
                                     <a style ="color:white;">Created by Dramani Alhassan</a>
@@ -274,10 +223,10 @@ require_once "connection.php";
                             <h5 class="title">We're Here to Help</h5>
                             <ul class="links-list">
                                 <li>
-                                    <a href="contact.php">Contact Us</a>
+                                    <a href="user_contact.php">Contact Us</a>
                                 </li>
                                 <li>
-                                    <a href="#0">Help & FAQ</a>
+                                    <a href="user_faqs.php">Help & FAQ</a>
                                 </li>
                             </ul>
                         </div>
@@ -346,7 +295,5 @@ require_once "connection.php";
     <script src="assets/js/yscountdown.min.js"></script>
     <script src="assets/js/jquery-ui.min.js"></script>
     <script src="assets/js/main.js"></script>
-    <script src="assets/js/signup.js"></script>
-     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </body>
 </html>

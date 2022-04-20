@@ -1,3 +1,38 @@
+<?php 
+session_start();
+
+//adding to cart
+if (isset($_POST['add'])){
+    /// print_r($_POST['product_id']);
+    if(isset($_SESSION['favorites'])){
+
+        $item_array_id = array_column($_SESSION['favorites'], "product_id");
+
+        if(in_array($_POST['product_id'], $item_array_id)){
+            echo "<script>alert('Product is already added in the Favorites..!')</script>";
+            echo "<script>window.location = 'vehicles.php'</script>";
+        }else{
+
+            $count = count($_SESSION['favorites']);
+            $item_array = array(
+                'product_id' => $_POST['product_id']
+            );
+
+            $_SESSION['favorites'][$count] = $item_array;
+        }
+
+    }else{
+
+        $item_array = array(
+                'product_id' => $_POST['product_id']
+        );
+
+        // Create new session variable
+        $_SESSION['favorites'][0] = $item_array;
+        
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -42,7 +77,20 @@
                             <a href="dashboard.php" class="mr-3"><i class="fa fa-bars"></i><span class="ml-2 d-none d-sm-inline-block">Dashboard</span></a>
                         </li>
                     </ul>
-                    <ul class="cart-button-area">                       
+                    <ul class="cart-button-area">
+                    <li><a href="my_favorites.php" class="cart-button"><i class='fa fa-star' style='color: yellowgreen'></i>
+                    <?php
+
+                    if (isset($_SESSION['favorites'])){
+                        $count = count($_SESSION['favorites']);
+                        echo "<span class=\"amount\">$count</span>";
+                    }else{
+                        echo "<span class=\"amount\">0</span>";
+                    }
+
+                    ?>
+                      </a></li>                       
+                    
                     <li><a href="log_out.php" class="user-button"><i class='fa fa-sign-out-alt' style='color: white'></i></a><p style="color:white";><strong>Log Out</strong></p><li>
                     </ul>
                 </div>
@@ -65,7 +113,7 @@
                         </li>
                         
                         <li>
-                            <a href="contact.php">Contact</a>
+                            <a href="user_contact.php">Contact</a>
                         </li>
                     </ul>
                     <form class="search-form">
@@ -94,7 +142,7 @@
                     <a href="home.php">Home</a>
                 </li>
                 <li>
-                    <span> Watches</span>
+                    <span>Vehicles</span>
                 </li>
             </ul>
         </div>
@@ -110,471 +158,21 @@
                 <h3 class="title">Bid on These Featured Auctions!</h3>
             </div>
             <div class="row justify-content-center mb-30-none">
-                <div class="col-sm-10 col-md-6 col-lg-4">
-                    <div class="auction-item-2">
-                        <div class="auction-thumb">
-                            <a href="product-details.php"><img src="assets/images/auction/watches/1.webp" alt="jewelry"></a>
-                            <a href="#0" class="rating"><i class="far fa-star"></i></a>
-                            <a href="#0" class="bid"><i class="flaticon-auction"></i></a>
-                        </div>
-                        <div class="auction-content">
-                            <h6 class="title">
-                                <a href="#0">Datejust rolex</a>
-                            </h6>
-                            <div class="bid-area">
-                                <div class="bid-amount">
-                                    <div class="icon">
-                                        <i class="flaticon-auction"></i>
-                                    </div>
-                                    <div class="amount-content">
-                                        <div class="current">Current Bid</div>
-                                        <div class="amount">₵876.00</div>
-                                    </div>
-                                </div>
-                                <div class="bid-amount">
-                                    <div class="icon">
-                                        <i class="flaticon-money"></i>
-                                    </div>
-                                    <div class="amount-content">
-                                        <div class="current">Buy Now</div>
-                                        <div class="amount">₵5,00.00</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="countdown-area">
-                                <div class="countdown">
-                                    <div id="bid_counter23"></div>
-                                </div>
-                                <span class="total-bids">min bid: ₵700</span>
-                            </div>
-                            <div class="text-center">
-                                <a href="#0" class="custom-button">Submit a bid</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-10 col-md-6 col-lg-4">
-                    <div class="auction-item-2">
-                        <div class="auction-thumb">
-                            <a href="product-details.html"><img src="assets/images/auction/watches/2.jpg" alt="jewelry"></a>
-                            <a href="#0" class="rating"><i class="far fa-star"></i></a>
-                            <a href="#0" class="bid"><i class="flaticon-auction"></i></a>
-                        </div>
-                        <div class="auction-content">
-                            <h6 class="title">
-                                <a href="#0">Milguass rolex</a>
-                            </h6>
-                            <div class="bid-area">
-                                <div class="bid-amount">
-                                    <div class="icon">
-                                        <i class="flaticon-auction"></i>
-                                    </div>
-                                    <div class="amount-content">
-                                        <div class="current">Current Bid</div>
-                                        <div class="amount">₵876.00</div>
-                                    </div>
-                                </div>
-                                <div class="bid-amount">
-                                    <div class="icon">
-                                        <i class="flaticon-money"></i>
-                                    </div>
-                                    <div class="amount-content">
-                                        <div class="current">Buy Now</div>
-                                        <div class="amount">₵5,00.00</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="countdown-area">
-                                <div class="countdown">
-                                    <div id="bid_counter24"></div>
-                                </div>
-                                <span class="total-bids">min bid: ₵700</span>
-                            </div>
-                            <div class="text-center">
-                                <a href="#0" class="custom-button">Submit a bid</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-10 col-md-6 col-lg-4">
-                    <div class="auction-item-2">
-                        <div class="auction-thumb">
-                            <a href="product-details.html"><img src="assets/images/auction/watches/3.jpg" alt="jewelry"></a>
-                            <a href="#0" class="rating"><i class="far fa-star"></i></a>
-                            <a href="#0" class="bid"><i class="flaticon-auction"></i></a>
-                        </div>
-                        <div class="auction-content">
-                            <h6 class="title">
-                                <a href="#0">Oyster Perpetual rolex</a>
-                            </h6>
-                            <div class="bid-area">
-                                <div class="bid-amount">
-                                    <div class="icon">
-                                        <i class="flaticon-auction"></i>
-                                    </div>
-                                    <div class="amount-content">
-                                        <div class="current">Current Bid</div>
-                                        <div class="amount">₵876.00</div>
-                                    </div>
-                                </div>
-                                <div class="bid-amount">
-                                    <div class="icon">
-                                        <i class="flaticon-money"></i>
-                                    </div>
-                                    <div class="amount-content">
-                                        <div class="current">Buy Now</div>
-                                        <div class="amount">₵5,00.00</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="countdown-area">
-                                <div class="countdown">
-                                    <div id="bid_counter25"></div>
-                                </div>
-                                <span class="total-bids">min bid: ₵700</span>
-                            </div>
-                            <div class="text-center">
-                                <a href="#0" class="custom-button">Submit a bid</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <?php require_once ("All_components.php");?>
+                        <?php
+                         require_once('assets/Config/const.php');
+                         $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+                         $sql = "SELECT * FROM seller_item where categories='WATCHES'";
+                         $result = mysqli_query($mysqli, $sql);
+                        // Associative while loop array
+                        while ($row = mysqli_fetch_assoc($result)){
+                            vehicle($row['title'], $row['min_bid_price'], $row['image'],$row['item_id'], $row['buy_price'], $row['direction']);
+                        }                                                                              
+                    ?>
             </div>
         </div>
     </section>
-    <!--============= Featured Auction Section Ends Here =============-->
-
-
-    <!--============= Product Auction Section Starts Here =============-->
-    <div class="product-auction padding-bottom">
-        <div class="container">
-            <div class="row mb--50">
-                <div class="col-lg-4 mb-50">
-                    <div class="widget">
-                        <h5 class="title">Filter by Price</h5>
-                        <div class="widget-body">
-                            <div id="slider-range"></div>
-                            <div class="price-range">
-                                <label for="amount">Price :</label>
-                                <input type="text" id="amount" readonly>
-                            </div>
-                        </div>
-                        <div class="text-center mt-20">
-                            <a href="#0" class="custom-button">Filter</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-8 mb-50">
-                    <div class="product-header mb-40 style-2">
-                        <div class="product-header-item">
-                            <div class="item">Sort By : </div>
-                            <select name="sort-by" class="select-bar">
-                                <option value="all">All</option>
-                                <option value="name">Name</option>
-                                <option value="date">Date</option>
-                                <option value="type">Type</option>
-                                <option value="car">Car</option>
-                            </select>
-                        </div>
-                        <div class="product-header-item">
-                            <div class="item">Show : </div>
-                            <select name="sort-by" class="select-bar">
-                                <option value="09">06</option>
-                                <option value="21">09</option>
-                                <option value="30">30</option>
-                                <option value="39">39</option>
-                                <option value="60">60</option>
-                            </select>
-                        </div>
-                        <form class="product-search ml-auto">
-                            <input type="text" placeholder="Item Name">
-                            <button type="submit"><i class="fas fa-search"></i></button>
-                        </form>
-                    </div>
-                    <div class="row mb-30-none justify-content-center">
-                        <div class="col-sm-10 col-md-6">
-                            <div class="auction-item-2">
-                                <div class="auction-thumb">
-                                    <a href="product-details.html"><img src="assets/images/auction/watches/6.webp" alt="product"></a>
-                                    <a href="#0" class="rating"><i class="far fa-star"></i></a>
-                                    <a href="#0" class="bid"><i class="flaticon-auction"></i></a>
-                                </div>
-                                <div class="auction-content">
-                                    <h6 class="title">
-                                        <a href="#0">Breitling</a>
-                                    </h6>
-                                    <div class="bid-area">
-                                        <div class="bid-amount">
-                                            <div class="icon">
-                                                <i class="flaticon-auction"></i>
-                                            </div>
-                                            <div class="amount-content">
-                                                <div class="current">Current Bid</div>
-                                                <div class="amount">₵876.00</div>
-                                            </div>
-                                        </div>
-                                        <div class="bid-amount">
-                                            <div class="icon">
-                                                <i class="flaticon-money"></i>
-                                            </div>
-                                            <div class="amount-content">
-                                                <div class="current">Buy Now</div>
-                                                <div class="amount">₵5,00.00</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="countdown-area">
-                                        <div class="countdown">
-                                            <div id="bid_counter10"></div>
-                                        </div>
-                                        <span class="total-bids">min bid: ₵700</span>
-                                    </div>
-                                    <div class="text-center">
-                                        <a href="#0" class="custom-button">Submit a bid</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-10 col-md-6">
-                            <div class="auction-item-2">
-                                <div class="auction-thumb">
-                                    <a href="product-details.html"><img src="assets/images/auction/watches/5.webp" alt="product"></a>
-                                    <a href="#0" class="rating"><i class="far fa-star"></i></a>
-                                    <a href="#0" class="bid"><i class="flaticon-auction"></i></a>
-                                </div>
-                                <div class="auction-content">
-                                    <h6 class="title">
-                                        <a href="#0">Grand Seiko</a>
-                                    </h6>
-                                    <div class="bid-area">
-                                        <div class="bid-amount">
-                                            <div class="icon">
-                                                <i class="flaticon-auction"></i>
-                                            </div>
-                                            <div class="amount-content">
-                                                <div class="current">Current Bid</div>
-                                                <div class="amount">₵876.00</div>
-                                            </div>
-                                        </div>
-                                        <div class="bid-amount">
-                                            <div class="icon">
-                                                <i class="flaticon-money"></i>
-                                            </div>
-                                            <div class="amount-content">
-                                                <div class="current">Buy Now</div>
-                                                <div class="amount">₵5,00.00</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="countdown-area">
-                                        <div class="countdown">
-                                            <div id="bid_counter12"></div>
-                                        </div>
-                                        <span class="total-bids">min bid: ₵700</span>
-                                    </div>
-                                    <div class="text-center">
-                                        <a href="#0" class="custom-button">Submit a bid</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-10 col-md-6">
-                            <div class="auction-item-2">
-                                <div class="auction-thumb">
-                                    <a href="product-details.html"><img src="assets/images/auction/watches/4.webp" alt="product"></a>
-                                    <a href="#0" class="rating"><i class="far fa-star"></i></a>
-                                    <a href="#0" class="bid"><i class="flaticon-auction"></i></a>
-                                </div>
-                                <div class="auction-content">
-                                    <h6 class="title">
-                                        <a href="#0">Grand Seiko Sports</a>
-                                    </h6>
-                                    <div class="bid-area">
-                                        <div class="bid-amount">
-                                            <div class="icon">
-                                                <i class="flaticon-auction"></i>
-                                            </div>
-                                            <div class="amount-content">
-                                                <div class="current">Current Bid</div>
-                                                <div class="amount">₵876.00</div>
-                                            </div>
-                                        </div>
-                                        <div class="bid-amount">
-                                            <div class="icon">
-                                                <i class="flaticon-money"></i>
-                                            </div>
-                                            <div class="amount-content">
-                                                <div class="current">Buy Now</div>
-                                                <div class="amount">₵5,00.00</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="countdown-area">
-                                        <div class="countdown">
-                                            <div id="bid_counter13"></div>
-                                        </div>
-                                        <span class="total-bids">min bid: ₵700</span>
-                                    </div>
-                                    <div class="text-center">
-                                        <a href="#0" class="custom-button">Submit a bid</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-10 col-md-6">
-                            <div class="auction-item-2">
-                                <div class="auction-thumb">
-                                    <a href="product-details.html"><img src="assets/images/auction/watches/7.webp" alt="product"></a>
-                                    <a href="#0" class="rating"><i class="far fa-star"></i></a>
-                                    <a href="#0" class="bid"><i class="flaticon-auction"></i></a>
-                                </div>
-                                <div class="auction-content">
-                                    <h6 class="title">
-                                        <a href="#0">Omega Watch</a>
-                                    </h6>
-                                    <div class="bid-area">
-                                        <div class="bid-amount">
-                                            <div class="icon">
-                                                <i class="flaticon-auction"></i>
-                                            </div>
-                                            <div class="amount-content">
-                                                <div class="current">Current Bid</div>
-                                                <div class="amount">₵876.00</div>
-                                            </div>
-                                        </div>
-                                        <div class="bid-amount">
-                                            <div class="icon">
-                                                <i class="flaticon-money"></i>
-                                            </div>
-                                            <div class="amount-content">
-                                                <div class="current">Buy Now</div>
-                                                <div class="amount">₵5,00.00</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="countdown-area">
-                                        <div class="countdown">
-                                            <div id="bid_counter14"></div>
-                                        </div>
-                                        <span class="total-bids">min bid: ₵700</span>
-                                    </div>
-                                    <div class="text-center">
-                                        <a href="#0" class="custom-button">Submit a bid</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-10 col-md-6">
-                            <div class="auction-item-2">
-                                <div class="auction-thumb">
-                                    <a href="product-details.html"><img src="assets/images/auction/watches/8.webp" alt="product"></a>
-                                    <a href="#0" class="rating"><i class="far fa-star"></i></a>
-                                    <a href="#0" class="bid"><i class="flaticon-auction"></i></a>
-                                </div>
-                                <div class="auction-content">
-                                    <h6 class="title">
-                                        <a href="#0">Tudor watch</a>
-                                    </h6>
-                                    <div class="bid-area">
-                                        <div class="bid-amount">
-                                            <div class="icon">
-                                                <i class="flaticon-auction"></i>
-                                            </div>
-                                            <div class="amount-content">
-                                                <div class="current">Current Bid</div>
-                                                <div class="amount">₵876.00</div>
-                                            </div>
-                                        </div>
-                                        <div class="bid-amount">
-                                            <div class="icon">
-                                                <i class="flaticon-money"></i>
-                                            </div>
-                                            <div class="amount-content">
-                                                <div class="current">Buy Now</div>
-                                                <div class="amount">₵5,00.00</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="countdown-area">
-                                        <div class="countdown">
-                                            <div id="bid_counter15"></div>
-                                        </div>
-                                        <span class="total-bids">min bid: ₵700</span>
-                                    </div>
-                                    <div class="text-center">
-                                        <a href="#0" class="custom-button">Submit a bid</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-10 col-md-6">
-                            <div class="auction-item-2">
-                                <div class="auction-thumb">
-                                    <a href="product-details.html"><img src="assets/images/auction/watches/9.webp" alt="product"></a>
-                                    <a href="#0" class="rating"><i class="far fa-star"></i></a>
-                                    <a href="#0" class="bid"><i class="flaticon-auction"></i></a>
-                                </div>
-                                <div class="auction-content">
-                                    <h6 class="title">
-                                        <a href="#0">Cartier Watch</a>
-                                    </h6>
-                                    <div class="bid-area">
-                                        <div class="bid-amount">
-                                            <div class="icon">
-                                                <i class="flaticon-auction"></i>
-                                            </div>
-                                            <div class="amount-content">
-                                                <div class="current">Current Bid</div>
-                                                <div class="amount">₵876.00</div>
-                                            </div>
-                                        </div>
-                                        <div class="bid-amount">
-                                            <div class="icon">
-                                                <i class="flaticon-money"></i>
-                                            </div>
-                                            <div class="amount-content">
-                                                <div class="current">Buy Now</div>
-                                                <div class="amount">₵5,00.00</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="countdown-area">
-                                        <div class="countdown">
-                                            <div id="bid_counter11"></div>
-                                        </div>
-                                        <span class="total-bids">min bid: ₵700</span>
-                                    </div>
-                                    <div class="text-center">
-                                        <a href="#0" class="custom-button">Submit a bid</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <ul class="pagination">
-                        <li>
-                            <a href="#0"><i class="flaticon-left-arrow"></i></a>
-                        </li>
-                        <li>
-                            <a href="#0">1</a>
-                        </li>
-                        <li>
-                            <a href="#0" class="active">2</a>
-                        </li>
-                        <li>
-                            <a href="#0">3</a>
-                        </li>
-                        <li>
-                            <a href="#0"><i class="flaticon-right-arrow"></i></a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--============= Product Auction Section Ends Here =============-->
-
-
+   
     <!--============= Footer Section Starts Here =============-->
     <footer class="bg_img padding-top oh" data-background="assets/images/footer/footer-bg.jpg">
         <div class="footer-top-shape">
@@ -651,7 +249,7 @@
                                     <a href="#0">Divanta</a>
                                 </li>
                                 <li>
-                                    <a href="user_terms.php">Terms and Conditions</a>
+                                    <a href="Terms.php">Terms and Conditions</a>
                                 </li>
                                 
                                     <a style ="color:white;">Created by Dramani Alhassan</a>
@@ -664,10 +262,10 @@
                             <h5 class="title">We're Here to Help</h5>
                             <ul class="links-list">
                                 <li>
-                                    <a href="user_contact.php">Contact Us</a>
+                                    <a href="contact.php">Contact Us</a>
                                 </li>
                                 <li>
-                                    <a href="user_faqs.php">Help & FAQ</a>
+                                    <a href="help">Help & FAQ</a>
                                 </li>
                             </ul>
                         </div>

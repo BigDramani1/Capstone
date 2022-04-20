@@ -134,27 +134,27 @@
                 </div>
                 <div class="m--15">
                     <div class="browse-slider owl-theme owl-carousel">
-                        <a href="vehicles.php" class="browse-item">
+                        <a href="index_vehicles.php" class="browse-item">
                             <img src="assets/images/auction/01.png" alt="auction">
                             <span class="info">Vehicles</span>
                         </a>
-                        <a href="jewelry.php" class="browse-item">
+                        <a href="index_jewelry.php" class="browse-item">
                             <img src="assets/images/auction/02.png" alt="auction">
                             <span class="info">Jewelry</span>
                         </a>
-                        <a href="watches.php" class="browse-item">
+                        <a href="index_watches.php" class="browse-item">
                             <img src="assets/images/auction/03.png" alt="auction">
                             <span class="info">Watches</span>
                         </a>
-                        <a href="electronics.php" class="browse-item">
+                        <a href="index_electronics.php" class="browse-item">
                             <img src="assets/images/auction/04.png" alt="auction">
                             <span class="info">Electronics</span>
                         </a>
-                        <a href="sports.php" class="browse-item">
+                        <a href="index_sports.php" class="browse-item">
                             <img src="assets/images/auction/05.png" alt="auction">
                             <span class="info">Sports</span>
                         </a>
-                        <a href="house.php" class="browse-item">
+                        <a href="index_house.php" class="browse-item">
                             <img src="assets/images/auction/06.png" alt="auction">
                             <span class="info">Real Estate</span>
                         </a>
@@ -178,7 +178,7 @@
                             <p>We offer affordable Vehicles</p>
                         </div>
                     </div>
-                    <a href="vehicles.php" class="normal-button">View All</a>
+                    <a href="index_vehicles.php" class="normal-button">View All</a>
                 </div>
                 <div class="row justify-content-center mb-30-none">
                 
@@ -186,7 +186,7 @@
                         <?php
                          require_once('assets/Config/const.php');
                          $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
-                         $sql = "SELECT * FROM seller_item where categories='VEHICLES'";
+                         $sql = "SELECT * FROM seller_item where categories='VEHICLES' limit 3";
                          $result = mysqli_query($mysqli, $sql);
                         // Associative while loop array
                         while ($row = mysqli_fetch_assoc($result)){
@@ -212,7 +212,7 @@
                         <p>Online jewelry auctions where you can bid now and save money</p>
                     </div>
                 </div>
-                <a href="jewelry.php" class="normal-button">View All</a>
+                <a href="index_jewelry.php" class="normal-button">View All</a>
             </div>
             <div class="row justify-content-center mb-30-none">
                     
@@ -220,7 +220,7 @@
                         <?php
                          require_once('assets/Config/const.php');
                          $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
-                         $sql = "SELECT * FROM seller_item where categories='JEWELRY'";
+                         $sql = "SELECT * FROM seller_item where categories='JEWELRY' limit 3";
                          $result = mysqli_query($mysqli, $sql);
                         // Associative while loop array
                         while ($row = mysqli_fetch_assoc($result)){
@@ -261,14 +261,14 @@
                         <p>Shop for men & women designer brand watches</p>
                     </div>
                 </div>
-                <a href="watches.php" class="normal-button">View All</a>
+                <a href="index_watches.php" class="normal-button">View All</a>
             </div>
             <div class="row justify-content-center mb-30-none">
             <?php require_once ("index_component.php");?>
                         <?php
                          require_once('assets/Config/const.php');
                          $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
-                         $sql = "SELECT * FROM seller_item where categories='WATCHES'";
+                         $sql = "SELECT * FROM seller_item where categories='WATCHES' limit 3";
                          $result = mysqli_query($mysqli, $sql);
                         // Associative while loop array
                         while ($row = mysqli_fetch_assoc($result)){
@@ -294,14 +294,14 @@
                         <p>Find auctions for Homes, Condos, Residential & Commercial Properties.</p>
                     </div>
                 </div>
-                <a href="house.php" class="normal-button">View All</a>
+                <a href="index_house.php" class="normal-button">View All</a>
             </div>
             <div class="auction-slider-4 owl-theme owl-carousel">
             <?php require_once ("index_component.php");?>
                         <?php
                          require_once('assets/Config/const.php');
                          $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
-                         $sql = "SELECT * FROM seller_item where categories='REAL ESTATE'";
+                         $sql = "SELECT * FROM seller_item where categories='REAL ESTATE' limit 3";
                          $result = mysqli_query($mysqli, $sql);
                         // Associative while loop array
                         while ($row = mysqli_fetch_assoc($result)){

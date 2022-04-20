@@ -217,7 +217,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 <div class="header-top-wrapper">
                     <ul class="customer-support">
                         <li>
-                            <a href="dashboard.php" class="mr-3"><i class="fa fa-bars"></i><span class="ml-2 d-none d-sm-inline-block">Dashboard</span></a>
+                            <a href="seller_login.php" class="mr-3"><i class="fa fa-bars"></i><span class="ml-2 d-none d-sm-inline-block">Dashboard</span></a>
                         </li>
                     </ul>
                     <ul class="cart-button-area">

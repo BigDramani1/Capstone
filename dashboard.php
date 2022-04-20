@@ -1,5 +1,6 @@
 <?php 
 session_start();
+require_once "connection.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -37,7 +38,7 @@ session_start();
 
     <!--============= Header Section Starts Here =============-->
     <header>
-        <div class="header-top">
+    <div class="header-top">
             <div class="container">
                 <div class="header-top-wrapper">
                     <ul class="customer-support">
@@ -45,7 +46,20 @@ session_start();
                             <a href="dashboard.php" class="mr-3"><i class="fa fa-bars"></i><span class="ml-2 d-none d-sm-inline-block">Dashboard</span></a>
                         </li>
                     </ul>
-                    <ul class="cart-button-area">                       
+                    <ul class="cart-button-area">
+                    <li><a href="my_favorites.php" class="cart-button"><i class='fa fa-star' style='color: yellowgreen'></i>
+                    <?php
+
+                    if (isset($_SESSION['favorites'])){
+                        $count = count($_SESSION['favorites']);
+                        echo "<span class=\"amount\">$count</span>";
+                    }else{
+                        echo "<span class=\"amount\">0</span>";
+                    }
+
+                    ?>
+                      </a></li>                       
+                    
                     <li><a href="log_out.php" class="user-button"><i class='fa fa-sign-out-alt' style='color: white'></i></a><p style="color:white";><strong>Log Out</strong></p><li>
                     </ul>
                 </div>
@@ -152,19 +166,22 @@ session_start();
                                         <img src="assets/images/dashboard/01.png" alt="dashboard">
                                     </div>
                                     <div class="content">
-                                        <h2 class="title"><span class="counter">4</span></h2>
+                                        <h2 class="title"><span class="counter">
+                                        <?php 
+                                        require_once('assets/Config/const.php');
+                                        $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+                                        $buyer_id=  $_SESSION["id"];
+                                        $sql="SELECT count(min_bid_price) from buyers_bid where buyer_id=$buyer_id";
+                                       $result = mysqli_query($mysqli, $sql);
+                                       if($row = mysqli_fetch_column($result)) {
+                                        echo "<span class=\"amount\">$row</span>";
+                                    }else{
+                                        echo "<span class=\"amount\">0</span>";
+                                    }
+
+                                        ?>
+                                        </span></h2>
                                         <h6 class="info">Active Bids</h6>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4 col-sm-6">
-                                <div class="dashboard-item">
-                                    <div class="thumb">
-                                        <img src="assets/images/dashboard/02.png" alt="dashboard">
-                                    </div>
-                                    <div class="content">
-                                        <h2 class="title"><span class="counter">0</span></h2>
-                                        <h6 class="info">Items Won</h6>
                                     </div>
                                 </div>
                             </div>
@@ -174,63 +191,57 @@ session_start();
                                         <img src="assets/images/dashboard/03.png" alt="dashboard">
                                     </div>
                                     <div class="content">
-                                        <h2 class="title"><span class="counter">2</span></h2>
+                                        <h2 class="title"><span class="counter">
+                                        <?php
+
+                                        if (isset($_SESSION['favorites'])){
+                                            $count = count($_SESSION['favorites']);
+                                            echo "<span class=\"amount\">$count</span>";
+                                        }else{
+                                            echo "<span class=\"amount\">0</span>";
+                                        }
+
+                                        ?>
+
+                                        </span></h2>
                                         <h6 class="info">Favorites</h6>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="dashboard-widget">
-                        <h5 class="title mb-10">My Bids</h5>
+                    </div> 
+                            <div class="dashboard-widget">
+                            <h5 class="title mb-10" style="text-align:center">My Bid History</h5>
                         <div class="dashboard-purchasing-tabs">
                             <ul class="nav-tabs nav">
-                                <li>
-                                    <a href="#current" class="active" data-toggle="tab">Current</a>
-                                </li>
-                                <li>
-                                    <a href="#history" data-toggle="tab">History</a>
-                                </li>
                             </ul>
-                            <div class="tab-content">
-                                <div class="tab-pane show active fade" id="current">
-                                    <table class="purchasing-table">
-                                        <thead>
-                                            <th>Item</th>
-                                            <th>Price Bidded</th>
-                                            <th>Buy Price</th>
-                                            <th>Expires</th>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td data-purchase="item">2018 Hyundai Sonata</td>
-                                                <td data-purchase="Price Bidded">₵1,775.00</td>
-                                                <td data-purchase="Buy Price">₵1,775.00</td>
-                                                <td data-purchase="expires">7/2/2021</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
                                 <div class="tab-pane show fade" id="history">
                                     <table class="purchasing-table">
                                         <thead>
-                                            <th>Item</th>
-                                            <th>Price Bidded</th>
+                                            <th>No.</th>
+                                            <th>Title</th>
+                                            <th>Minimum Bid price</th>
                                             <th>Buy Price</th>
-                                            <th>Expires</th>
                                         </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td data-purchase="item">2018 Hyundai Sonata</td>
-                                                <td data-purchase="Price Bidded">₵1,775.00</td>
-                                                <td data-purchase="Buy Price">₵1,775.00</td>
-                                                <td data-purchase="expires">7/2/2021</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
+                                    <tbody>
+                                 <?php require_once ("All_components.php");?>
+                            <?php
+                                require_once('assets/Config/const.php');
+                                $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+                                 $buyer_id=  $_SESSION["id"];
+                                 $sql = "SELECT * FROM buyers_bid where buyer_id=$buyer_id";
+                                $result2 = mysqli_query($mysqli, $sql);
+                                 while($rows = mysqli_fetch_assoc($result2)){
+                                    dashboard($rows['title'], $rows['min_bid_price'], $rows['item_id'], $rows['buy_price'], $rows['bid_count']);
+                               }
+       
+                            ?>
                             </div>
-                        </div>
+                            </div>
+                            </table>
+                            </tbody>
+                             </div>
+
                     </div>
                 </div>
             </div>

@@ -56,7 +56,20 @@ if (isset($_POST['remove'])){
                             <a href="dashboard.php" class="mr-3"><i class="fa fa-bars"></i><span class="ml-2 d-none d-sm-inline-block">Dashboard</span></a>
                         </li>
                     </ul>
-                    <ul class="cart-button-area">                       
+                    <ul class="cart-button-area">
+                    <li><a href="my_favorites.php" class="cart-button"><i class='fa fa-star' style='color: yellowgreen'></i>
+                    <?php
+
+                    if (isset($_SESSION['favorites'])){
+                        $count = count($_SESSION['favorites']);
+                        echo "<span class=\"amount\">$count</span>";
+                    }else{
+                        echo "<span class=\"amount\">0</span>";
+                    }
+
+                    ?>
+                      </a></li>                       
+                    
                     <li><a href="log_out.php" class="user-button"><i class='fa fa-sign-out-alt' style='color: white'></i></a><p style="color:white";><strong>Log Out</strong></p><li>
                     </ul>
                 </div>
@@ -84,7 +97,7 @@ if (isset($_POST['remove'])){
                     </ul>
                     <form class="search-form">
                         <input type="text" placeholder="Search for brand, model....">
-                        <button type="submit"><i class="fas fa-search "></i></button>
+                        <button type="submit"><i class="fas fa-search"></i></button>
                     </form>
                     <div class="search-bar d-md-none">
                         <a href="#0"><i class="fas fa-search"></i></a>
@@ -173,7 +186,7 @@ if (isset($_POST['remove'])){
                         while ($row = mysqli_fetch_assoc($result)){
                             foreach ($product_id as $id){
                                 if ($row['item_id'] == $id){
-                                    cartElement($row['title'], $row['min_bid_price'],$row['image'],$row['item_id'], $row['buy_price']);
+                                    cartElement($row['title'], $row['min_bid_price'],$row['image'],$row['item_id'], $row['buy_price'], $row['direction']);
                                 }
                             }
                         }

@@ -224,7 +224,7 @@ if (isset($_POST['add'])){
                         <?php
                          require_once('assets/Config/const.php');
                          $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
-                         $sql = "SELECT * FROM seller_item where categories='VEHICLES'";
+                         $sql = "SELECT * FROM seller_item where categories='VEHICLES' limit 3";
                          $result = mysqli_query($mysqli, $sql);
                         // Associative while loop array
                         while ($row = mysqli_fetch_assoc($result)){
@@ -256,7 +256,7 @@ if (isset($_POST['add'])){
                         <?php
                          require_once('assets/Config/const.php');
                          $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
-                         $sql = "SELECT * FROM seller_item where categories='JEWELRY'";
+                         $sql = "SELECT * FROM seller_item where categories='JEWELRY' limit 3";
                          $result = mysqli_query($mysqli, $sql);
                         // Associative while loop array
                         while ($row = mysqli_fetch_assoc($result)){
@@ -287,7 +287,7 @@ if (isset($_POST['add'])){
                         <?php
                          require_once('assets/Config/const.php');
                          $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
-                         $sql = "SELECT * FROM seller_item where categories='WATCHES'";
+                         $sql = "SELECT * FROM seller_item where categories='WATCHES' limit 3";
                          $result = mysqli_query($mysqli, $sql);
                         // Associative while loop array
                         while ($row = mysqli_fetch_assoc($result)){
@@ -319,7 +319,7 @@ if (isset($_POST['add'])){
                         <?php
                          require_once('assets/Config/const.php');
                          $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
-                         $sql = "SELECT * FROM seller_item where categories='REAL ESTATE'";
+                         $sql = "SELECT * FROM seller_item where categories='REAL ESTATE' limit 3";
                          $result = mysqli_query($mysqli, $sql);
                         // Associative while loop array
                         while ($row = mysqli_fetch_assoc($result)){

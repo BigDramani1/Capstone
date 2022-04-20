@@ -56,10 +56,7 @@
                             <a href="seller_page.php">Home</a>
                         </li>
                         <li>
-                            <a href="home.php">Auction Page</a>
-                        </li>
-                        <li>
-                            <a href="seller_favorites.php">My Favorites</a>
+                            <a href="seller_items.php">My Items</a>
                         </li>
                         
                         <li>
