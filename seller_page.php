@@ -225,18 +225,9 @@
                     <label for="name"></label>
                     <input type="text" id="name" placeholder="Description of Product">
                 </div>
-                <!---make row and column for this and make the phone num echo
                 <div class="column">
                     <label for="name"></label>
                     <input type="text" id="name" placeholder="Title of the product">
-                </div>
-                <div class="column">
-                    <label for="name"></label>
-                    <input type="phone" id="name" placeholder="phone number +233">
-                </div>-->
-                <div class="column">
-                    <label for="subject"></label>
-                    <input type="number" id="num" placeholder="Enter your min bid amount in GH₵">
                 </div>
                 </div>
                 <div class="rows">
@@ -244,6 +235,12 @@
                     <label for="subject"></label>
                     <input type="number" id="num" placeholder="Enter your buy price in GH₵">
                 </div>
+                <div class="column">
+                    <label for="subject"></label>
+                    <input type="number" id="num" placeholder="Enter your min bid amount in GH₵">
+                </div>
+                </div>
+                <div class="rows">
                 <div class="column">
                   <input type="file" id="file" name="pictures" multiple>
                   <div class="pic">

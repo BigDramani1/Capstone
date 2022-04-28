@@ -231,4 +231,9 @@ insert into sign_up_seller (username, password, fname, lname, email, city, phone
 insert into sign_up_seller (username, password, fname, lname, email, city, phone) values ("JAEB", "Gameover69", "Jacinta", "Badu", "jacintabadu586@gmail.com", "KUMASEI", "+233 546339012");
 insert into sign_up_seller (username, password, fname, lname, email, city, phone) values ("SexyBlinks", "Gameover69", "Benedicta", "Atiapah", "benz44@yahoo.com", "ACCRA", "+233 546333700");
 
-select count(min_bid_price) from buyers_bid where buyer_id=7;
+select * from buyers_bid;
+
+select  max(bid_count)
+ from buyers_bid as total;
+
+

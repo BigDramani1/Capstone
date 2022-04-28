@@ -1,4 +1,4 @@
-<?php
+3e<?php
 session_start();
 
 ?>

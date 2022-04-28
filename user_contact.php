@@ -112,11 +112,15 @@ session_start();
                         <form class="contact-form" methood="post" action="user_email.php" >
                             <div class="form-group">
                                 <label for="name"><i class="far fa-user"></i></label>
-                                <input type="text" name="firstname" value ="<?php echo $_SESSION["firstname"]; echo " "; echo $_SESSION["lastname"];?>" placeholder="Your Name" name="name" id="name">
+                                <input type="text" name="fullname" id="fullname" value ="<?php echo $_SESSION["firstname"]; echo " "; echo $_SESSION["lastname"];?>" placeholder="Your Name" name="name" id="name">
                             </div>
                             <div class="form-group">
                                 <label for="name"><i class="fas fa-envelope-open-text"></i></label>
-                                <input type="text" name="email" value="<?php echo $_SESSION["email"]; ?>" placeholder="Enter Your Email ID" name="email" id="email">
+                                <input type="text" name="email" id="email" value="<?php echo $_SESSION["email"]; ?>" placeholder="Enter Your Email ID" name="email" id="email">
+                            </div>
+                            <div class="form-group">
+                                <label for="name"><i class="far fa-envelope"></i></label>
+                                <input type="text" name="subject" id="subject" placeholder="Subject"></textarea>
                             </div>
                             <div class="form-group">
                                 <label for="message" name= "message" class="message"><i class="far fa-envelope"></i></label>
