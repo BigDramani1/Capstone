@@ -1,6 +1,3 @@
-<?php
-session_start();
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +5,7 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <title>Contact Page</title>
+    <title>Login in Page</title>
 
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/all.min.css">
@@ -19,23 +16,22 @@ session_start();
     <link rel="stylesheet" href="assets/css/flaticon.css">
     <link rel="stylesheet" href="assets/css/jquery-ui.min.css">
     <link rel="stylesheet" href="assets/css/main.css">
-
     <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon">
 </head>
 
 <body>
     <!--============= ScrollToTop Section Starts Here =============-->
+    <div class="overlayer" id="overlayer">
+        <div class="loader">
+            <div class="loader-inner"></div>
+        </div>
+    </div>
     <a href="#0" class="scrollToTop"><i class="fas fa-angle-up"></i></a>
     <div class="overlay"></div>
     <!--============= ScrollToTop Section Ends Here =============-->
 
 
     <!--============= Header Section Starts Here =============-->
-    <div class="overlayer" id="overlayer">
-        <div class="loader">
-            <div class="loader-inner"></div>
-        </div>
-    </div>
     <header>
         <div class="header-top">
             <div class="container">
@@ -61,35 +57,37 @@ session_start();
                     </div>
                     <ul class="menu ml-auto">
                         <li>
-                            <a href="home.php">Home</a>
+                            <a href="home.php" style='text-decoration: none'>Home</a>
                         </li>
                         <li>
-                            <a href="my_favorites.php">My Favorites</a>
+                            <a href="my_favorites.php" style='text-decoration: none'>My Favorites</a>
                         </li>
                         
                         <li>
-                            <a href="user_contact.php">Contact</a>
+                            <a href="user_contact.php"style='text-decoration: none'>Contact</a>
                         </li>
                         <li>
-                            <a href="user_faqs.php">Faqs</a>
+                            <a href="user_faqs.php"style='text-decoration: none'>Faqs</a>
                         </li>
                     </ul>
-                    
                 </div>
             </div>
         </div>
     </header>
     <!--============= Header Section Ends Here =============-->
 
-    <!--============= Hero Section Starts Here =============-->
-    <div class="hero-section">
-        <div class="container">
+  
+ <!--============= Hero Section Starts Here =============-->
+ <div class="hero-section">
             <ul class="breadcrumb">
                 <li>
                     <a href="home.php">Home</a>
                 </li>
                 <li>
-                    <span>Contact Us</span>
+                    <a href="user_contact.php">Contact</a>
+                </li>
+                <li>
+                    <span>Message</span>
                 </li>
             </ul>
         </div>
@@ -98,79 +96,15 @@ session_start();
     <!--============= Hero Section Ends Here =============-->
 
 
-    <!--============= Contact Section Starts Here =============-->
-    <section class="contact-section padding-bottom">
-        <div class="container">
-            <div class="contact-wrapper padding-top padding-bottom mt--100 mt-lg--440">
-                <div class="section-header">
-                    <h5 class="cate">Contact Us</h5>
-                    <h2 class="title">get in touch</h2>
-                    <p>We'd love to hear from you! Let us know how we can help.</p>
-                </div>
-                <?php 
-		if(isset($_POST['sendmail'])) {
-			require 'PHPMailerAutoload.php';
-			require 'credential.php';
-
-			$mail = new PHPMailer;
-
-			$mail->SMTPDebug = 4;                               // Enable verbose debug output
-
-			$mail->isSMTP();                                      // Set mailer to use SMTP
-			$mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
-			$mail->SMTPAuth = true;                               // Enable SMTP authentication
-			$mail->Username = EMAIL;                 // SMTP username
-			$mail->Password = PASS;                           // SMTP password
-			$mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
-			$mail->Port = 587;    
-			$mail->SMTPDebug  = SMTP::DEBUG_OFF;                                // TCP port to connect to
-
-			$mail->setFrom(EMAIL, 'Divanta');
-			$mail->addAddress($_POST['email']);     // Add a recipient
-
-			$mail->addReplyTo(EMAIL);
-		
-			$mail->isHTML(true);                                  // Set email format to HTML
-
-			$mail->Subject = $_POST['subject'];
-			$mail->Body    = $_POST['message'];
-
-			if(!$mail->send()) {
-			    echo 'Message could not be sent.';
-			    echo 'Mailer Error: ' . $mail->ErrorInfo;
-			} else {
-                echo "<script> location.href='user_message.php'; </script>";
-			}
-		}
-	 ?>
-                <div class="row">
-                    <div class="col-xl-8 col-lg-7">
-                        <form class="contact-form" methood="post" method="post" enctype="multipart/form-data">
-                            <div class="form-group">
-                                <label for="name"><i class="fas fa-envelope-open-text"></i></label>
-                                <input hidden type="email" class="form-control" id="email" name="email" value="divanta65@gmail.com" readonly>
-                            </div>
-                            <div class="form-group">
-                                <label for="subject"><i class="fas fa-envelope-open-text"></i></label>
-                                <input type="email" name="subject" id="subject" value="<?php echo $_SESSION["email"]; ?>" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="message" name= "message" class="message"><i class="far fa-envelope"></i></label>
-                                <textarea name="message" id="message" placeholder="Type Your Message" required></textarea>
-                            </div>
-                            <div class="form-group text-center mb-0">
-                                <button type="submit" name="sendmail" class="custom-button">Send Message</button>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="col-xl-4 col-lg-5 d-lg-block d-none">
-                        <img src="assets/images/contact.png" class="w-100" alt="images">
-                    </div>
-                </div>
-            </div>
+    <!--============= Account Section Starts Here =============-->
+    <section class="account-section padding-bottom">
+        <div class="engage">      
+         <h2>Thank You For Contacting Us! We Will Get Back To You ASAP</h2>
+         <br><h4 style="text-align:center">click the button below to go back home </h4>
+         <br><button onclick="window.location.href='home.php';" style="background-color:yellow;"><h4>Home</h4></button>
         </div>
     </section>
-    <!--============= Contact Section Ends Here =============-->
+    <!--============= Account Section Ends Here =============-->
 
 
     <!--============= Footer Section Starts Here =============-->
@@ -249,7 +183,7 @@ session_start();
                                     <a href="#0">Divanta</a>
                                 </li>
                                 <li>
-                                    <a href="terms.php">Terms and Conditions</a>
+                                    <a href="user_terms.php">Terms and Conditions</a>
                                 </li>
                                 
                                     <a style ="color:white;">Created by Dramani Alhassan</a>
@@ -332,7 +266,6 @@ session_start();
     <script src="assets/js/owl.min.js"></script>
     <script src="assets/js/magnific-popup.min.js"></script>
     <script src="assets/js/yscountdown.min.js"></script>
-    <script src="assets/js/contact.js"></script>
     <script src="assets/js/jquery-ui.min.js"></script>
     <script src="assets/js/main.js"></script>
 </body>

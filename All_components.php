@@ -290,7 +290,7 @@ function vehicles($buy_price, $descriptions, $image, $image1,$image2, $image3, $
 }
 
 //This is for the carting in the favorite section
-function dashboard($title, $min_bid_price, $item_id, $buy_price, $bid_count){ 
+function dashboard($title, $min_bid_price, $item_id, $buy_price, $bid_count, $days){ 
     $element = "
                         
                             <tr>
@@ -299,6 +299,7 @@ function dashboard($title, $min_bid_price, $item_id, $buy_price, $bid_count){
                                 <td data-purchase=\"Price Bidded\">$title</td>
                                 <td data-purchase=\"Buy Price\">$min_bid_price</td>
                                 <td data-purchase=\"expires\">$buy_price</td>
+                                <td data-purchase=\"date\">$days</td>
                             </tr>
 ";
  echo $element;

@@ -52,6 +52,7 @@ item_id int not null,
 min_bid_price int not null,
 title varchar(50) not null,
 buy_price int not null,
+days datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
 primary key(bid_count));
 
 

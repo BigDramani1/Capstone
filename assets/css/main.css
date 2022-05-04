@@ -7030,6 +7030,20 @@ button.custom-button {
     -moz-border-radius: 10px;
     box-shadow: 0px 6px 18px 0px rgba(16, 5, 54, 0.17);
 }
+.engage{
+    background-color: #ffff;
+    width: 80%;
+    min-width: 400px;
+    padding: 35px 50px;
+    transform: translate(-50%,-50%);
+    position: relative;
+    left: 50%;
+    top: 0px;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    box-shadow: 0px 6px 18px 0px rgba(16, 5, 54, 0.17);
+}
 /*Making the button for submiting amount */
   
   /* Float cancel and delete buttons and add an equal width */

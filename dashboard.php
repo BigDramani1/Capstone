@@ -220,8 +220,9 @@ require_once "connection.php";
                                         <thead>
                                             <th>No.</th>
                                             <th>Title</th>
-                                            <th>Minimum Bid price</th>
+                                            <th>Amount bidded</th>
                                             <th>Buy Price</th>
+                                            <th>Date & Time</th>
                                         </thead>
                                     <tbody>
                                  <?php require_once ("All_components.php");?>
@@ -232,7 +233,7 @@ require_once "connection.php";
                                  $sql = "SELECT * FROM buyers_bid where buyer_id=$buyer_id";
                                 $result2 = mysqli_query($mysqli, $sql);
                                  while($rows = mysqli_fetch_assoc($result2)){
-                                    dashboard($rows['title'], $rows['min_bid_price'], $rows['item_id'], $rows['buy_price'], $rows['bid_count']);
+                                    dashboard($rows['title'], $rows['min_bid_price'], $rows['item_id'], $rows['buy_price'], $rows['bid_count'], $rows['days']);
                                }
        
                             ?>
